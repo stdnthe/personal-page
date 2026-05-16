@@ -4,7 +4,7 @@ const copy = {
     navWriting: "Writing",
     navContact: "Contact",
     heroEyebrow: "Data Science / LLM Evaluation / Agent Product",
-    heroTitle: "我关心模型在真实任务中是否真的可靠。",
+    heroTitle: "我关心模型在真实任务中是否真的可靠",
     heroLede:
       "我用数据科学的方式观察大模型、Agent 和分析工作流：它们何时有效，何时失败，以及如何把这些判断变成可复用的产品能力。",
     chipOne: "Agent 评测",
@@ -56,7 +56,7 @@ const copy = {
     navWriting: "Writing",
     navContact: "Contact",
     heroEyebrow: "Data Science / LLM Evaluation / Agent Product",
-    heroTitle: "I care whether models hold up in real tasks.",
+    heroTitle: "I care whether models hold up in real tasks",
     heroLede:
       "I study LLMs, agents, and analytical workflows through a data science lens: when they work, where they fail, and how those judgments can become reusable product capability.",
     chipOne: "Agent evaluation",

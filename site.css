@@ -165,8 +165,8 @@ p {
 h1 {
   max-width: 900px;
   margin-bottom: 26px;
-  font-size: clamp(46px, 6.4vw, 76px);
-  line-height: 1.06;
+  font-size: clamp(40px, 5.4vw, 64px);
+  line-height: 1.1;
   letter-spacing: 0;
 }
 
@@ -443,7 +443,7 @@ h1 {
   }
 
   h1 {
-    font-size: 42px;
+    font-size: 36px;
   }
 
   .section-heading {
