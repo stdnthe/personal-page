@@ -3,39 +3,49 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>AI Eval & Agent Research</title>
+    <title>Jiaqi He | AI Eval & Agent Research</title>
     <meta
       name="description"
       content="一个数据科学背景的 AI 产品与评测研究者，持续探索大模型能力边界。"
     />
     <link rel="stylesheet" href="site.css" />
   </head>
-  <body>
+  <body data-lang="zh">
     <header class="site-header">
       <a class="brand" href="#top" aria-label="回到首页">
-        <span class="brand-mark">AI</span>
-        <span>Eval Lab</span>
+        <span class="brand-mark">JH</span>
+        <span>
+          <strong>Jiaqi He</strong>
+          <small>AI Eval Lab</small>
+        </span>
       </a>
       <nav class="nav" aria-label="主导航">
-        <a href="#work">Projects</a>
-        <a href="#writing">Writing</a>
-        <a href="#now">Now</a>
-        <a href="#contact">Contact</a>
+        <a href="#work" data-i18n="navWork">Projects</a>
+        <a href="#writing" data-i18n="navWriting">Writing</a>
+        <a href="#contact" data-i18n="navContact">Contact</a>
       </nav>
+      <div class="language-switch" aria-label="Language switch">
+        <button class="lang-button active" type="button" data-set-lang="zh">中文</button>
+        <button class="lang-button" type="button" data-set-lang="en">EN</button>
+      </div>
     </header>
 
     <main id="top">
       <section class="hero" aria-labelledby="hero-title">
         <div class="hero-copy">
-          <p class="eyebrow">Data Science · LLM Evaluation · Agent Product</p>
-          <h1 id="hero-title">探索大模型能力边界，把评测变成产品能力。</h1>
-          <p class="hero-lede">
-            我关注大模型在真实复杂任务中的表现，尤其是 Agent、评测体系和数据科学工作流中的能力边界。
-            这里会持续沉淀我的科普文章、评测实验、产品原型和研究路线。
+          <p class="eyebrow" data-i18n="heroEyebrow">Data Science / LLM Evaluation / Agent Product</p>
+          <h1 id="hero-title" data-i18n="heroTitle">我关心模型在真实任务中是否真的可靠。</h1>
+          <p class="hero-lede" data-i18n="heroLede">
+            我用数据科学的方式观察大模型、Agent 和分析工作流：它们何时有效，何时失败，以及如何把这些判断变成可复用的产品能力。
           </p>
+          <div class="signal-list" aria-label="Focus areas">
+            <span data-i18n="chipOne">Agent 评测</span>
+            <span data-i18n="chipTwo">数据工作流</span>
+            <span data-i18n="chipThree">AI 产品原型</span>
+          </div>
           <div class="hero-actions" aria-label="主要入口">
-            <a class="button primary" href="#work">查看项目</a>
-            <a class="button secondary" href="#writing">阅读文章</a>
+            <a class="button primary" href="#work" data-i18n="heroPrimary">看作品</a>
+            <a class="button secondary" href="#writing" data-i18n="heroSecondary">读文章</a>
           </div>
         </div>
         <figure class="hero-visual">
@@ -44,130 +54,110 @@
             alt="在雪场拿着单板滑雪板的个人照片"
           />
           <figcaption>
-            Current focus: AI evaluation, agent products, and building in public.
+            <span data-i18n="photoCaption">Snowboard, data, and models: all require feedback from reality.</span>
           </figcaption>
         </figure>
       </section>
 
       <section class="section statement" aria-labelledby="statement-title">
-        <p class="section-kicker">Positioning</p>
-        <h2 id="statement-title">一个懂数据科学、产品策略和模型评测的 AI 研究型建设者。</h2>
-        <p>
-          我的长期目标是进入顶尖 LLM 厂商，参与 Agent 和大模型评测相关工作。
+        <p class="section-kicker" data-i18n="statementKicker">Positioning</p>
+        <h2 id="statement-title" data-i18n="statementTitle">把抽象的模型能力，拆成可观察、可评估、可迭代的问题。</h2>
+        <p data-i18n="statementBody">
           我希望用数据科学的方法，把“模型是否真的变强”这件事拆成可观察、可评估、可迭代的系统。
+          这里记录我对 Agent 产品、模型评测和数据工作流的持续观察与实践。
         </p>
       </section>
 
       <section class="section" id="work" aria-labelledby="work-title">
         <div class="section-heading">
-          <p class="section-kicker">Projects</p>
-          <h2 id="work-title">正在建设的作品</h2>
+          <p class="section-kicker" data-i18n="workKicker">Projects</p>
+          <h2 id="work-title" data-i18n="workTitle">作品与实验</h2>
         </div>
 
         <div class="project-grid">
           <article class="project-card featured">
-            <p class="card-label">MVP Direction</p>
-            <h3>数据科学 Agent 评测平台</h3>
-            <p>
+            <p class="card-label" data-i18n="projectOneLabel">Evaluation System</p>
+            <h3 data-i18n="projectOneTitle">数据科学 Agent 评测平台</h3>
+            <p data-i18n="projectOneBody">
               评估模型是否能完成真实数据分析任务：理解业务问题、处理数据、编写 SQL/Python、
               生成洞察，并对错误进行归因。
             </p>
             <ul class="check-list">
-              <li>任务完成度评分</li>
-              <li>代码可运行性检查</li>
-              <li>结论是否被数据支持</li>
-              <li>失败原因归因报告</li>
+              <li data-i18n="projectOnePointOne">任务完成度评分</li>
+              <li data-i18n="projectOnePointTwo">代码可运行性检查</li>
+              <li data-i18n="projectOnePointThree">结论是否被数据支持</li>
+              <li data-i18n="projectOnePointFour">失败原因归因报告</li>
             </ul>
           </article>
 
           <article class="project-card">
-            <p class="card-label">Content System</p>
-            <h3>大模型科普系列</h3>
-            <p>
+            <p class="card-label" data-i18n="projectTwoLabel">Writing System</p>
+            <h3 data-i18n="projectTwoTitle">大模型科普系列</h3>
+            <p data-i18n="projectTwoBody">
               从 Transformer 原理、LLM 训练流程到大模型能力评估，先写文章，再改造成适合视频表达的脚本。
             </p>
-            <a href="#writing">查看选题</a>
+            <a href="#writing" data-i18n="projectLink">查看选题</a>
           </article>
 
           <article class="project-card">
-            <p class="card-label">Prototype</p>
-            <h3>DeepSeek V4 可视化解释器</h3>
-            <p>
+            <p class="card-label" data-i18n="projectThreeLabel">Prototype</p>
+            <h3 data-i18n="projectThreeTitle">模型机制可视化解释器</h3>
+            <p data-i18n="projectThreeBody">
               将论文和原理笔记转成可视化解释页面，用于训练自己把复杂模型结构讲清楚的能力。
             </p>
-            <a href="#work">查看项目</a>
+            <a href="#work" data-i18n="projectLinkAlt">查看项目</a>
           </article>
         </div>
       </section>
 
       <section class="section" id="writing" aria-labelledby="writing-title">
         <div class="section-heading">
-          <p class="section-kicker">Writing</p>
-          <h2 id="writing-title">文章与视频选题</h2>
+          <p class="section-kicker" data-i18n="writingKicker">Writing</p>
+          <h2 id="writing-title" data-i18n="writingTitle">文章与视频选题</h2>
         </div>
 
         <div class="writing-list">
           <a class="writing-item" href="#writing">
             <span>01</span>
             <div>
-              <h3>Transformer 到底解决了什么问题？</h3>
-              <p>从 RNN 的限制讲到 Attention 和并行训练的意义。</p>
+              <h3 data-i18n="writingOneTitle">Transformer 到底解决了什么问题？</h3>
+              <p data-i18n="writingOneBody">从 RNN 的限制讲到 Attention 和并行训练的意义。</p>
             </div>
           </a>
           <a class="writing-item" href="#writing">
             <span>02</span>
             <div>
-              <h3>Attention 机制：模型如何决定该看哪里？</h3>
-              <p>解释 Query、Key、Value 和注意力权重的直觉。</p>
+              <h3 data-i18n="writingTwoTitle">Attention 机制：模型如何决定该看哪里？</h3>
+              <p data-i18n="writingTwoBody">解释 Query、Key、Value 和注意力权重的直觉。</p>
             </div>
           </a>
           <a class="writing-item" href="#writing">
             <span>03</span>
             <div>
-              <h3>LLM 训练过程：从数据到会对话的模型</h3>
-              <p>拆解预训练、指令微调、RLHF / DPO 和推理阶段。</p>
+              <h3 data-i18n="writingThreeTitle">LLM 训练过程：从数据到会对话的模型</h3>
+              <p data-i18n="writingThreeBody">拆解预训练、指令微调、RLHF / DPO 和推理阶段。</p>
             </div>
           </a>
           <a class="writing-item" href="#writing">
             <span>04</span>
             <div>
-              <h3>大模型能力评估：怎么判断一个模型强不强？</h3>
-              <p>讨论 Benchmark、人类偏好、真实任务和 Agent 评估。</p>
+              <h3 data-i18n="writingFourTitle">大模型能力评估：怎么判断一个模型强不强？</h3>
+              <p data-i18n="writingFourBody">讨论 Benchmark、人类偏好、真实任务和 Agent 评估。</p>
             </div>
           </a>
         </div>
-      </section>
-
-      <section class="section split" id="now" aria-labelledby="now-title">
-        <div>
-          <p class="section-kicker">Now</p>
-          <h2 id="now-title">当前 90 天建设计划</h2>
-        </div>
-        <ol class="timeline">
-          <li>
-            <strong>完善科普内容系统</strong>
-            <span>完成 Transformer、训练过程、评测方法三条主线的文章和视频脚本。</span>
-          </li>
-          <li>
-            <strong>设计评测平台 MVP</strong>
-            <span>确定数据科学 Agent 任务集、评分维度和第一版产品交互。</span>
-          </li>
-          <li>
-            <strong>发布公开作品</strong>
-            <span>将文章、Demo、评测报告和路线图沉淀成可被面试官快速理解的作品集。</span>
-          </li>
-        </ol>
       </section>
     </main>
 
     <footer class="site-footer" id="contact">
       <div>
-        <p class="section-kicker">Contact</p>
-        <h2>Let’s explore the frontier of model capability.</h2>
+        <p class="section-kicker" data-i18n="contactKicker">Contact</p>
+        <h2 data-i18n="contactTitle">保持好奇，也保持可验证。</h2>
       </div>
-      <p>
+      <p data-i18n="contactBody">
         后续可以在这里放邮箱、GitHub、LinkedIn、B 站、小红书或公众号入口。
       </p>
     </footer>
+    <script src="site.js"></script>
   </body>
 </html>
