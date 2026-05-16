@@ -160,4 +160,4 @@ document.querySelectorAll("[data-set-lang]").forEach((button) => {
   button.addEventListener("click", () => applyLanguage(button.dataset.setLang));
 });
 
-applyLanguage(localStorage.getItem("preferred-language") || "zh");
+applyLanguage(localStorage.getItem("preferred-language") || "en");
