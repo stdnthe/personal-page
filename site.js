@@ -49,7 +49,7 @@ const copy = {
     writingFourBody: "讨论 Benchmark、人类偏好、真实任务和 Agent 评估。",
     contactKicker: "Contact",
     contactTitle: "保持好奇，也保持可验证。",
-    contactBody: "后续可以在这里放邮箱、GitHub、LinkedIn、B 站、小红书或公众号入口。",
+    contactBody: "如果你也关注 AI 评测、Agent 产品或数据科学工作流，欢迎交流。",
   },
   en: {
     navWork: "Projects",
@@ -102,7 +102,7 @@ const copy = {
     contactKicker: "Contact",
     contactTitle: "Stay curious. Stay verifiable.",
     contactBody:
-      "Links to email, GitHub, LinkedIn, Bilibili, Xiaohongshu, or a newsletter can live here later.",
+      "If you are interested in AI evaluation, agent products, or data science workflows, feel free to reach out.",
   },
 };
 
