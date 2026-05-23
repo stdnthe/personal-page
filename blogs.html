@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Blogs | Jiaqi He</title>
+    <meta
+      name="description"
+      content="Jiaqi He 的 AI Evals、数据产品和大模型科普文章。"
+    />
+    <link rel="stylesheet" href="site.css?v=20260523-nav-pages" />
+  </head>
+  <body data-lang="en">
+    <header class="site-header">
+      <a class="brand" href="index.html" aria-label="回到首页">
+        <span>
+          <strong><span>Jiaqi</span> <em>He</em></strong>
+          <small>AI Eval Lab</small>
+        </span>
+      </a>
+      <nav class="nav" aria-label="主导航">
+        <a href="blogs.html" data-i18n="navWriting">Blogs</a>
+        <a href="projects.html" data-i18n="navWork">Project</a>
+      </nav>
+      <div class="language-switch" aria-label="Language switch">
+        <a class="lang-button" href="?lang=zh" data-set-lang="zh">中文</a>
+        <a class="lang-button active" href="?lang=en" data-set-lang="en">EN</a>
+      </div>
+    </header>
+
+    <main>
+      <section class="section page-intro" aria-labelledby="blogs-title">
+        <p class="section-kicker" data-i18n="writingKicker">Blogs</p>
+        <h1 id="blogs-title" data-i18n="writingTitle">Featured Blogs</h1>
+        <p data-i18n="blogsIntro">
+          关于 AI 评测、数据产品和大模型基础的文章与系列笔记。
+        </p>
+      </section>
+
+      <section class="section start-section" aria-labelledby="series-title">
+        <div class="section-heading">
+          <p class="section-kicker" data-i18n="seriesHomeKicker">Blog Series</p>
+          <h2 id="series-title" data-i18n="seriesHomeTitle">从这些系列开始读</h2>
+        </div>
+        <div class="series-home-grid">
+          <a class="series-home-card" href="articles/">
+            <span data-i18n="seriesOneLabel">Series 01</span>
+            <strong data-i18n="seriesOneTitle">大模型科普系列</strong>
+            <p data-i18n="seriesOneBody">从 Transformer、Attention 到训练和评估，按学习路径组织。</p>
+          </a>
+          <article class="series-home-card">
+            <span data-i18n="seriesTwoLabel">Coming next</span>
+            <strong data-i18n="seriesTwoTitle">AI Evals 笔记</strong>
+            <p data-i18n="seriesTwoBody">记录模型评测、任务设计、失败归因和真实业务验证方法。</p>
+          </article>
+          <article class="series-home-card">
+            <span data-i18n="seriesThreeLabel">Coming next</span>
+            <strong data-i18n="seriesThreeTitle">Data Product 实践</strong>
+            <p data-i18n="seriesThreeBody">把数据分析、增长问题和 AI 工作流整理成产品化思考。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" aria-labelledby="featured-title">
+        <div class="section-heading">
+          <p class="section-kicker" data-i18n="writingKicker">Blogs</p>
+          <h2 id="featured-title" data-i18n="writingTitle">Featured Blogs</h2>
+        </div>
+
+        <div class="writing-list">
+          <a class="writing-item" href="articles/model-evaluation.html">
+            <span class="list-number">04</span>
+            <div>
+              <p class="post-meta" data-i18n="postFourMeta">May 2026 · 7 min read</p>
+              <h3 data-i18n="writingFourTitle">大模型能力评估：怎么判断一个模型强不强？</h3>
+              <p data-i18n="writingFourBody">讨论 Benchmark、人类偏好、真实任务和 Agent 评估。</p>
+            </div>
+          </a>
+          <a class="writing-item" href="articles/llm-training.html">
+            <span class="list-number">03</span>
+            <div>
+              <p class="post-meta" data-i18n="postThreeMeta">May 2026 · 8 min read</p>
+              <h3 data-i18n="writingThreeTitle">LLM 训练过程：从数据到会对话的模型</h3>
+              <p data-i18n="writingThreeBody">拆解预训练、指令微调、RLHF / DPO 和推理阶段。</p>
+            </div>
+          </a>
+          <a class="writing-item" href="articles/attention.html">
+            <span class="list-number">02</span>
+            <div>
+              <p class="post-meta" data-i18n="postTwoMeta">May 2026 · 7 min read</p>
+              <h3 data-i18n="writingTwoTitle">Attention 机制：模型如何决定该看哪里？</h3>
+              <p data-i18n="writingTwoBody">解释 Query、Key、Value 和注意力权重的直觉。</p>
+            </div>
+          </a>
+          <a class="writing-item" href="articles/transformer.html">
+            <span class="list-number">01</span>
+            <div>
+              <p class="post-meta" data-i18n="postOneMeta">May 2026 · 6 min read</p>
+              <h3 data-i18n="writingOneTitle">Transformer 到底解决了什么问题？</h3>
+              <p data-i18n="writingOneBody">从 RNN 的限制讲到 Attention 和并行训练的意义。</p>
+            </div>
+          </a>
+        </div>
+      </section>
+    </main>
+
+    <script src="site.js?v=20260523-nav-pages"></script>
+  </body>
+</html>
