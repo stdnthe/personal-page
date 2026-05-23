@@ -6,11 +6,12 @@
     <title>大模型能力评估：怎么判断一个模型强不强？ | Jiaqi He</title>
     <meta
       name="description"
+      data-i18n-content="evaluationDescription"
       content="把 Benchmark、人类偏好、真实任务和 Agent 评估放在同一张地图里看。"
     />
     <link rel="stylesheet" href="../site.css?v=20260523-articles" />
   </head>
-  <body class="article-page">
+  <body class="article-page" data-title-key="evaluationTitleMeta">
     <header class="site-header">
       <a class="brand" href="../index.html" aria-label="回到首页">
         <span class="brand-mark">JH</span>
@@ -20,76 +21,92 @@
         </span>
       </a>
       <nav class="nav" aria-label="主导航">
-        <a href="index.html">系列目录</a>
-        <a href="../index.html#work">Projects</a>
-        <a href="../index.html#writing">Writing</a>
-        <a href="../index.html#contact">Contact</a>
+        <a href="index.html" data-i18n="articleNavSeries">系列目录</a>
+        <a href="../index.html#work" data-i18n="navWork">Projects</a>
+        <a href="../index.html#writing" data-i18n="navWriting">Writing</a>
+        <a href="../index.html#contact" data-i18n="navContact">Contact</a>
       </nav>
+      <div class="language-switch" aria-label="Language switch">
+        <a class="lang-button" href="?lang=zh" data-set-lang="zh">中文</a>
+        <a class="lang-button active" href="?lang=en" data-set-lang="en">EN</a>
+      </div>
     </header>
 
     <main class="article-layout">
       <section class="series-progress" aria-label="系列进度">
         <div class="progress-meta">
-          <span>第 4 / 4 篇</span>
-          <span>预计阅读 7 分钟</span>
+          <span data-i18n="progressFour">第 4 / 4 篇</span>
+          <span data-i18n="readEstimateSeven">预计阅读 7 分钟</span>
         </div>
         <div class="progress-track" aria-hidden="true">
           <div class="progress-fill" style="width: 100%"></div>
         </div>
         <div class="series-steps">
-          <a href="transformer.html">01</a>
-          <a href="attention.html">02</a>
-          <a href="llm-training.html">03</a>
-          <a class="active" href="model-evaluation.html">04</a>
+          <a href="transformer.html">
+            <span class="step-index">01</span>
+            <span class="step-title" data-i18n="articleOneTitle">Transformer 到底解决了什么问题？</span>
+          </a>
+          <a href="attention.html">
+            <span class="step-index">02</span>
+            <span class="step-title" data-i18n="articleTwoTitle">Attention 机制：模型如何决定该看哪里？</span>
+          </a>
+          <a href="llm-training.html">
+            <span class="step-index">03</span>
+            <span class="step-title" data-i18n="articleThreeTitle">LLM 训练过程：从数据到会对话的模型</span>
+          </a>
+          <a class="active" href="model-evaluation.html">
+            <span class="step-index">04</span>
+            <span class="step-title" data-i18n="articleFourTitle">大模型能力评估：怎么判断一个模型强不强？</span>
+          </a>
         </div>
       </section>
 
       <article>
         <header class="article-header">
-          <p class="section-kicker">AI Evaluation</p>
-          <h1>大模型能力评估：怎么判断一个模型强不强？</h1>
-          <p class="article-summary">
+          <p class="section-kicker" data-i18n="evaluationKicker">AI Evaluation</p>
+          <h1 data-i18n="articleFourTitle">大模型能力评估：怎么判断一个模型强不强？</h1>
+          <p class="article-summary" data-i18n="evaluationSummary">
             一个模型强不强，不能只看榜单分数。真正重要的是：它在你的任务里是否稳定、可控、可解释。
           </p>
         </header>
 
         <div class="article-body">
-          <p>
+          <p data-i18n="evaluationIntro">
             大模型评估最容易陷入一个误区：把单个分数当作全部答案。分数有价值，但它通常只照亮能力地图的一小块。
           </p>
 
           <div class="concept-map" aria-label="模型评估地图">
             <div class="concept-node">
-              <strong>Benchmark</strong>
-              <span>适合快速横向比较，但可能和真实业务任务有距离。</span>
+              <strong data-i18n="evaluationNodeOneTitle">Benchmark</strong>
+              <span data-i18n="evaluationNodeOneBody">适合快速横向比较，但可能和真实业务任务有距离。</span>
             </div>
             <div class="concept-node">
-              <strong>人类偏好</strong>
-              <span>能衡量回答是否自然、清楚、有帮助，但成本更高。</span>
+              <strong data-i18n="evaluationNodeTwoTitle">人类偏好</strong>
+              <span data-i18n="evaluationNodeTwoBody">能衡量回答是否自然、清楚、有帮助，但成本更高。</span>
             </div>
             <div class="concept-node">
-              <strong>真实任务</strong>
-              <span>最接近落地价值，需要明确数据、约束和成功标准。</span>
+              <strong data-i18n="evaluationNodeThreeTitle">真实任务</strong>
+              <span data-i18n="evaluationNodeThreeBody">最接近落地价值，需要明确数据、约束和成功标准。</span>
             </div>
           </div>
 
-          <h2>榜单分数适合做起点</h2>
-          <p>
+          <h2 data-i18n="evaluationHeadingOne">榜单分数适合做起点</h2>
+          <p data-i18n="evaluationBodyOne">
             Benchmark 能帮助我们快速了解模型的知识、数学、代码、推理等能力。但如果模型在榜单上表现很好，不代表它一定适合你的业务流程。
           </p>
 
-          <h2>真实任务评估更接近产品判断</h2>
-          <p>
+          <h2 data-i18n="evaluationHeadingTwo">真实任务评估更接近产品判断</h2>
+          <p data-i18n="evaluationBodyTwo">
             如果你要评估一个数据分析 Agent，问题就不只是“答案对不对”，还包括它能否理解业务问题、选择合适数据、写出可运行代码、解释结果并发现异常。
           </p>
 
-          <h2>好的评估需要可复现</h2>
-          <p>
+          <h2 data-i18n="evaluationHeadingThree">好的评估需要可复现</h2>
+          <p data-i18n="evaluationBodyThree">
             评估集、评分规则、失败原因分类和样例记录都要清楚。否则今天觉得模型好，明天觉得模型差，很可能只是测试方式变了。
           </p>
 
-          <h2>一句话总结</h2>
-          <p>
+          <h2 data-i18n="evaluationHeadingFour">一句话总结</h2>
+          <p data-i18n="evaluationBodyFour">
             判断模型强不强，要把通用分数、人类体验和真实任务结果结合起来看。尤其在产品落地时，稳定解决目标任务比单纯冲高分更重要。
           </p>
         </div>
@@ -97,14 +114,15 @@
 
       <nav class="article-nav" aria-label="上一篇下一篇">
         <a href="llm-training.html">
-          <span>上一篇</span>
-          <strong>LLM 训练过程：从数据到会对话的模型</strong>
+          <span data-i18n="navPrevious">上一篇</span>
+          <strong data-i18n="articleThreeTitle">LLM 训练过程：从数据到会对话的模型</strong>
         </a>
         <a href="index.html">
-          <span>返回目录</span>
-          <strong>大模型科普系列</strong>
+          <span data-i18n="navBackSeries">返回目录</span>
+          <strong data-i18n="seriesTitle">大模型科普系列</strong>
         </a>
       </nav>
     </main>
+    <script src="../site.js?v=20260523-articles-i18n"></script>
   </body>
 </html>

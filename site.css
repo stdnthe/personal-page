@@ -110,6 +110,9 @@ a {
 }
 
 .lang-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   min-width: 46px;
   height: 30px;
   border: 0;
@@ -132,7 +135,7 @@ a {
   gap: clamp(40px, 7vw, 112px);
   align-items: center;
   min-height: calc(100vh - 72px);
-  padding: clamp(58px, 8vw, 104px) clamp(20px, 5vw, 72px) clamp(34px, 5vw, 64px);
+  padding: clamp(34px, 5vw, 68px) clamp(20px, 5vw, 72px) clamp(34px, 5vw, 64px);
 }
 
 .hero-copy {
@@ -243,6 +246,10 @@ h1 {
 }
 
 .statement {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(300px, 0.8fr);
+  gap: clamp(30px, 6vw, 72px);
+  align-items: center;
   background: #ffffff;
 }
 
@@ -253,11 +260,50 @@ h1 {
   line-height: 1.12;
 }
 
-.statement p:last-child {
+.statement-copy p:last-child {
   max-width: 850px;
   margin-bottom: 0;
   color: var(--muted);
   font-size: 19px;
+}
+
+.skill-cloud {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 300px;
+  padding: clamp(18px, 3vw, 28px);
+  border: 1px solid var(--line);
+  background:
+    linear-gradient(135deg, rgba(240, 251, 248, 0.74), rgba(255, 255, 255, 0.92)),
+    #ffffff;
+  box-shadow: 0 12px 28px rgba(38, 35, 28, 0.06);
+}
+
+.skill-cloud span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 34px;
+  padding: 0 12px;
+  border: 1px solid rgba(15, 118, 110, 0.18);
+  background: rgba(255, 255, 255, 0.78);
+  color: #38524f;
+  font-size: 13px;
+  font-weight: 850;
+}
+
+.skill-cloud .cloud-lg {
+  min-height: 42px;
+  font-size: 17px;
+}
+
+.skill-cloud .cloud-xl {
+  min-height: 52px;
+  background: #171717;
+  color: #ffffff;
+  font-size: 22px;
 }
 
 .section-heading {
@@ -541,17 +587,45 @@ h1 {
 
 .series-steps a {
   display: grid;
-  min-height: 38px;
-  place-items: center;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 10px;
+  align-items: center;
+  min-height: 74px;
+  padding: 12px;
   border: 1px solid var(--line);
   color: var(--muted);
-  font-size: 12px;
   font-weight: 850;
 }
 
 .series-steps a.active {
   border-color: rgba(15, 118, 110, 0.42);
   background: #f0fbf8;
+  color: var(--accent-dark);
+}
+
+.step-index {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  background: #eef2ff;
+  color: var(--blue);
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.series-steps a.active .step-index {
+  background: var(--accent);
+  color: #ffffff;
+}
+
+.step-title {
+  color: #403d37;
+  font-size: 13px;
+  line-height: 1.25;
+}
+
+.series-steps a.active .step-title {
   color: var(--accent-dark);
 }
 
@@ -727,6 +801,7 @@ h1 {
 
   .hero,
   .series-hero,
+  .statement,
   .background-grid,
   .project-grid,
   .site-footer {

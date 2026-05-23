@@ -22,12 +22,12 @@
       <nav class="nav" aria-label="主导航">
         <a href="#background" data-i18n="navBackground">Background</a>
         <a href="#work" data-i18n="navWork">Projects</a>
-        <a href="#writing" data-i18n="navWriting">Writing</a>
+        <a href="#writing" data-i18n="navWriting">Blogs</a>
         <a href="#contact" data-i18n="navContact">Contact</a>
       </nav>
       <div class="language-switch" aria-label="Language switch">
-        <button class="lang-button" type="button" data-set-lang="zh">中文</button>
-        <button class="lang-button active" type="button" data-set-lang="en">EN</button>
+        <a class="lang-button" href="?lang=zh" data-set-lang="zh">中文</a>
+        <a class="lang-button active" href="?lang=en" data-set-lang="en">EN</a>
       </div>
     </header>
 
@@ -61,11 +61,25 @@
       </section>
 
       <section class="section statement" aria-labelledby="statement-title">
-        <p class="section-kicker" data-i18n="statementKicker">Positioning</p>
-        <h2 id="statement-title" data-i18n="statementTitle">我喜欢把业务问题转化为数据驱动的洞察，再把洞察做成可落地的 AI 分析产品。</h2>
-        <p data-i18n="statementBody">
-          我的背景结合了数据科学、金融量化建模、机器学习和 AI 评测。这里记录我对增长分析、Agent 产品、模型评测和数据工作流的持续观察与实践。
-        </p>
+        <div class="statement-copy">
+          <p class="section-kicker" data-i18n="statementKicker">Positioning</p>
+          <h2 id="statement-title" data-i18n="statementTitle">我喜欢把业务问题转化为数据驱动的洞察，再把洞察做成可落地的 AI 分析产品。</h2>
+          <p data-i18n="statementBody">
+            我的背景结合了数据科学、金融量化建模、机器学习和 AI 评测。这里记录我对增长分析、Agent 产品、模型评测和数据工作流的持续观察与实践。
+          </p>
+        </div>
+        <div class="skill-cloud" aria-label="能力标签">
+          <span class="cloud-xl" data-i18n="skillCloudOne">AI Evals</span>
+          <span class="cloud-lg" data-i18n="skillCloudTwo">Growth Analytics</span>
+          <span data-i18n="skillCloudThree">SQL</span>
+          <span class="cloud-lg" data-i18n="skillCloudFour">Python</span>
+          <span data-i18n="skillCloudFive">LLM</span>
+          <span class="cloud-xl" data-i18n="skillCloudSix">Data Science</span>
+          <span data-i18n="skillCloudSeven">Agent Products</span>
+          <span class="cloud-lg" data-i18n="skillCloudEight">Product Analytics</span>
+          <span data-i18n="skillCloudNine">Quant Modeling</span>
+          <span data-i18n="skillCloudTen">Experiment Design</span>
+        </div>
       </section>
 
       <section class="section" id="background" aria-labelledby="background-title">
@@ -77,7 +91,7 @@
         <div class="background-grid">
           <article class="background-card">
             <p class="card-label" data-i18n="backgroundOneLabel">Industry</p>
-            <h3 data-i18n="backgroundOneTitle">AI Data Analyst @ LoctekMotion</h3>
+            <h3 data-i18n="backgroundOneTitle">AI Data Analyst</h3>
             <p data-i18n="backgroundOneBody">
               当前从事 AI Data Analyst 工作，关注 Large Language Models、AI Evals，以及如何用数据分析支持实际业务和产品判断。
             </p>
@@ -127,7 +141,7 @@
             <p class="card-label" data-i18n="projectTwoLabel">Writing System</p>
             <h3 data-i18n="projectTwoTitle">大模型科普系列</h3>
             <p data-i18n="projectTwoBody">
-              从 Transformer 原理、LLM 训练流程到大模型能力评估，先写文章，再改造成适合视频表达的脚本。
+              从 Transformer 原理、LLM 训练流程到大模型能力评估，把复杂概念写成更容易理解的文章。
             </p>
             <a href="articles/" data-i18n="projectLink">查看系列</a>
           </article>
@@ -146,7 +160,7 @@
       <section class="section" id="writing" aria-labelledby="writing-title">
         <div class="section-heading">
           <p class="section-kicker" data-i18n="writingKicker">Writing</p>
-          <h2 id="writing-title" data-i18n="writingTitle">文章与视频选题</h2>
+          <h2 id="writing-title" data-i18n="writingTitle">Blogs</h2>
         </div>
 
         <div class="writing-list">
