@@ -240,6 +240,48 @@ h1 {
   font-size: 13px;
 }
 
+.writer-hero {
+  grid-template-columns: minmax(0, 1fr) minmax(260px, 420px);
+  min-height: auto;
+  align-items: end;
+}
+
+.quick-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 22px;
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 850;
+}
+
+.quick-links a:hover {
+  color: var(--accent-dark);
+}
+
+.profile-panel {
+  display: grid;
+  gap: 18px;
+  align-self: stretch;
+  padding: 18px;
+  border: 1px solid var(--line);
+  background: #ffffff;
+  box-shadow: 0 12px 28px rgba(38, 35, 28, 0.06);
+}
+
+.profile-panel img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border: 1px solid var(--line);
+}
+
+.profile-panel p:last-child {
+  margin-bottom: 0;
+  color: var(--muted);
+}
+
 .section {
   padding: clamp(54px, 8vw, 88px) clamp(20px, 5vw, 72px);
   border-top: 1px solid var(--line);
@@ -321,6 +363,47 @@ h1 {
   line-height: 1.14;
 }
 
+.series-home-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr 1fr;
+  gap: 14px;
+}
+
+.series-home-card {
+  min-height: 230px;
+  padding: 24px;
+  border: 1px solid var(--line);
+  background: #ffffff;
+  box-shadow: 0 12px 28px rgba(38, 35, 28, 0.06);
+}
+
+.series-home-card.featured {
+  background: #f0fbf8;
+  border-color: rgba(15, 118, 110, 0.3);
+}
+
+.series-home-card span,
+.post-meta {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--accent-dark);
+  font-size: 12px;
+  font-weight: 850;
+  text-transform: uppercase;
+}
+
+.series-home-card strong {
+  display: block;
+  margin-bottom: 12px;
+  font-size: 24px;
+  line-height: 1.2;
+}
+
+.series-home-card p {
+  margin-bottom: 0;
+  color: var(--muted);
+}
+
 .background-grid,
 .project-grid {
   display: grid;
@@ -329,6 +412,10 @@ h1 {
 
 .background-grid {
   grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.background-grid.compact .background-card {
+  min-height: 220px;
 }
 
 .project-grid {
@@ -439,6 +526,11 @@ h1 {
 .writing-item p {
   margin-bottom: 0;
   color: var(--muted);
+}
+
+.writing-item .post-meta {
+  margin-bottom: 4px;
+  color: var(--quiet);
 }
 
 .series-shell {
@@ -802,6 +894,7 @@ h1 {
   .hero,
   .series-hero,
   .statement,
+  .series-home-grid,
   .background-grid,
   .project-grid,
   .site-footer {

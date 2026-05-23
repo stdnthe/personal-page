@@ -20,9 +20,10 @@
         </span>
       </a>
       <nav class="nav" aria-label="主导航">
-        <a href="#background" data-i18n="navBackground">Background</a>
-        <a href="#work" data-i18n="navWork">Projects</a>
         <a href="#writing" data-i18n="navWriting">Blogs</a>
+        <a href="#series" data-i18n="navSeries">Series</a>
+        <a href="#projects" data-i18n="navWork">Projects</a>
+        <a href="#about" data-i18n="navAbout">About</a>
         <a href="#contact" data-i18n="navContact">Contact</a>
       </nav>
       <div class="language-switch" aria-label="Language switch">
@@ -32,38 +33,139 @@
     </header>
 
     <main id="top">
-      <section class="hero" aria-labelledby="hero-title">
+      <section class="hero writer-hero" aria-labelledby="hero-title">
         <div class="hero-copy">
-          <p class="eyebrow" data-i18n="heroEyebrow">Growth Analytics / AI Product Analytics / LLM Evaluation</p>
-          <h1 id="hero-title" data-i18n="heroTitle">把业务问题变成可验证的 AI 数据产品</h1>
+          <p class="eyebrow" data-i18n="heroEyebrow">AI Evals / Data Product / LLM Notes</p>
+          <h1 id="hero-title" data-i18n="heroTitle">Hi，我是 Jiaqi He。</h1>
           <p class="hero-lede" data-i18n="heroLede">
-            我是一名关注增长分析、AI 产品分析和大模型评测的数据科学从业者，喜欢把复杂业务问题转化为数据洞察和实用的 AI 分析产品。
+            我关注 AI 评测、数据产品和大模型科普，喜欢把复杂业务问题拆成可验证的数据判断，再写成清楚、可复用的分析笔记。
           </p>
           <div class="signal-list" aria-label="Focus areas">
-            <span data-i18n="chipOne">Growth Analytics</span>
-            <span data-i18n="chipTwo">AI Product Analytics</span>
-            <span data-i18n="chipThree">LLM Evaluation</span>
+            <span data-i18n="chipOne">AI Evaluation</span>
+            <span data-i18n="chipTwo">Data Product</span>
+            <span data-i18n="chipThree">LLM Explainers</span>
           </div>
           <div class="hero-actions" aria-label="主要入口">
-            <a class="button primary" href="#work" data-i18n="heroPrimary">看作品</a>
-            <a class="button secondary" href="#writing" data-i18n="heroSecondary">读文章</a>
+            <a class="button primary" href="#writing" data-i18n="heroPrimary">读文章</a>
+            <a class="button secondary" href="#series" data-i18n="heroSecondary">Start Here</a>
+          </div>
+          <div class="quick-links" aria-label="Profile links">
+            <a href="mailto:hejiaqi0318@163.com">Email</a>
+            <a href="https://github.com/hejiaqi0318" target="_blank" rel="noreferrer">GitHub</a>
+            <a href="https://www.linkedin.com/in/jiaqihe-ai" target="_blank" rel="noreferrer">LinkedIn</a>
           </div>
         </div>
-        <figure class="hero-visual">
-          <img
-            src="assets/images/profile-snowboard.jpg"
-            alt="在雪场拿着单板滑雪板的个人照片"
-          />
-          <figcaption>
-            <span data-i18n="photoCaption">Snowboard, data, and models: all require feedback from reality.</span>
-          </figcaption>
-        </figure>
+        <div class="profile-panel">
+          <img src="assets/images/profile-snowboard.jpg" alt="在雪场拿着单板滑雪板的个人照片" />
+          <div>
+            <p class="card-label" data-i18n="profileLabel">Current focus</p>
+            <p data-i18n="profileBody">AI evaluation, analytics workflows, and practical LLM explainers.</p>
+          </div>
+        </div>
       </section>
 
-      <section class="section statement" aria-labelledby="statement-title">
+      <section class="section start-section" id="series" aria-labelledby="series-title">
+        <div class="section-heading">
+          <p class="section-kicker" data-i18n="seriesHomeKicker">Start Here</p>
+          <h2 id="series-title" data-i18n="seriesHomeTitle">从这些系列开始读</h2>
+        </div>
+        <div class="series-home-grid">
+          <a class="series-home-card featured" href="articles/">
+            <span data-i18n="seriesOneLabel">Series 01</span>
+            <strong data-i18n="seriesOneTitle">大模型科普系列</strong>
+            <p data-i18n="seriesOneBody">从 Transformer、Attention 到训练和评估，按学习路径组织。</p>
+          </a>
+          <a class="series-home-card" href="#projects">
+            <span data-i18n="seriesTwoLabel">Coming next</span>
+            <strong data-i18n="seriesTwoTitle">AI Evals 笔记</strong>
+            <p data-i18n="seriesTwoBody">记录模型评测、任务设计、失败归因和真实业务验证方法。</p>
+          </a>
+          <a class="series-home-card" href="#projects">
+            <span data-i18n="seriesThreeLabel">Coming next</span>
+            <strong data-i18n="seriesThreeTitle">Data Product 实践</strong>
+            <p data-i18n="seriesThreeBody">把数据分析、增长问题和 AI 工作流整理成产品化思考。</p>
+          </a>
+        </div>
+      </section>
+
+      <section class="section" id="writing" aria-labelledby="writing-title">
+        <div class="section-heading">
+          <p class="section-kicker" data-i18n="writingKicker">Blogs</p>
+          <h2 id="writing-title" data-i18n="writingTitle">Featured Blogs</h2>
+        </div>
+
+        <div class="writing-list">
+          <a class="writing-item" href="articles/model-evaluation.html">
+            <span>04</span>
+            <div>
+              <p class="post-meta" data-i18n="postFourMeta">May 2026 · 7 min read</p>
+              <h3 data-i18n="writingFourTitle">大模型能力评估：怎么判断一个模型强不强？</h3>
+              <p data-i18n="writingFourBody">讨论 Benchmark、人类偏好、真实任务和 Agent 评估。</p>
+            </div>
+          </a>
+          <a class="writing-item" href="articles/llm-training.html">
+            <span>03</span>
+            <div>
+              <p class="post-meta" data-i18n="postThreeMeta">May 2026 · 8 min read</p>
+              <h3 data-i18n="writingThreeTitle">LLM 训练过程：从数据到会对话的模型</h3>
+              <p data-i18n="writingThreeBody">拆解预训练、指令微调、RLHF / DPO 和推理阶段。</p>
+            </div>
+          </a>
+          <a class="writing-item" href="articles/attention.html">
+            <span>02</span>
+            <div>
+              <p class="post-meta" data-i18n="postTwoMeta">May 2026 · 7 min read</p>
+              <h3 data-i18n="writingTwoTitle">Attention 机制：模型如何决定该看哪里？</h3>
+              <p data-i18n="writingTwoBody">解释 Query、Key、Value 和注意力权重的直觉。</p>
+            </div>
+          </a>
+          <a class="writing-item" href="articles/transformer.html">
+            <span>01</span>
+            <div>
+              <p class="post-meta" data-i18n="postOneMeta">May 2026 · 6 min read</p>
+              <h3 data-i18n="writingOneTitle">Transformer 到底解决了什么问题？</h3>
+              <p data-i18n="writingOneBody">从 RNN 的限制讲到 Attention 和并行训练的意义。</p>
+            </div>
+          </a>
+        </div>
+      </section>
+
+      <section class="section" id="projects" aria-labelledby="projects-title">
+        <div class="section-heading">
+          <p class="section-kicker" data-i18n="workKicker">Projects</p>
+          <h2 id="projects-title" data-i18n="workTitle">Selected Work</h2>
+        </div>
+        <div class="project-grid">
+          <article class="project-card">
+            <p class="card-label" data-i18n="projectOneLabel">Evaluation System</p>
+            <h3 data-i18n="projectOneTitle">数据科学 Agent 评测平台</h3>
+            <p data-i18n="projectOneBody">
+              评估模型是否能完成真实数据分析任务：理解业务问题、处理数据、编写 SQL/Python、生成洞察，并对错误进行归因。
+            </p>
+          </article>
+          <article class="project-card">
+            <p class="card-label" data-i18n="projectThreeLabel">Prototype</p>
+            <h3 data-i18n="projectThreeTitle">模型机制可视化解释器</h3>
+            <p data-i18n="projectThreeBody">
+              将论文和原理笔记转成可视化解释页面，用于训练自己把复杂模型结构讲清楚的能力。
+            </p>
+            <a href="#projects" data-i18n="projectLinkAlt">查看项目</a>
+          </article>
+          <article class="project-card">
+            <p class="card-label" data-i18n="projectTwoLabel">Writing System</p>
+            <h3 data-i18n="projectTwoTitle">大模型科普系列</h3>
+            <p data-i18n="projectTwoBody">
+              从 Transformer 原理、LLM 训练流程到大模型能力评估，把复杂概念写成更容易理解的文章。
+            </p>
+            <a href="articles/" data-i18n="projectLink">查看系列</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="section statement" id="about" aria-labelledby="about-title">
         <div class="statement-copy">
-          <p class="section-kicker" data-i18n="statementKicker">Positioning</p>
-          <h2 id="statement-title" data-i18n="statementTitle">我喜欢把业务问题转化为数据驱动的洞察，再把洞察做成可落地的 AI 分析产品。</h2>
+          <p class="section-kicker" data-i18n="backgroundKicker">About</p>
+          <h2 id="about-title" data-i18n="backgroundTitle">数据科学、AI 产品分析与量化建模背景</h2>
           <p data-i18n="statementBody">
             我的背景结合了数据科学、金融量化建模、机器学习和 AI 评测。这里记录我对增长分析、Agent 产品、模型评测和数据工作流的持续观察与实践。
           </p>
@@ -82,116 +184,27 @@
         </div>
       </section>
 
-      <section class="section" id="background" aria-labelledby="background-title">
+      <section class="section about-strip" aria-label="Background details">
         <div class="section-heading">
           <p class="section-kicker" data-i18n="backgroundKicker">Background</p>
-          <h2 id="background-title" data-i18n="backgroundTitle">数据科学、AI 产品分析与量化建模背景</h2>
+          <h2 data-i18n="aboutDetailTitle">基础与经历</h2>
         </div>
-
-        <div class="background-grid">
+        <div class="background-grid compact">
           <article class="background-card">
             <p class="card-label" data-i18n="backgroundOneLabel">Industry</p>
             <h3 data-i18n="backgroundOneTitle">AI Data Analyst</h3>
-            <p data-i18n="backgroundOneBody">
-              当前从事 AI Data Analyst 工作，关注 Large Language Models、AI Evals，以及如何用数据分析支持实际业务和产品判断。
-            </p>
+            <p data-i18n="backgroundOneBody">当前从事 AI Data Analyst 工作，关注 Large Language Models、AI Evals，以及如何用数据分析支持实际业务和产品判断。</p>
           </article>
-
           <article class="background-card">
             <p class="card-label" data-i18n="backgroundTwoLabel">Education</p>
             <h3 data-i18n="backgroundTwoTitle">中国矿业大学（北京）</h3>
-            <p data-i18n="backgroundTwoBody">
-              本科专业为 Data Science，系统学习 SQL、Python、机器学习和数据分析，并持续将数据方法用于业务问题拆解。
-            </p>
+            <p data-i18n="backgroundTwoBody">本科专业为 Data Science，系统学习 SQL、Python、机器学习和数据分析，并持续将数据方法用于业务问题拆解。</p>
           </article>
-
           <article class="background-card">
             <p class="card-label" data-i18n="backgroundThreeLabel">Quant Finance</p>
             <h3 data-i18n="backgroundThreeTitle">CQF / Quantitative Finance</h3>
-            <p data-i18n="backgroundThreeBody">
-              完成 Certificate in Quantitative Finance，强化了金融量化建模、风险管理、机器学习和深度强化学习方面的实践基础。
-            </p>
+            <p data-i18n="backgroundThreeBody">完成 Certificate in Quantitative Finance，强化了金融量化建模、风险管理、机器学习和深度强化学习方面的实践基础。</p>
           </article>
-        </div>
-      </section>
-
-      <section class="section" id="work" aria-labelledby="work-title">
-        <div class="section-heading">
-          <p class="section-kicker" data-i18n="workKicker">Projects</p>
-          <h2 id="work-title" data-i18n="workTitle">作品与实验</h2>
-        </div>
-
-        <div class="project-grid">
-          <article class="project-card featured">
-            <p class="card-label" data-i18n="projectOneLabel">Evaluation System</p>
-            <h3 data-i18n="projectOneTitle">数据科学 Agent 评测平台</h3>
-            <p data-i18n="projectOneBody">
-              评估模型是否能完成真实数据分析任务：理解业务问题、处理数据、编写 SQL/Python、
-              生成洞察，并对错误进行归因。
-            </p>
-            <ul class="check-list">
-              <li data-i18n="projectOnePointOne">任务完成度评分</li>
-              <li data-i18n="projectOnePointTwo">代码可运行性检查</li>
-              <li data-i18n="projectOnePointThree">结论是否被数据支持</li>
-              <li data-i18n="projectOnePointFour">失败原因归因报告</li>
-            </ul>
-          </article>
-
-          <article class="project-card">
-            <p class="card-label" data-i18n="projectTwoLabel">Writing System</p>
-            <h3 data-i18n="projectTwoTitle">大模型科普系列</h3>
-            <p data-i18n="projectTwoBody">
-              从 Transformer 原理、LLM 训练流程到大模型能力评估，把复杂概念写成更容易理解的文章。
-            </p>
-            <a href="articles/" data-i18n="projectLink">查看系列</a>
-          </article>
-
-          <article class="project-card">
-            <p class="card-label" data-i18n="projectThreeLabel">Prototype</p>
-            <h3 data-i18n="projectThreeTitle">模型机制可视化解释器</h3>
-            <p data-i18n="projectThreeBody">
-              将论文和原理笔记转成可视化解释页面，用于训练自己把复杂模型结构讲清楚的能力。
-            </p>
-            <a href="#work" data-i18n="projectLinkAlt">查看项目</a>
-          </article>
-        </div>
-      </section>
-
-      <section class="section" id="writing" aria-labelledby="writing-title">
-        <div class="section-heading">
-          <p class="section-kicker" data-i18n="writingKicker">Writing</p>
-          <h2 id="writing-title" data-i18n="writingTitle">Blogs</h2>
-        </div>
-
-        <div class="writing-list">
-          <a class="writing-item" href="articles/transformer.html">
-            <span>01</span>
-            <div>
-              <h3 data-i18n="writingOneTitle">Transformer 到底解决了什么问题？</h3>
-              <p data-i18n="writingOneBody">从 RNN 的限制讲到 Attention 和并行训练的意义。</p>
-            </div>
-          </a>
-          <a class="writing-item" href="articles/attention.html">
-            <span>02</span>
-            <div>
-              <h3 data-i18n="writingTwoTitle">Attention 机制：模型如何决定该看哪里？</h3>
-              <p data-i18n="writingTwoBody">解释 Query、Key、Value 和注意力权重的直觉。</p>
-            </div>
-          </a>
-          <a class="writing-item" href="articles/llm-training.html">
-            <span>03</span>
-            <div>
-              <h3 data-i18n="writingThreeTitle">LLM 训练过程：从数据到会对话的模型</h3>
-              <p data-i18n="writingThreeBody">拆解预训练、指令微调、RLHF / DPO 和推理阶段。</p>
-            </div>
-          </a>
-          <a class="writing-item" href="articles/model-evaluation.html">
-            <span>04</span>
-            <div>
-              <h3 data-i18n="writingFourTitle">大模型能力评估：怎么判断一个模型强不强？</h3>
-              <p data-i18n="writingFourBody">讨论 Benchmark、人类偏好、真实任务和 Agent 评估。</p>
-            </div>
-          </a>
         </div>
       </section>
     </main>
