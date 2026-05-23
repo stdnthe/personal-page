@@ -13,9 +13,8 @@
   <body data-lang="en">
     <header class="site-header">
       <a class="brand" href="#top" aria-label="回到首页">
-        <span class="brand-mark">JH</span>
         <span>
-          <strong>Jiaqi He</strong>
+          <strong><span>Jiaqi</span> <em>He</em></strong>
           <small>AI Eval Lab</small>
         </span>
       </a>
@@ -40,14 +39,9 @@
           <p class="hero-lede" data-i18n="heroLede">
             我关注 AI 评测、数据产品和大模型科普，喜欢把复杂业务问题拆成可验证的数据判断，再写成清楚、可复用的分析笔记。
           </p>
-          <div class="signal-list" aria-label="Focus areas">
-            <span data-i18n="chipOne">AI Evaluation</span>
-            <span data-i18n="chipTwo">Data Product</span>
-            <span data-i18n="chipThree">LLM Explainers</span>
-          </div>
           <div class="hero-actions" aria-label="主要入口">
-            <a class="button primary" href="#writing" data-i18n="heroPrimary">读文章</a>
             <a class="button secondary" href="#series" data-i18n="heroSecondary">Start Here</a>
+            <a class="button secondary" href="#writing" data-i18n="heroPrimary">Best Articles</a>
           </div>
           <div class="quick-links" aria-label="Profile links">
             <a href="mailto:hejiaqi0318@163.com">Email</a>
@@ -56,11 +50,7 @@
           </div>
         </div>
         <div class="profile-panel">
-          <img src="assets/images/profile-snowboard.jpg" alt="在雪场拿着单板滑雪板的个人照片" />
-          <div>
-            <p class="card-label" data-i18n="profileLabel">Current focus</p>
-            <p data-i18n="profileBody">AI evaluation, analytics workflows, and practical LLM explainers.</p>
-          </div>
+          <img src="assets/images/profile-professional.jpg" alt="Jiaqi He professional portrait" />
         </div>
       </section>
 
@@ -70,7 +60,7 @@
           <h2 id="series-title" data-i18n="seriesHomeTitle">从这些系列开始读</h2>
         </div>
         <div class="series-home-grid">
-          <a class="series-home-card featured" href="articles/">
+          <a class="series-home-card" href="articles/">
             <span data-i18n="seriesOneLabel">Series 01</span>
             <strong data-i18n="seriesOneTitle">大模型科普系列</strong>
             <p data-i18n="seriesOneBody">从 Transformer、Attention 到训练和评估，按学习路径组织。</p>
@@ -96,7 +86,7 @@
 
         <div class="writing-list">
           <a class="writing-item" href="articles/model-evaluation.html">
-            <span>04</span>
+            <span class="list-number">04</span>
             <div>
               <p class="post-meta" data-i18n="postFourMeta">May 2026 · 7 min read</p>
               <h3 data-i18n="writingFourTitle">大模型能力评估：怎么判断一个模型强不强？</h3>
@@ -104,7 +94,7 @@
             </div>
           </a>
           <a class="writing-item" href="articles/llm-training.html">
-            <span>03</span>
+            <span class="list-number">03</span>
             <div>
               <p class="post-meta" data-i18n="postThreeMeta">May 2026 · 8 min read</p>
               <h3 data-i18n="writingThreeTitle">LLM 训练过程：从数据到会对话的模型</h3>
@@ -112,7 +102,7 @@
             </div>
           </a>
           <a class="writing-item" href="articles/attention.html">
-            <span>02</span>
+            <span class="list-number">02</span>
             <div>
               <p class="post-meta" data-i18n="postTwoMeta">May 2026 · 7 min read</p>
               <h3 data-i18n="writingTwoTitle">Attention 机制：模型如何决定该看哪里？</h3>
@@ -120,7 +110,7 @@
             </div>
           </a>
           <a class="writing-item" href="articles/transformer.html">
-            <span>01</span>
+            <span class="list-number">01</span>
             <div>
               <p class="post-meta" data-i18n="postOneMeta">May 2026 · 6 min read</p>
               <h3 data-i18n="writingOneTitle">Transformer 到底解决了什么问题？</h3>
@@ -135,7 +125,7 @@
           <p class="section-kicker" data-i18n="workKicker">Projects</p>
           <h2 id="projects-title" data-i18n="workTitle">Selected Work</h2>
         </div>
-        <div class="project-grid">
+        <div class="project-list">
           <article class="project-card">
             <p class="card-label" data-i18n="projectOneLabel">Evaluation System</p>
             <h3 data-i18n="projectOneTitle">数据科学 Agent 评测平台</h3>
@@ -170,15 +160,15 @@
             我的背景结合了数据科学、金融量化建模、机器学习和 AI 评测。这里记录我对增长分析、Agent 产品、模型评测和数据工作流的持续观察与实践。
           </p>
         </div>
-        <div class="skill-cloud" aria-label="能力标签">
-          <span class="cloud-xl" data-i18n="skillCloudOne">AI Evals</span>
-          <span class="cloud-lg" data-i18n="skillCloudTwo">Growth Analytics</span>
+        <div class="skill-cloud compact-cloud" aria-label="能力标签">
+          <span data-i18n="skillCloudOne">AI Evals</span>
+          <span data-i18n="skillCloudTwo">Growth Analytics</span>
           <span data-i18n="skillCloudThree">SQL</span>
-          <span class="cloud-lg" data-i18n="skillCloudFour">Python</span>
+          <span data-i18n="skillCloudFour">Python</span>
           <span data-i18n="skillCloudFive">LLM</span>
-          <span class="cloud-xl" data-i18n="skillCloudSix">Data Science</span>
+          <span data-i18n="skillCloudSix">Data Science</span>
           <span data-i18n="skillCloudSeven">Agent Products</span>
-          <span class="cloud-lg" data-i18n="skillCloudEight">Product Analytics</span>
+          <span data-i18n="skillCloudEight">Product Analytics</span>
           <span data-i18n="skillCloudNine">Quant Modeling</span>
           <span data-i18n="skillCloudTen">Experiment Design</span>
         </div>

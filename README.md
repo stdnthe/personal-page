@@ -8,7 +8,7 @@
 - `articles/`: 大模型科普系列落地页和文章页
 - `site.css`: 页面样式
 - `assets/images/`: 首页视觉素材
-- `assets/images/profile-snowboard.jpg`: 首页个人照片，已压缩为网页版本
+- `assets/images/profile-professional.jpg`: 首页职业照
 
 ## Preview
 
