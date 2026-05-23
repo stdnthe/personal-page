@@ -50,7 +50,7 @@ const copy = {
     projectThreeTitle: "模型机制可视化解释器",
     projectThreeBody:
       "将论文和原理笔记转成可视化解释页面，用交互原型帮助自己把复杂模型结构讲清楚。",
-    projectLink: "查看选题",
+    projectLink: "查看系列",
     projectLinkAlt: "查看项目",
     writingKicker: "Writing",
     writingTitle: "文章与视频选题",
@@ -117,7 +117,7 @@ const copy = {
     projectThreeTitle: "Model mechanism visualizer",
     projectThreeBody:
       "Interactive explainers that turn papers and technical notes into visual pages for understanding complex model structures.",
-    projectLink: "View topics",
+    projectLink: "View series",
     projectLinkAlt: "View project",
     writingKicker: "Writing",
     writingTitle: "Writing and video topics",

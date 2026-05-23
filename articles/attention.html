@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Attention 机制：模型如何决定该看哪里？ | Jiaqi He</title>
+    <meta
+      name="description"
+      content="用 Query、Key、Value 的直觉解释注意力权重是怎么来的。"
+    />
+    <link rel="stylesheet" href="../site.css?v=20260523-articles" />
+  </head>
+  <body class="article-page">
+    <header class="site-header">
+      <a class="brand" href="../index.html" aria-label="回到首页">
+        <span class="brand-mark">JH</span>
+        <span>
+          <strong>Jiaqi He</strong>
+          <small>AI Eval Lab</small>
+        </span>
+      </a>
+      <nav class="nav" aria-label="主导航">
+        <a href="index.html">系列目录</a>
+        <a href="../index.html#work">Projects</a>
+        <a href="../index.html#writing">Writing</a>
+        <a href="../index.html#contact">Contact</a>
+      </nav>
+    </header>
+
+    <main class="article-layout">
+      <section class="series-progress" aria-label="系列进度">
+        <div class="progress-meta">
+          <span>第 2 / 4 篇</span>
+          <span>预计阅读 7 分钟</span>
+        </div>
+        <div class="progress-track" aria-hidden="true">
+          <div class="progress-fill" style="width: 50%"></div>
+        </div>
+        <div class="series-steps">
+          <a href="transformer.html">01</a>
+          <a class="active" href="attention.html">02</a>
+          <a href="llm-training.html">03</a>
+          <a href="model-evaluation.html">04</a>
+        </div>
+      </section>
+
+      <article>
+        <header class="article-header">
+          <p class="section-kicker">LLM Basics</p>
+          <h1>Attention 机制：模型如何决定该看哪里？</h1>
+          <p class="article-summary">
+            Attention 可以理解成一种“相关性搜索”：当前词提出问题，其他词拿出线索，模型再决定重点参考谁。
+          </p>
+        </header>
+
+        <div class="article-body">
+          <p>
+            当模型处理一句话时，每个词都不应该孤立理解。比如“它很好用”里的“它”指什么，需要回到前文寻找线索。Attention 就是在做这种寻找。
+          </p>
+
+          <div class="concept-map" aria-label="QKV 直觉">
+            <div class="concept-node">
+              <strong>Query</strong>
+              <span>当前词提出的问题：我现在需要什么信息？</span>
+            </div>
+            <div class="concept-node">
+              <strong>Key</strong>
+              <span>其他词提供的索引：我这里有什么线索？</span>
+            </div>
+            <div class="concept-node">
+              <strong>Value</strong>
+              <span>真正被取走的信息：如果相关，就把内容贡献出来。</span>
+            </div>
+          </div>
+
+          <h2>注意力权重是什么？</h2>
+          <p>
+            模型会比较 Query 和每个 Key 的匹配程度。越匹配，权重越高；权重越高，对应的 Value 就越会影响当前词的表示。
+          </p>
+          <p>
+            这不是人类显式写规则，而是在大量训练数据中学出来的统计关系。模型学会了哪些词之间经常互相解释、互相限定、互相补充。
+          </p>
+
+          <h2>为什么要多头注意力？</h2>
+          <p>
+            一句话里常常同时存在多种关系：主谓关系、指代关系、时间关系、因果关系。多头注意力让模型从多个角度观察同一句话。
+          </p>
+
+          <h2>一句话总结</h2>
+          <p>
+            Attention 让模型不只是按顺序读字，而是能动态判断“当前理解最需要参考哪里”。这也是 Transformer 能处理复杂上下文的关键。
+          </p>
+        </div>
+      </article>
+
+      <nav class="article-nav" aria-label="上一篇下一篇">
+        <a href="transformer.html">
+          <span>上一篇</span>
+          <strong>Transformer 到底解决了什么问题？</strong>
+        </a>
+        <a href="llm-training.html">
+          <span>下一篇</span>
+          <strong>LLM 训练过程：从数据到会对话的模型</strong>
+        </a>
+      </nav>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>LLM 训练过程：从数据到会对话的模型 | Jiaqi He</title>
+    <meta
+      name="description"
+      content="拆解预训练、指令微调、偏好对齐和推理阶段各自解决什么问题。"
+    />
+    <link rel="stylesheet" href="../site.css?v=20260523-articles" />
+  </head>
+  <body class="article-page">
+    <header class="site-header">
+      <a class="brand" href="../index.html" aria-label="回到首页">
+        <span class="brand-mark">JH</span>
+        <span>
+          <strong>Jiaqi He</strong>
+          <small>AI Eval Lab</small>
+        </span>
+      </a>
+      <nav class="nav" aria-label="主导航">
+        <a href="index.html">系列目录</a>
+        <a href="../index.html#work">Projects</a>
+        <a href="../index.html#writing">Writing</a>
+        <a href="../index.html#contact">Contact</a>
+      </nav>
+    </header>
+
+    <main class="article-layout">
+      <section class="series-progress" aria-label="系列进度">
+        <div class="progress-meta">
+          <span>第 3 / 4 篇</span>
+          <span>预计阅读 8 分钟</span>
+        </div>
+        <div class="progress-track" aria-hidden="true">
+          <div class="progress-fill" style="width: 75%"></div>
+        </div>
+        <div class="series-steps">
+          <a href="transformer.html">01</a>
+          <a href="attention.html">02</a>
+          <a class="active" href="llm-training.html">03</a>
+          <a href="model-evaluation.html">04</a>
+        </div>
+      </section>
+
+      <article>
+        <header class="article-header">
+          <p class="section-kicker">LLM Training</p>
+          <h1>LLM 训练过程：从数据到会对话的模型</h1>
+          <p class="article-summary">
+            大模型不是一开始就会聊天，它通常先学习语言规律，再学习按照人的指令工作，最后学习什么回答更符合人类偏好。
+          </p>
+        </header>
+
+        <div class="article-body">
+          <p>
+            可以把训练过程理解成三层能力的叠加：先会“续写”，再会“听指令”，最后更会“给出有帮助的回答”。
+          </p>
+
+          <div class="concept-map" aria-label="LLM 训练三阶段">
+            <div class="concept-node">
+              <strong>预训练</strong>
+              <span>从海量文本中学习语言结构、事实关联和常识模式。</span>
+            </div>
+            <div class="concept-node">
+              <strong>指令微调</strong>
+              <span>让模型理解用户是在提问、要求总结、改写或推理。</span>
+            </div>
+            <div class="concept-node">
+              <strong>偏好对齐</strong>
+              <span>用人类偏好信号调整回答风格、帮助性和安全边界。</span>
+            </div>
+          </div>
+
+          <h2>预训练：先学会语言世界</h2>
+          <p>
+            预训练常见目标是预测下一个 token。这个任务看起来简单，但当数据足够大、模型足够大时，它会逼着模型学习语法、知识、推理痕迹和领域模式。
+          </p>
+
+          <h2>指令微调：从续写变成助手</h2>
+          <p>
+            只做预训练的模型更像一个“文本续写器”。指令微调会给它很多问答、总结、分类、代码、推理样例，让它学会按照任务格式完成请求。
+          </p>
+
+          <h2>偏好对齐：回答不只要对，还要有用</h2>
+          <p>
+            同一个问题可能有很多回答。偏好对齐会告诉模型哪些回答更清楚、更稳妥、更符合用户需求。RLHF 和 DPO 都属于这个方向的代表方法。
+          </p>
+
+          <h2>一句话总结</h2>
+          <p>
+            LLM 训练不是单次魔法，而是从语言建模到任务理解、再到人类偏好对齐的连续工程。
+          </p>
+        </div>
+      </article>
+
+      <nav class="article-nav" aria-label="上一篇下一篇">
+        <a href="attention.html">
+          <span>上一篇</span>
+          <strong>Attention 机制：模型如何决定该看哪里？</strong>
+        </a>
+        <a href="model-evaluation.html">
+          <span>下一篇</span>
+          <strong>大模型能力评估：怎么判断一个模型强不强？</strong>
+        </a>
+      </nav>
+    </main>
+  </body>
+</html>

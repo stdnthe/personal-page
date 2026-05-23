@@ -5,6 +5,7 @@
 ## Files
 
 - `index.html`: 个人主页页面
+- `articles/`: 大模型科普系列落地页和文章页
 - `site.css`: 页面样式
 - `assets/images/`: 首页视觉素材
 - `assets/images/profile-snowboard.jpg`: 首页个人照片，已压缩为网页版本
