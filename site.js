@@ -33,7 +33,7 @@ const copy = {
     skillCloudNine: "Quant Modeling",
     skillCloudTen: "Experiment Design",
     skillsKicker: "Core Skills",
-    backgroundKicker: "Background",
+    backgroundKicker: "Personal Background",
     backgroundTitle: "数据科学、AI 产品分析与量化建模背景",
     homeBioOne:
       "我关注如何把增长、产品和业务问题转化为可验证的数据判断，并进一步沉淀成更稳定的 AI 分析产品。",
@@ -77,7 +77,9 @@ const copy = {
     writingKicker: "Blogs",
     writingTitle: "Blogs",
     blogsIntro: "关于 AI 评测、数据产品和大模型基础的文章与系列笔记。",
-    homeSelectedBlogsTitle: "Selected Blogs",
+    homeSelectedBlogsTitle: "Blogs",
+    homeSelectedBlogsIntro:
+      "I often share my experience building AI products. Below is a selection of my long-form writing.",
     recentPostsTitle: "Recent / Featured Posts",
     postOneMeta: "May 2026 · 6 min read",
     postTwoMeta: "May 2026 · 7 min read",
@@ -239,7 +241,7 @@ const copy = {
     evaluationBodyFour:
       "判断模型强不强，要把通用分数、人类体验和真实任务结果结合起来看。尤其在产品落地时，稳定解决目标任务比单纯冲高分更重要。",
     contactKicker: "Contact",
-    contactTitle: "保持好奇，也保持可验证。",
+    contactTitle: "Follow Me",
     contactBody: "如果你也关注 AI 评测、Agent 产品或数据科学工作流，欢迎交流。",
   },
   en: {
@@ -276,7 +278,7 @@ const copy = {
     skillCloudNine: "Quant Modeling",
     skillCloudTen: "Experiment Design",
     skillsKicker: "Core Skills",
-    backgroundKicker: "Background",
+    backgroundKicker: "Personal Background",
     backgroundTitle: "Data science, AI product analytics, and quantitative modeling",
     homeBioOne:
       "I focus on turning growth, product, and business questions into verifiable data judgment, then shaping that judgment into more reliable AI analytics products.",
@@ -320,7 +322,9 @@ const copy = {
     writingKicker: "Blogs",
     writingTitle: "Blogs",
     blogsIntro: "Notes and article series on AI evaluation, data products, and LLM fundamentals.",
-    homeSelectedBlogsTitle: "Selected Blogs",
+    homeSelectedBlogsTitle: "Blogs",
+    homeSelectedBlogsIntro:
+      "I often share my experience building AI products. Below is a selection of my long-form writing.",
     recentPostsTitle: "Recent / Featured Posts",
     postOneMeta: "May 2026 · 6 min read",
     postTwoMeta: "May 2026 · 7 min read",
@@ -499,7 +503,7 @@ const copy = {
     evaluationBodyFour:
       "To judge a model, combine general scores, human experience, and real-task results. In product work, reliably solving the target task matters more than chasing one high score.",
     contactKicker: "Contact",
-    contactTitle: "Stay curious. Stay verifiable.",
+    contactTitle: "Follow Me",
     contactBody:
       "If you are interested in AI evaluation, agent products, or data science workflows, feel free to reach out.",
   },

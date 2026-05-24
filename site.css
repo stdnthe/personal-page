@@ -333,6 +333,14 @@ h1 {
   line-height: 1.14;
 }
 
+.section-intro {
+  max-width: 760px;
+  margin: 12px 0 0;
+  color: var(--muted);
+  font-size: clamp(18px, 2vw, 22px);
+  line-height: 1.62;
+}
+
 .text-section {
   padding-top: clamp(18px, 3vw, 34px);
   padding-bottom: clamp(30px, 5vw, 56px);
@@ -343,6 +351,13 @@ h1 {
   margin-bottom: 20px;
   font-size: clamp(30px, 4vw, 46px);
   line-height: 1.14;
+}
+
+.skills-overview {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(260px, 340px);
+  gap: clamp(28px, 6vw, 72px);
+  align-items: center;
 }
 
 .text-stack {
@@ -356,6 +371,42 @@ h1 {
   color: #2d2b27;
   font-size: clamp(18px, 2vw, 22px);
   line-height: 1.72;
+}
+
+.skill-radar {
+  margin: 0;
+}
+
+.skill-radar svg {
+  display: block;
+  width: 100%;
+  max-width: 340px;
+  margin-left: auto;
+}
+
+.radar-grid polygon,
+.radar-grid line {
+  fill: none;
+  stroke: #ded8ca;
+  stroke-width: 1;
+}
+
+.radar-area {
+  fill: rgba(15, 118, 110, 0.12);
+}
+
+.radar-line {
+  fill: none;
+  stroke: var(--accent-dark);
+  stroke-linejoin: round;
+  stroke-width: 2.5;
+}
+
+.radar-labels {
+  fill: var(--muted);
+  font-size: 10px;
+  font-weight: 850;
+  text-transform: uppercase;
 }
 
 .compact-section {
@@ -1028,6 +1079,7 @@ a.project-status:hover {
   .hero,
   .series-hero,
   .statement,
+  .skills-overview,
   .series-home-grid,
   .background-grid,
   .project-grid,

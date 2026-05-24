@@ -8,7 +8,7 @@
       name="description"
       content="一个数据科学背景的 AI 产品与评测研究者，持续探索大模型能力边界。"
     />
-    <link rel="stylesheet" href="site.css?v=20260524-english-only" />
+    <link rel="stylesheet" href="site.css?v=20260524-skills-matrix" />
   </head>
   <body data-lang="en">
     <header class="site-header">
@@ -41,19 +41,48 @@
       <section class="section text-section" aria-labelledby="about-title">
         <p class="section-kicker" data-i18n="skillsKicker">Core Skills</p>
         <h2 id="about-title" data-i18n="backgroundTitle">数据科学、AI 产品分析与量化建模背景</h2>
-        <div class="text-stack">
-          <p data-i18n="homeBioOne">
-            我关注如何把增长、产品和业务问题转化为可验证的数据判断，并进一步沉淀成更稳定的 AI 分析产品。
-          </p>
-          <p data-i18n="homeBioTwo">
-            我的工作兴趣集中在 Growth Analytics、AI Product Analytics 和 LLM Evaluation：既关心模型能力，也关心这些能力是否能在真实任务里稳定产生价值。
-          </p>
+        <div class="skills-overview">
+          <div class="text-stack">
+            <p data-i18n="homeBioOne">
+              我关注如何把增长、产品和业务问题转化为可验证的数据判断，并进一步沉淀成更稳定的 AI 分析产品。
+            </p>
+            <p data-i18n="homeBioTwo">
+              我的工作兴趣集中在 Growth Analytics、AI Product Analytics 和 LLM Evaluation：既关心模型能力，也关心这些能力是否能在真实任务里稳定产生价值。
+            </p>
+          </div>
+          <figure class="skill-radar" aria-label="Skill matrix radar chart">
+            <svg viewBox="0 0 260 260" role="img" aria-labelledby="skill-radar-title skill-radar-desc">
+              <title id="skill-radar-title">Skill Matrix</title>
+              <desc id="skill-radar-desc">Radar chart showing strengths across analytics, AI product, LLM evaluation, machine learning and quantitative modeling, experimentation, and SQL or Python.</desc>
+              <g class="radar-grid">
+                <polygon points="130,98 158,114 158,146 130,162 102,146 102,114" />
+                <polygon points="130,74 178,102 178,158 130,186 82,158 82,102" />
+                <polygon points="130,50 199,90 199,170 130,210 61,170 61,90" />
+                <line x1="130" y1="130" x2="130" y2="50" />
+                <line x1="130" y1="130" x2="199" y2="90" />
+                <line x1="130" y1="130" x2="199" y2="170" />
+                <line x1="130" y1="130" x2="130" y2="210" />
+                <line x1="130" y1="130" x2="61" y2="170" />
+                <line x1="130" y1="130" x2="61" y2="90" />
+              </g>
+              <polygon class="radar-area" points="130,56 189,96 192,166 130,190 67,166 69,95" />
+              <polyline class="radar-line" points="130,56 189,96 192,166 130,190 67,166 69,95 130,56" />
+              <g class="radar-labels">
+                <text x="130" y="24" text-anchor="middle">Analytics</text>
+                <text x="222" y="82" text-anchor="middle">AI Product</text>
+                <text x="224" y="184" text-anchor="middle">LLM Evals</text>
+                <text x="130" y="244" text-anchor="middle">ML / Quant</text>
+                <text x="36" y="184" text-anchor="middle">Experiment</text>
+                <text x="36" y="82" text-anchor="middle">SQL / Python</text>
+              </g>
+            </svg>
+          </figure>
         </div>
       </section>
 
       <section class="section compact-section" aria-labelledby="background-title">
         <div class="section-heading">
-          <p class="section-kicker" data-i18n="backgroundKicker">Background</p>
+          <p class="section-kicker" data-i18n="backgroundKicker">Personal Background</p>
           <h2 id="background-title" data-i18n="aboutDetailTitle">基础与经历</h2>
         </div>
         <div class="info-list">
@@ -83,8 +112,10 @@
 
       <section class="section compact-section" aria-labelledby="selected-blogs-title">
         <div class="section-heading">
-          <p class="section-kicker" data-i18n="writingKicker">Blogs</p>
-          <h2 id="selected-blogs-title" data-i18n="homeSelectedBlogsTitle">Selected Blogs</h2>
+          <h2 id="selected-blogs-title" data-i18n="homeSelectedBlogsTitle">Blogs</h2>
+          <p class="section-intro" data-i18n="homeSelectedBlogsIntro">
+            I often share my experience building AI products. Below is a selection of my long-form writing.
+          </p>
         </div>
         <div class="post-table">
           <a class="post-row" href="articles/model-evaluation.html">
@@ -113,8 +144,7 @@
 
     <footer class="site-footer" id="contact">
       <div>
-        <p class="section-kicker" data-i18n="contactKicker">Contact</p>
-        <h2 data-i18n="contactTitle">保持好奇，也保持可验证。</h2>
+        <h2 data-i18n="contactTitle">Follow Me</h2>
       </div>
       <div class="contact-panel">
         <p class="contact-copy" data-i18n="contactBody">
@@ -145,6 +175,6 @@
         </div>
       </div>
     </footer>
-    <script src="site.js?v=20260524-english-only"></script>
+    <script src="site.js?v=20260524-skills-matrix"></script>
   </body>
 </html>
