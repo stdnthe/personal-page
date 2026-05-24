@@ -333,6 +333,35 @@ h1 {
   line-height: 1.14;
 }
 
+.title-with-icon {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.title-icon {
+  display: inline-flex;
+  flex: 0 0 auto;
+  width: 0.9em;
+  height: 0.9em;
+  color: var(--accent-dark);
+}
+
+.title-icon svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.9;
+}
+
+.title-text {
+  min-width: 0;
+}
+
 .section-intro {
   max-width: 760px;
   margin: 12px 0 0;
@@ -391,23 +420,23 @@ h1 {
 .radar-grid circle,
 .radar-grid line {
   fill: none;
-  stroke: #ded8ca;
+  stroke: #cfc8bb;
   stroke-width: 1;
 }
 
 .radar-area {
-  fill: rgba(15, 118, 110, 0.1);
+  fill: rgba(23, 23, 23, 0.08);
 }
 
 .radar-line {
   fill: none;
-  stroke: var(--accent-dark);
+  stroke: var(--ink);
   stroke-linejoin: round;
   stroke-width: 2.5;
 }
 
 .radar-labels {
-  fill: var(--muted);
+  fill: #3a3833;
   font-size: 10px;
   font-weight: 850;
   text-transform: uppercase;
@@ -1007,7 +1036,7 @@ a.project-status:hover {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(280px, 460px);
   gap: 30px;
-  padding: clamp(48px, 7vw, 80px) clamp(20px, 5vw, 72px);
+  padding: clamp(48px, 7vw, 80px) clamp(20px, 4vw, 44px);
   background: #ffffff;
   color: var(--ink);
   border-top: 1px solid #e6e6e6;
