@@ -8,7 +8,7 @@
       name="description"
       content="一个数据科学背景的 AI 产品与评测研究者，持续探索大模型能力边界。"
     />
-    <link rel="stylesheet" href="site.css?v=20260523-nav-pages" />
+    <link rel="stylesheet" href="site.css?v=20260524-knowledge-layout" />
   </head>
   <body data-lang="en">
     <header class="site-header">
@@ -46,49 +46,78 @@
         </div>
       </section>
 
-      <section class="section statement" id="about" aria-labelledby="about-title">
-        <div class="statement-copy">
-          <p class="section-kicker" data-i18n="backgroundKicker">About</p>
-          <h2 id="about-title" data-i18n="backgroundTitle">数据科学、AI 产品分析与量化建模背景</h2>
-          <p data-i18n="statementBody">
-            我的背景结合了数据科学、金融量化建模、机器学习和 AI 评测。这里记录我对增长分析、Agent 产品、模型评测和数据工作流的持续观察与实践。
+      <section class="section text-section" aria-labelledby="about-title">
+        <p class="section-kicker" data-i18n="backgroundKicker">About</p>
+        <h2 id="about-title" data-i18n="backgroundTitle">数据科学、AI 产品分析与量化建模背景</h2>
+        <div class="text-stack">
+          <p data-i18n="homeBioOne">
+            我关注如何把增长、产品和业务问题转化为可验证的数据判断，并进一步沉淀成更稳定的 AI 分析产品。
           </p>
-        </div>
-        <div class="skill-cloud compact-cloud" aria-label="能力标签">
-          <span data-i18n="skillCloudOne">AI Evals</span>
-          <span data-i18n="skillCloudTwo">Growth Analytics</span>
-          <span data-i18n="skillCloudThree">SQL</span>
-          <span data-i18n="skillCloudFour">Python</span>
-          <span data-i18n="skillCloudFive">LLM</span>
-          <span data-i18n="skillCloudSix">Data Science</span>
-          <span data-i18n="skillCloudSeven">Agent Products</span>
-          <span data-i18n="skillCloudEight">Product Analytics</span>
-          <span data-i18n="skillCloudNine">Quant Modeling</span>
-          <span data-i18n="skillCloudTen">Experiment Design</span>
+          <p data-i18n="homeBioTwo">
+            我的工作兴趣集中在 Growth Analytics、AI Product Analytics 和 LLM Evaluation：既关心模型能力，也关心这些能力是否能在真实任务里稳定产生价值。
+          </p>
+          <p data-i18n="homeBioThree">
+            这个网站会持续记录我的项目、文章和学习笔记，包括大模型科普、Agent 评测、数据工作流和量化建模相关的思考。
+          </p>
         </div>
       </section>
 
-      <section class="section about-strip" aria-label="Background details">
+      <section class="section compact-section" aria-labelledby="background-title">
         <div class="section-heading">
           <p class="section-kicker" data-i18n="backgroundKicker">Background</p>
-          <h2 data-i18n="aboutDetailTitle">基础与经历</h2>
+          <h2 id="background-title" data-i18n="aboutDetailTitle">基础与经历</h2>
         </div>
-        <div class="background-grid compact">
-          <article class="background-card">
-            <p class="card-label" data-i18n="backgroundOneLabel">Industry</p>
-            <h3 data-i18n="backgroundOneTitle">AI Data Analyst</h3>
-            <p data-i18n="backgroundOneBody">当前从事 AI Data Analyst 工作，关注 Large Language Models、AI Evals，以及如何用数据分析支持实际业务和产品判断。</p>
+        <div class="info-list">
+          <article class="info-row">
+            <span class="info-meta" data-i18n="backgroundOneLabel">Industry</span>
+            <div>
+              <h3 data-i18n="backgroundOneTitle">AI Data Analyst</h3>
+              <p data-i18n="backgroundOneBody">当前从事 AI Data Analyst 工作，关注 Large Language Models、AI Evals，以及如何用数据分析支持实际业务和产品判断。</p>
+            </div>
           </article>
-          <article class="background-card">
-            <p class="card-label" data-i18n="backgroundTwoLabel">Education</p>
-            <h3 data-i18n="backgroundTwoTitle">中国矿业大学（北京）</h3>
-            <p data-i18n="backgroundTwoBody">本科专业为 Data Science，系统学习 SQL、Python、机器学习和数据分析，并持续将数据方法用于业务问题拆解。</p>
+          <article class="info-row">
+            <span class="info-meta" data-i18n="backgroundTwoLabel">Education</span>
+            <div>
+              <h3 data-i18n="backgroundTwoTitle">中国矿业大学（北京）</h3>
+              <p data-i18n="backgroundTwoBody">本科专业为 Data Science，系统学习 SQL、Python、机器学习和数据分析，并持续将数据方法用于业务问题拆解。</p>
+            </div>
           </article>
-          <article class="background-card">
-            <p class="card-label" data-i18n="backgroundThreeLabel">Quant Finance</p>
-            <h3 data-i18n="backgroundThreeTitle">CQF / Quantitative Finance</h3>
-            <p data-i18n="backgroundThreeBody">完成 Certificate in Quantitative Finance，强化了金融量化建模、风险管理、机器学习和深度强化学习方面的实践基础。</p>
+          <article class="info-row">
+            <span class="info-meta" data-i18n="backgroundThreeLabel">Quant Finance</span>
+            <div>
+              <h3 data-i18n="backgroundThreeTitle">CQF / Quantitative Finance</h3>
+              <p data-i18n="backgroundThreeBody">完成 Certificate in Quantitative Finance，强化了金融量化建模、风险管理、机器学习和深度强化学习方面的实践基础。</p>
+            </div>
           </article>
+        </div>
+      </section>
+
+      <section class="section compact-section" aria-labelledby="selected-blogs-title">
+        <div class="section-heading">
+          <p class="section-kicker" data-i18n="writingKicker">Blogs</p>
+          <h2 id="selected-blogs-title" data-i18n="homeSelectedBlogsTitle">Selected Blogs</h2>
+        </div>
+        <div class="post-table">
+          <a class="post-row" href="articles/model-evaluation.html">
+            <time data-i18n="postFourDate">2026-05</time>
+            <span data-i18n="writingFourTitle">大模型能力评估：怎么判断一个模型强不强？</span>
+            <em data-i18n="postFourTopic">LLM Evaluation</em>
+          </a>
+          <a class="post-row" href="articles/llm-training.html">
+            <time data-i18n="postThreeDate">2026-05</time>
+            <span data-i18n="writingThreeTitle">LLM 训练过程：从数据到会对话的模型</span>
+            <em data-i18n="postThreeTopic">LLM Training</em>
+          </a>
+          <a class="post-row" href="articles/attention.html">
+            <time data-i18n="postTwoDate">2026-05</time>
+            <span data-i18n="writingTwoTitle">Attention 机制：模型如何决定该看哪里？</span>
+            <em data-i18n="postTwoTopic">Transformer</em>
+          </a>
+          <a class="post-row" href="articles/transformer.html">
+            <time data-i18n="postOneDate">2026-05</time>
+            <span data-i18n="writingOneTitle">Transformer 到底解决了什么问题？</span>
+            <em data-i18n="postOneTopic">Transformer</em>
+          </a>
         </div>
       </section>
     </main>
@@ -127,6 +156,6 @@
         </div>
       </div>
     </footer>
-    <script src="site.js?v=20260523-nav-pages"></script>
+    <script src="site.js?v=20260524-knowledge-layout"></script>
   </body>
 </html>
