@@ -41,7 +41,7 @@ a {
   max-width: 1160px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 1fr auto auto;
+  grid-template-columns: 1fr auto;
   align-items: center;
   gap: 24px;
   padding: 26px clamp(20px, 4vw, 44px) 20px;
@@ -94,34 +94,6 @@ a {
 .project-card a:hover,
 .writing-item:hover h3 {
   color: var(--accent-dark);
-}
-
-.language-switch {
-  display: inline-flex;
-  align-items: center;
-  padding: 3px;
-  border: 1px solid var(--line);
-  background: rgba(255, 255, 255, 0.55);
-}
-
-.lang-button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 46px;
-  height: 30px;
-  border: 0;
-  background: transparent;
-  color: var(--muted);
-  font: inherit;
-  font-size: 12px;
-  font-weight: 850;
-  cursor: pointer;
-}
-
-.lang-button.active {
-  background: var(--ink);
-  color: #fff;
 }
 
 .hero {
@@ -1079,10 +1051,6 @@ a.project-status:hover {
 @media (max-width: 560px) {
   .site-header {
     padding: 16px 20px;
-  }
-
-  .language-switch {
-    justify-self: end;
   }
 
   .nav {

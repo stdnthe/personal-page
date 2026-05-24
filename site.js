@@ -9,7 +9,7 @@ const copy = {
     heroEyebrow: "Growth Analytics / AI Product Analytics / LLM Evaluation",
     heroTitle: "Hi，我是 Jiaqi He。",
     heroLede:
-      "我是一名 Data Scientist，专注于 Growth Analytics、AI Product Analytics 和 LLM Evaluation。",
+      "I enjoy turning business problems into data-driven insights and building practical AI-powered analytics products. I have also completed the Certificate in Quantitative Finance (CQF), which strengthened my foundation in quantitative modeling and machine learning in finance.",
     chipOne: "Growth Analytics",
     chipTwo: "AI Product Analytics",
     chipThree: "LLM Evaluation",
@@ -38,8 +38,6 @@ const copy = {
       "我关注如何把增长、产品和业务问题转化为可验证的数据判断，并进一步沉淀成更稳定的 AI 分析产品。",
     homeBioTwo:
       "我的工作兴趣集中在 Growth Analytics、AI Product Analytics 和 LLM Evaluation：既关心模型能力，也关心这些能力是否能在真实任务里稳定产生价值。",
-    homeBioThree:
-      "这个网站会持续记录我的项目、文章和学习笔记，包括大模型科普、Agent 评测、数据工作流和量化建模相关的思考。",
     backgroundOneLabel: "Industry",
     backgroundOneTitle: "AI Data Analyst",
     backgroundOneBody:
@@ -253,7 +251,7 @@ const copy = {
     heroEyebrow: "Growth Analytics / AI Product Analytics / LLM Evaluation",
     heroTitle: "Hi, I'm Jiaqi He.",
     heroLede:
-      "Data Scientist focused on Growth Analytics, AI Product Analytics, and LLM Evaluation.",
+      "I enjoy turning business problems into data-driven insights and building practical AI-powered analytics products. I have also completed the Certificate in Quantitative Finance (CQF), which strengthened my foundation in quantitative modeling and machine learning in finance.",
     chipOne: "Growth Analytics",
     chipTwo: "AI Product Analytics",
     chipThree: "LLM Evaluation",
@@ -282,8 +280,6 @@ const copy = {
       "I focus on turning growth, product, and business questions into verifiable data judgment, then shaping that judgment into more reliable AI analytics products.",
     homeBioTwo:
       "My interests sit across Growth Analytics, AI Product Analytics, and LLM Evaluation: not just whether a model is capable, but whether it creates stable value in real tasks.",
-    homeBioThree:
-      "This site collects my projects, articles, and learning notes on LLM explainers, agent evaluation, data workflows, and quantitative modeling.",
     backgroundOneLabel: "Industry",
     backgroundOneTitle: "AI Data Analyst",
     backgroundOneBody:
@@ -508,9 +504,9 @@ const copy = {
 };
 
 const applyLanguage = (language) => {
-  const dictionary = copy[language] || copy.zh;
-  document.documentElement.lang = language === "zh" ? "zh-CN" : "en";
-  document.body.dataset.lang = language;
+  const dictionary = copy.en;
+  document.documentElement.lang = "en";
+  document.body.dataset.lang = "en";
 
   document.querySelectorAll("[data-i18n]").forEach((node) => {
     const key = node.dataset.i18n;
@@ -537,50 +533,11 @@ const applyLanguage = (language) => {
     document.title = dictionary[document.body.dataset.titleKey];
   }
 
-  document.querySelectorAll("[data-set-lang]").forEach((button) => {
-    button.classList.toggle("active", button.dataset.setLang === language);
-    button.setAttribute("aria-pressed", String(button.dataset.setLang === language));
-  });
-
   try {
-    localStorage.setItem("preferred-language", language);
+    localStorage.removeItem("preferred-language");
   } catch {
-    document.body.dataset.preferredLanguage = language;
+    document.body.dataset.preferredLanguage = "en";
   }
 };
 
-const handleLanguageIntent = (event) => {
-  if (!event.target || !event.target.closest) {
-    return;
-  }
-
-  const button = event.target.closest("[data-set-lang]");
-  if (!button) {
-    return;
-  }
-
-  event.preventDefault();
-  applyLanguage(button.dataset.setLang);
-};
-
-document.addEventListener("click", handleLanguageIntent);
-document.addEventListener("pointerdown", handleLanguageIntent);
-document.addEventListener("keydown", (event) => {
-  if (event.key === "Enter" || event.key === " ") {
-    handleLanguageIntent(event);
-  }
-});
-
-const params = new URLSearchParams(window.location.search);
-const requestedLanguage = params.get("lang");
-let preferredLanguage = requestedLanguage === "zh" || requestedLanguage === "en" ? requestedLanguage : "en";
-
-if (!requestedLanguage) {
-  try {
-    preferredLanguage = localStorage.getItem("preferred-language") || "en";
-  } catch {
-    preferredLanguage = document.body.dataset.lang || "en";
-  }
-}
-
-applyLanguage(preferredLanguage);
+applyLanguage("en");
