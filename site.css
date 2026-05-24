@@ -750,7 +750,9 @@ a.project-status:hover {
 
 .series-shell {
   min-height: 100vh;
-  background: #fffdf8;
+  background:
+    linear-gradient(135deg, rgba(240, 251, 248, 0.86) 0%, rgba(255, 253, 248, 0.94) 40%),
+    #fffdf8;
 }
 
 .series-hero {
@@ -758,11 +760,10 @@ a.project-status:hover {
   grid-template-columns: minmax(0, 1fr) minmax(260px, 420px);
   gap: clamp(28px, 6vw, 76px);
   align-items: end;
-  padding: clamp(54px, 8vw, 92px) clamp(20px, 5vw, 72px);
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: clamp(54px, 8vw, 92px) clamp(20px, 4vw, 44px);
   border-bottom: 1px solid var(--line);
-  background:
-    linear-gradient(135deg, rgba(240, 251, 248, 0.86), rgba(255, 253, 248, 0.94) 56%),
-    #fffdf8;
 }
 
 .series-hero h1 {
@@ -796,8 +797,9 @@ a.project-status:hover {
 }
 
 .article-list {
-  padding: clamp(38px, 6vw, 66px) clamp(20px, 5vw, 72px);
-  border-top: 1px solid #e6e6e6;
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: clamp(38px, 6vw, 66px) clamp(20px, 4vw, 44px);
 }
 
 .article-card {
