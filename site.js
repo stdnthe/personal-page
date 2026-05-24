@@ -583,4 +583,4 @@ const applyLanguage = (language) => {
     }
   };
 
-applyLanguage("zh");
+applyLanguage("en");
