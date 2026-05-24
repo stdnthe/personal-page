@@ -852,9 +852,15 @@ a.project-status:hover {
 }
 
 .article-layout {
-  max-width: 920px;
+  max-width: 1160px;
   margin: 0 auto;
-  padding: clamp(42px, 7vw, 78px) clamp(20px, 5vw, 44px);
+  padding: clamp(42px, 7vw, 78px) clamp(20px, 4vw, 44px);
+}
+
+.article-layout .article-header,
+.article-layout .article-body,
+.article-layout .article-nav {
+  max-width: 720px;
 }
 
 .series-progress {
