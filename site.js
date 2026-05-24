@@ -7,9 +7,9 @@ const copy = {
     navAbout: "About",
     navContact: "Contact",
     heroEyebrow: "Growth Analytics / AI Product Analytics / LLM Evaluation",
-    heroTitle: "Hi，我是 Jiaqi He。",
+    heroTitle: "About Me",
     heroLede:
-      "I enjoy turning business problems into data-driven insights and building practical AI-powered analytics products. I have also completed the Certificate in Quantitative Finance (CQF), which strengthened my foundation in quantitative modeling and machine learning in finance.",
+      "I'm Jiaqi He. I enjoy turning business problems into data-driven insights and building practical AI-powered analytics products. I have also completed the Certificate in Quantitative Finance (CQF), which strengthened my foundation in quantitative modeling and machine learning in finance.",
     chipOne: "Growth Analytics",
     chipTwo: "AI Product Analytics",
     chipThree: "LLM Evaluation",
@@ -249,9 +249,9 @@ const copy = {
     navAbout: "About",
     navContact: "Contact",
     heroEyebrow: "Growth Analytics / AI Product Analytics / LLM Evaluation",
-    heroTitle: "Hi, I'm Jiaqi He.",
+    heroTitle: "About Me",
     heroLede:
-      "I enjoy turning business problems into data-driven insights and building practical AI-powered analytics products. I have also completed the Certificate in Quantitative Finance (CQF), which strengthened my foundation in quantitative modeling and machine learning in finance.",
+      "I'm Jiaqi He. I enjoy turning business problems into data-driven insights and building practical AI-powered analytics products. I have also completed the Certificate in Quantitative Finance (CQF), which strengthened my foundation in quantitative modeling and machine learning in finance.",
     chipOne: "Growth Analytics",
     chipTwo: "AI Product Analytics",
     chipThree: "LLM Evaluation",
