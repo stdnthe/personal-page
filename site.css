@@ -796,20 +796,19 @@ a.project-status:hover {
 }
 
 .article-list {
-  display: grid;
-  gap: 14px;
   padding: clamp(38px, 6vw, 66px) clamp(20px, 5vw, 72px);
+  border-top: 1px solid #e6e6e6;
 }
 
 .article-card {
   display: grid;
-  grid-template-columns: 74px minmax(0, 1fr) auto;
-  gap: 20px;
-  align-items: center;
-  padding: 22px;
-  border: 1px solid var(--line);
-  background: var(--panel);
-  box-shadow: 0 12px 28px rgba(38, 35, 28, 0.06);
+  grid-template-columns: minmax(52px, 0.1fr) minmax(0, 1fr) auto;
+  gap: clamp(16px, 4vw, 44px);
+  align-items: baseline;
+  padding: 18px 0;
+  border-bottom: 1px solid #e6e6e6;
+  background: transparent;
+  text-decoration: none;
 }
 
 .article-card:hover h2 {
@@ -817,33 +816,33 @@ a.project-status:hover {
 }
 
 .article-card-index {
-  display: grid;
-  place-items: center;
-  width: 52px;
-  height: 52px;
-  background: #eef2ff;
-  color: var(--blue);
-  font-weight: 900;
+  color: var(--quiet);
+  font-size: 13px;
+  font-weight: 760;
+  white-space: nowrap;
 }
 
 .article-card h2 {
-  margin-bottom: 6px;
-  font-size: clamp(22px, 3vw, 30px);
-  line-height: 1.18;
+  margin-bottom: 4px;
+  font-size: clamp(18px, 2vw, 22px);
+  font-weight: 760;
+  line-height: 1.35;
 }
 
 .article-card p {
   margin-bottom: 0;
+  font-size: 14px;
   color: var(--muted);
 }
 
 .read-time {
   justify-self: end;
-  min-width: 92px;
-  color: var(--accent-dark);
+  min-width: 80px;
+  color: var(--quiet);
   font-size: 13px;
-  font-weight: 850;
+  font-weight: 760;
   text-align: right;
+  white-space: nowrap;
 }
 
 .article-page {
@@ -1291,12 +1290,10 @@ a.project-status:hover {
   }
 
   .project-card,
-  .article-card,
   .writing-item {
     padding: 18px;
   }
 
-  .article-card,
   .writing-item {
     grid-template-columns: 1fr;
   }
