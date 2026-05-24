@@ -1,0 +1,149 @@
+<svg width="700" height="640" viewBox="0 0 700 640" xmlns="http://www.w3.org/2000/svg" font-family="'PingFang SC','Helvetica Neue',system-ui,sans-serif">
+  <defs>
+    <marker id="ah" markerWidth="7" markerHeight="5" refX="5" refY="2.5" orient="auto">
+      <polygon points="0 0,7 2.5,0 5" fill="#666"/>
+    </marker>
+    <marker id="ah-org" markerWidth="7" markerHeight="5" refX="5" refY="2.5" orient="auto">
+      <polygon points="0 0,7 2.5,0 5" fill="#f97316"/>
+    </marker>
+  </defs>
+
+  <!-- background -->
+  <rect width="700" height="640" fill="#fff"/>
+
+  <!-- title -->
+  <text x="350" y="28" text-anchor="middle" font-size="14" font-weight="700" fill="#111">The Transformer — Model Architecture</text>
+  <text x="350" y="45" text-anchor="middle" font-size="10" fill="#999">Vaswani et al., Attention Is All You Need, NeurIPS 2017</text>
+
+  <!-- column headers -->
+  <text x="185" y="67" text-anchor="middle" font-size="13" font-weight="600" fill="#444">Encoder</text>
+  <text x="515" y="67" text-anchor="middle" font-size="13" font-weight="600" fill="#444">Decoder</text>
+
+  <!-- ── Decoder top (above Nx box) ── -->
+  <!-- Output Probabilities -->
+  <rect x="435" y="76" width="160" height="30" rx="5" fill="#a7f3d0" stroke="#34d399" stroke-width="1.5"/>
+  <text x="515" y="96" text-anchor="middle" font-size="11.5" fill="#111">Output Probabilities</text>
+  <!-- Softmax -->
+  <rect x="435" y="116" width="160" height="30" rx="5" fill="#6ee7b7" stroke="#34d399" stroke-width="1.5"/>
+  <text x="515" y="136" text-anchor="middle" font-size="12" fill="#111">Softmax</text>
+  <!-- Linear -->
+  <rect x="435" y="156" width="160" height="30" rx="5" fill="#ddd6fe" stroke="#8b5cf6" stroke-width="1.5"/>
+  <text x="515" y="176" text-anchor="middle" font-size="12" fill="#111">Linear</text>
+
+  <!-- arrows: top decoder -->
+  <line x1="515" y1="106" x2="515" y2="116" stroke="#666" stroke-width="1.3" marker-end="url(#ah)"/>
+  <line x1="515" y1="146" x2="515" y2="156" stroke="#666" stroke-width="1.3" marker-end="url(#ah)"/>
+  <line x1="515" y1="186" x2="515" y2="200" stroke="#666" stroke-width="1.3" marker-end="url(#ah)"/>
+
+  <!-- ── Nx boxes ── -->
+  <!-- Encoder Nx: y=200–396 -->
+  <rect x="80" y="200" width="210" height="196" rx="8" fill="none" stroke="#bbb" stroke-width="1.5" stroke-dasharray="6,4"/>
+  <text x="272" y="392" font-size="11" fill="#aaa">N ×</text>
+  <!-- Decoder Nx: y=200–492 -->
+  <rect x="420" y="200" width="210" height="292" rx="8" fill="none" stroke="#bbb" stroke-width="1.5" stroke-dasharray="6,4"/>
+  <text x="612" y="488" font-size="11" fill="#aaa">N ×</text>
+
+  <!-- ── Shared blocks (same y both columns) ── -->
+
+  <!-- Add & Norm above FFN: y=212–242 -->
+  <rect x="100" y="212" width="170" height="30" rx="5" fill="#fed7aa" stroke="#f97316" stroke-width="1.5"/>
+  <text x="185" y="232" text-anchor="middle" font-size="11.5" fill="#111">Add &amp; Norm</text>
+  <rect x="440" y="212" width="170" height="30" rx="5" fill="#fed7aa" stroke="#f97316" stroke-width="1.5"/>
+  <text x="525" y="232" text-anchor="middle" font-size="11.5" fill="#111">Add &amp; Norm</text>
+
+  <!-- Feed Forward: y=252–286 -->
+  <rect x="100" y="252" width="170" height="34" rx="5" fill="#fef9c3" stroke="#eab308" stroke-width="1.5"/>
+  <text x="185" y="274" text-anchor="middle" font-size="12" fill="#111">Feed Forward</text>
+  <rect x="440" y="252" width="170" height="34" rx="5" fill="#fef9c3" stroke="#eab308" stroke-width="1.5"/>
+  <text x="525" y="274" text-anchor="middle" font-size="12" fill="#111">Feed Forward</text>
+
+  <!-- Add & Norm above Attention: y=296–326 -->
+  <rect x="100" y="296" width="170" height="30" rx="5" fill="#fed7aa" stroke="#f97316" stroke-width="1.5"/>
+  <text x="185" y="316" text-anchor="middle" font-size="11.5" fill="#111">Add &amp; Norm</text>
+  <rect x="440" y="296" width="170" height="30" rx="5" fill="#fed7aa" stroke="#f97316" stroke-width="1.5"/>
+  <text x="525" y="316" text-anchor="middle" font-size="11.5" fill="#111">Add &amp; Norm</text>
+
+  <!-- Encoder: Multi-Head Self-Attention: y=336–382 -->
+  <rect x="100" y="336" width="170" height="46" rx="5" fill="#fecaca" stroke="#ef4444" stroke-width="1.5"/>
+  <text x="185" y="355" text-anchor="middle" font-size="12" fill="#111">Multi-Head</text>
+  <text x="185" y="372" text-anchor="middle" font-size="12" fill="#111">Attention</text>
+
+  <!-- Decoder: Multi-Head Cross-Attention: y=336–382 -->
+  <rect x="440" y="336" width="170" height="46" rx="5" fill="#fecaca" stroke="#ef4444" stroke-width="1.5"/>
+  <text x="525" y="353" text-anchor="middle" font-size="11" fill="#111">Multi-Head Attention</text>
+  <text x="525" y="370" text-anchor="middle" font-size="10" fill="#888">(K, V from Encoder)</text>
+
+  <!-- ── Decoder-only extra blocks ── -->
+  <!-- Add & Norm above Masked: y=392–422 -->
+  <rect x="440" y="392" width="170" height="30" rx="5" fill="#fed7aa" stroke="#f97316" stroke-width="1.5"/>
+  <text x="525" y="412" text-anchor="middle" font-size="11.5" fill="#111">Add &amp; Norm</text>
+
+  <!-- Masked Multi-Head Attention: y=432–478 -->
+  <rect x="440" y="432" width="170" height="46" rx="5" fill="#fecaca" stroke="#ef4444" stroke-width="1.5"/>
+  <text x="525" y="450" text-anchor="middle" font-size="11" fill="#111">Masked Multi-Head</text>
+  <text x="525" y="467" text-anchor="middle" font-size="11" fill="#111">Attention</text>
+
+  <!-- ── Positional Encoding circles ── -->
+  <circle cx="185" cy="520" r="17" fill="#fff" stroke="#999" stroke-width="1.5"/>
+  <text x="185" y="525" text-anchor="middle" font-size="16" fill="#666">⊕</text>
+  <circle cx="525" cy="520" r="17" fill="#fff" stroke="#999" stroke-width="1.5"/>
+  <text x="525" y="525" text-anchor="middle" font-size="16" fill="#666">⊕</text>
+
+  <!-- Positional Encoding labels -->
+  <text x="68" y="516" text-anchor="end" font-size="9.5" fill="#999">Positional</text>
+  <text x="68" y="527" text-anchor="end" font-size="9.5" fill="#999">Encoding</text>
+  <text x="632" y="516" font-size="9.5" fill="#999">Positional</text>
+  <text x="632" y="527" font-size="9.5" fill="#999">Encoding</text>
+
+  <!-- ── Embeddings ── -->
+  <rect x="100" y="547" width="170" height="34" rx="5" fill="#bbf7d0" stroke="#4ade80" stroke-width="1.5"/>
+  <text x="185" y="569" text-anchor="middle" font-size="12" fill="#111">Input Embedding</text>
+  <rect x="440" y="547" width="170" height="34" rx="5" fill="#bbf7d0" stroke="#4ade80" stroke-width="1.5"/>
+  <text x="525" y="569" text-anchor="middle" font-size="12" fill="#111">Output Embedding</text>
+
+  <!-- Labels -->
+  <text x="185" y="608" text-anchor="middle" font-size="12" fill="#333">Inputs</text>
+  <text x="525" y="608" text-anchor="middle" font-size="11.5" fill="#333">Outputs (shifted right)</text>
+
+  <!-- ── Flow arrows ── -->
+
+  <!-- Encoder: label→emb→⊕→Nx→top -->
+  <line x1="185" y1="600" x2="185" y2="581" stroke="#666" stroke-width="1.3" marker-end="url(#ah)"/>
+  <line x1="185" y1="547" x2="185" y2="537" stroke="#666" stroke-width="1.3" marker-end="url(#ah)"/>
+  <line x1="185" y1="503" x2="185" y2="382" stroke="#666" stroke-width="1.3" marker-end="url(#ah)"/>
+  <!-- Encoder internal: MHA→A&N→FFN→A&N→exit -->
+  <line x1="185" y1="336" x2="185" y2="326" stroke="#666" stroke-width="1.3" marker-end="url(#ah)"/>
+  <line x1="185" y1="296" x2="185" y2="286" stroke="#666" stroke-width="1.3" marker-end="url(#ah)"/>
+  <line x1="185" y1="252" x2="185" y2="242" stroke="#666" stroke-width="1.3" marker-end="url(#ah)"/>
+  <line x1="185" y1="212" x2="185" y2="195" stroke="#666" stroke-width="1.3" marker-end="url(#ah)"/>
+
+  <!-- Decoder: label→emb→⊕→MaskedMHA→A&N→CrossMHA→A&N→FFN→A&N→Linear→top -->
+  <line x1="525" y1="600" x2="525" y2="581" stroke="#666" stroke-width="1.3" marker-end="url(#ah)"/>
+  <line x1="525" y1="547" x2="525" y2="537" stroke="#666" stroke-width="1.3" marker-end="url(#ah)"/>
+  <line x1="525" y1="503" x2="525" y2="478" stroke="#666" stroke-width="1.3" marker-end="url(#ah)"/>
+  <line x1="525" y1="432" x2="525" y2="422" stroke="#666" stroke-width="1.3" marker-end="url(#ah)"/>
+  <line x1="525" y1="392" x2="525" y2="382" stroke="#666" stroke-width="1.3" marker-end="url(#ah)"/>
+  <line x1="525" y1="336" x2="525" y2="326" stroke="#666" stroke-width="1.3" marker-end="url(#ah)"/>
+  <line x1="525" y1="296" x2="525" y2="286" stroke="#666" stroke-width="1.3" marker-end="url(#ah)"/>
+  <line x1="525" y1="252" x2="525" y2="242" stroke="#666" stroke-width="1.3" marker-end="url(#ah)"/>
+
+  <!-- ── Cross-attention: encoder output → decoder (K,V) ── -->
+  <path d="M 185 195 L 185 180 L 350 180 L 350 359 L 440 359"
+        stroke="#f97316" stroke-width="1.4" fill="none"
+        stroke-dasharray="5,3" marker-end="url(#ah-org)"/>
+  <text x="370" y="172" text-anchor="middle" font-size="9.5" fill="#f97316">K, V</text>
+
+  <!-- ── Residual connections (simplified arcs, left side) ── -->
+  <!-- Encoder: around Self-Attn + A&N -->
+  <path d="M 100 382 Q 82 382 82 307 Q 82 242 100 242" stroke="#ddd" stroke-width="1" fill="none"/>
+  <!-- Encoder: around FFN + A&N -->
+  <path d="M 100 252 Q 88 252 88 242 Q 88 232 100 232" stroke="#ddd" stroke-width="1" fill="none"/>
+
+  <!-- Decoder: around Masked Attn + A&N -->
+  <path d="M 440 478 Q 424 478 424 422 Q 424 402 440 402" stroke="#ddd" stroke-width="1" fill="none"/>
+  <!-- Decoder: around Cross Attn + A&N -->
+  <path d="M 440 382 Q 424 382 424 307 Q 424 242 440 242" stroke="#ddd" stroke-width="1" fill="none"/>
+  <!-- Decoder: around FFN + A&N -->
+  <path d="M 440 252 Q 428 252 428 242 Q 428 232 440 232" stroke="#ddd" stroke-width="1" fill="none"/>
+
+</svg>

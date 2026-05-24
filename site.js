@@ -83,16 +83,19 @@ const copy = {
     recentPostsTitle: "Recent / Featured Posts",
     postOneMeta: "May 2026 · 6 min read",
     postTwoMeta: "May 2026 · 7 min read",
-    postThreeMeta: "May 2026 · 8 min read",
-    postFourMeta: "May 2026 · 7 min read",
+    postThreeMeta: "May 2026 · 10 min read",
+    postFourMeta: "May 2026 · 8 min read",
+    postFiveMeta: "May 2026 · 7 min read",
     postOneDate: "2026-05",
     postTwoDate: "2026-05",
     postThreeDate: "2026-05",
     postFourDate: "2026-05",
+    postFiveDate: "2026-05",
     postOneTopic: "Transformer",
     postTwoTopic: "Transformer",
-    postThreeTopic: "LLM Training",
-    postFourTopic: "LLM Evaluation",
+    postThreeTopic: "Transformer",
+    postFourTopic: "LLM Training",
+    postFiveTopic: "LLM Evaluation",
     seriesHomeKicker: "Blog Series",
     seriesHomeTitle: "从这些系列开始读",
     seriesOneLabel: "Series 01",
@@ -109,10 +112,12 @@ const copy = {
     writingOneBody: "从 RNN 的限制讲到 Attention 和并行训练的意义。",
     writingTwoTitle: "Attention 机制：模型如何决定该看哪里？",
     writingTwoBody: "解释 Query、Key、Value 和注意力权重的直觉。",
-    writingThreeTitle: "LLM 训练过程：从数据到会对话的模型",
-    writingThreeBody: "拆解预训练、指令微调、RLHF / DPO 和推理阶段。",
-    writingFourTitle: "大模型能力评估：怎么判断一个模型强不强？",
-    writingFourBody: "讨论 Benchmark、人类偏好、真实任务和 Agent 评估。",
+    writingThreeTitle: "Transformer Block：大模型的一块积木",
+    writingThreeBody: "拆解 Multi-Head Attention、FFN、残差连接和 LayerNorm 各自解决什么问题。",
+    writingFourTitle: "LLM 训练过程：从数据到会对话的模型",
+    writingFourBody: "拆解预训练、指令微调、RLHF / DPO 和推理阶段。",
+    writingFiveTitle: "大模型能力评估：怎么判断一个模型强不强？",
+    writingFiveBody: "讨论 Benchmark、人类偏好、真实任务和 Agent 评估。",
     articleNavSeries: "系列目录",
     seriesIndexTitleMeta: "大模型科普系列 | Jiaqi He",
     seriesIndexDescription:
@@ -123,24 +128,32 @@ const copy = {
       "用尽量直观的语言拆开大模型的几个核心问题：它为什么需要 Transformer、Attention 到底在做什么、模型如何训练，以及我们该怎样评估它。",
     seriesNoteTitle: "建议阅读顺序",
     seriesNoteBody: "先理解结构，再理解训练，最后理解评估。每篇都可以单独阅读，也可以作为后续内容整理的初稿。",
+    seriesPhaseOne: "第一阶段 · Transformer 原理",
+    seriesPhaseTwo: "第二阶段 · LLM 训练过程",
+    seriesPhaseThree: "第三阶段 · 大模型能力评估",
     articleOneTitle: "Transformer 到底解决了什么问题？",
     articleOneBody: "从 RNN 的顺序处理限制讲到 Attention 和并行训练的意义。",
     articleTwoTitle: "Attention 机制：模型如何决定该看哪里？",
     articleTwoBody: "用 Query、Key、Value 的直觉解释注意力权重是怎么来的。",
-    articleThreeTitle: "LLM 训练过程：从数据到会对话的模型",
-    articleThreeBody: "拆解预训练、指令微调、偏好对齐和推理阶段各自解决什么问题。",
-    articleFourTitle: "大模型能力评估：怎么判断一个模型强不强？",
-    articleFourBody: "把 Benchmark、人类偏好、真实任务和 Agent 评估放在同一张地图里看。",
+    articleThreeTitle: "Transformer Block：大模型的一块积木",
+    articleThreeBody: "拆开 Multi-Head Attention、FFN、残差连接和 LayerNorm 各自解决什么问题。",
+    articleFourTitle: "LLM 训练过程：从数据到会对话的模型",
+    articleFourBody: "拆解预训练、指令微调、偏好对齐和推理阶段各自解决什么问题。",
+    articleFiveTitle: "大模型能力评估：怎么判断一个模型强不强？",
+    articleFiveBody: "把 Benchmark、人类偏好、真实任务和 Agent 评估放在同一张地图里看。",
     readTimeSix: "约 6 分钟",
     readTimeSeven: "约 7 分钟",
     readTimeEight: "约 8 分钟",
+    readTimeTen: "约 10 分钟",
     readEstimateSix: "预计阅读 6 分钟",
     readEstimateSeven: "预计阅读 7 分钟",
     readEstimateEight: "预计阅读 8 分钟",
-    progressOne: "第 1 / 4 篇",
-    progressTwo: "第 2 / 4 篇",
-    progressThree: "第 3 / 4 篇",
-    progressFour: "第 4 / 4 篇",
+    readEstimateTen: "预计阅读 10 分钟",
+    progressOne: "第 1 / 5 篇",
+    progressTwo: "第 2 / 5 篇",
+    progressThree: "第 3 / 5 篇",
+    progressFour: "第 4 / 5 篇",
+    progressFive: "第 5 / 5 篇",
     navPrevious: "上一篇",
     navNext: "下一篇",
     navBackSeries: "返回目录",
@@ -328,16 +341,19 @@ const copy = {
     recentPostsTitle: "Recent / Featured Posts",
     postOneMeta: "May 2026 · 6 min read",
     postTwoMeta: "May 2026 · 7 min read",
-    postThreeMeta: "May 2026 · 8 min read",
-    postFourMeta: "May 2026 · 7 min read",
+    postThreeMeta: "May 2026 · 10 min read",
+    postFourMeta: "May 2026 · 8 min read",
+    postFiveMeta: "May 2026 · 7 min read",
     postOneDate: "2026-05",
     postTwoDate: "2026-05",
     postThreeDate: "2026-05",
     postFourDate: "2026-05",
+    postFiveDate: "2026-05",
     postOneTopic: "Transformer",
     postTwoTopic: "Transformer",
-    postThreeTopic: "LLM Training",
-    postFourTopic: "LLM Evaluation",
+    postThreeTopic: "Transformer",
+    postFourTopic: "LLM Training",
+    postFiveTopic: "LLM Evaluation",
     seriesHomeKicker: "Blog Series",
     seriesHomeTitle: "Start with these series",
     seriesOneLabel: "Series 01",
@@ -354,10 +370,12 @@ const copy = {
     writingOneBody: "From RNN limitations to attention and parallel training.",
     writingTwoTitle: "Attention: how does a model decide where to look?",
     writingTwoBody: "An intuitive explanation of Query, Key, Value, and attention weights.",
-    writingThreeTitle: "How LLMs are trained: from data to dialogue",
-    writingThreeBody: "Pretraining, instruction tuning, RLHF / DPO, and inference.",
-    writingFourTitle: "How do we know whether a model is strong?",
-    writingFourBody: "Benchmarks, human preference, real-world tasks, and agent evaluation.",
+    writingThreeTitle: "Transformer Block: the building block of LLMs",
+    writingThreeBody: "Unpacking Multi-Head Attention, FFN, residual connections, and LayerNorm.",
+    writingFourTitle: "How LLMs are trained: from data to dialogue",
+    writingFourBody: "Pretraining, instruction tuning, RLHF / DPO, and inference.",
+    writingFiveTitle: "How do we know whether a model is strong?",
+    writingFiveBody: "Benchmarks, human preference, real-world tasks, and agent evaluation.",
     articleNavSeries: "Series",
     seriesIndexTitleMeta: "LLM Explainer Series | Jiaqi He",
     seriesIndexDescription:
@@ -369,26 +387,35 @@ const copy = {
     seriesNoteTitle: "Suggested order",
     seriesNoteBody:
       "Start with model structure, move into training, then finish with evaluation. Each article can stand alone or become a draft for future notes.",
+    seriesPhaseOne: "Phase 1 · Transformer fundamentals",
+    seriesPhaseTwo: "Phase 2 · LLM training",
+    seriesPhaseThree: "Phase 3 · Model evaluation",
     articleOneTitle: "What problem did the Transformer actually solve?",
     articleOneBody: "From the sequential limits of RNNs to attention and parallel training.",
     articleTwoTitle: "Attention: how does a model decide where to look?",
     articleTwoBody: "An intuitive explanation of Query, Key, Value, and attention weights.",
-    articleThreeTitle: "How LLMs are trained: from data to dialogue",
+    articleThreeTitle: "Transformer Block: the building block of LLMs",
     articleThreeBody:
-      "Pretraining, instruction tuning, preference alignment, and what each stage is for.",
-    articleFourTitle: "How do we know whether a model is strong?",
+      "Multi-Head Attention, FFN, residual connections, and LayerNorm — what each component actually does.",
+    articleFourTitle: "How LLMs are trained: from data to dialogue",
     articleFourBody:
+      "Pretraining, instruction tuning, preference alignment, and what each stage is for.",
+    articleFiveTitle: "How do we know whether a model is strong?",
+    articleFiveBody:
       "A map of benchmarks, human preference, real tasks, and agent evaluation.",
     readTimeSix: "6 min read",
     readTimeSeven: "7 min read",
     readTimeEight: "8 min read",
+    readTimeTen: "10 min read",
     readEstimateSix: "6 min read",
     readEstimateSeven: "7 min read",
     readEstimateEight: "8 min read",
-    progressOne: "Article 1 / 4",
-    progressTwo: "Article 2 / 4",
-    progressThree: "Article 3 / 4",
-    progressFour: "Article 4 / 4",
+    readEstimateTen: "10 min read",
+    progressOne: "Article 1 / 5",
+    progressTwo: "Article 2 / 5",
+    progressThree: "Article 3 / 5",
+    progressFour: "Article 4 / 5",
+    progressFive: "Article 5 / 5",
     navPrevious: "Previous",
     navNext: "Next",
     navBackSeries: "Back to series",
@@ -510,9 +537,9 @@ const copy = {
 };
 
 const applyLanguage = (language) => {
-  const dictionary = copy.en;
-  document.documentElement.lang = "en";
-  document.body.dataset.lang = "en";
+  const dictionary = copy[language] || copy.zh;
+  document.documentElement.lang = language === "en" ? "en" : "zh-CN";
+  document.body.dataset.lang = language;
 
   document.querySelectorAll("[data-i18n]").forEach((node) => {
     const key = node.dataset.i18n;
@@ -542,8 +569,8 @@ const applyLanguage = (language) => {
   try {
     localStorage.removeItem("preferred-language");
   } catch {
-    document.body.dataset.preferredLanguage = "en";
-  }
-};
+      document.body.dataset.preferredLanguage = language;
+    }
+  };
 
-applyLanguage("en");
+applyLanguage("zh");

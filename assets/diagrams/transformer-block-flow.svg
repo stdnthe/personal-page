@@ -1,0 +1,67 @@
+<svg width="1200" height="760" viewBox="0 0 1200 760" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="760" fill="#F7F5EF"/>
+  <text x="600" y="62" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="34" font-weight="700" fill="#222222">一个 Transformer Block 里发生了什么？</text>
+  <text x="600" y="100" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="18" fill="#5F6368">Attention 负责跨 token 交流，FFN 负责逐 token 加工，残差流负责承载信息主干</text>
+
+  <g font-family="Arial, 'PingFang SC', sans-serif">
+    <rect x="110" y="335" width="140" height="70" rx="12" fill="#FFFFFF" stroke="#CBD2D9" stroke-width="2"/>
+    <text x="180" y="363" text-anchor="middle" font-size="19" font-weight="700" fill="#222222">输入 x</text>
+    <text x="180" y="388" text-anchor="middle" font-size="15" fill="#6B7280">残差流</text>
+
+    <rect x="335" y="215" width="170" height="76" rx="14" fill="#EAF4F4" stroke="#2F6F73" stroke-width="2"/>
+    <text x="420" y="248" text-anchor="middle" font-size="20" font-weight="700" fill="#1F4F52">LayerNorm</text>
+    <text x="420" y="273" text-anchor="middle" font-size="15" fill="#2F6F73">稳定数值</text>
+
+    <rect x="555" y="215" width="205" height="76" rx="14" fill="#EAF4F4" stroke="#2F6F73" stroke-width="2"/>
+    <text x="657.5" y="248" text-anchor="middle" font-size="20" font-weight="700" fill="#1F4F52">Multi-Head Attention</text>
+    <text x="657.5" y="273" text-anchor="middle" font-size="15" fill="#2F6F73">跨 token 通信</text>
+
+    <circle cx="835" cy="370" r="31" fill="#C8553D"/>
+    <text x="835" y="379" text-anchor="middle" font-size="30" font-weight="700" fill="#FFFFFF">+</text>
+
+    <rect x="335" y="450" width="170" height="76" rx="14" fill="#FFF4E0" stroke="#E6A23C" stroke-width="2"/>
+    <text x="420" y="483" text-anchor="middle" font-size="20" font-weight="700" fill="#7A4D00">LayerNorm</text>
+    <text x="420" y="508" text-anchor="middle" font-size="15" fill="#8A5A00">再次稳定</text>
+
+    <rect x="555" y="450" width="205" height="76" rx="14" fill="#FFF4E0" stroke="#E6A23C" stroke-width="2"/>
+    <text x="657.5" y="483" text-anchor="middle" font-size="20" font-weight="700" fill="#7A4D00">FFN / MLP</text>
+    <text x="657.5" y="508" text-anchor="middle" font-size="15" fill="#8A5A00">逐 token 加工</text>
+
+    <circle cx="920" cy="370" r="31" fill="#C8553D"/>
+    <text x="920" y="379" text-anchor="middle" font-size="30" font-weight="700" fill="#FFFFFF">+</text>
+
+    <rect x="1000" y="335" width="140" height="70" rx="12" fill="#2F6F73"/>
+    <text x="1070" y="363" text-anchor="middle" font-size="19" font-weight="700" fill="#FFFFFF">输出 x'</text>
+    <text x="1070" y="388" text-anchor="middle" font-size="15" fill="#EAF4F4">传给下一层</text>
+  </g>
+
+  <g stroke="#C8553D" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M255 370H800"/>
+    <path d="M790 360L806 370L790 380"/>
+    <path d="M866 370H882"/>
+    <path d="M958 370H992"/>
+    <path d="M982 360L998 370L982 380"/>
+  </g>
+
+  <g stroke="#2F6F73" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M285 370C302 305 315 255 327 253"/>
+    <path d="M317 243L333 253L317 263"/>
+    <path d="M510 253H547"/>
+    <path d="M537 243L553 253L537 263"/>
+    <path d="M762 253C795 274 813 320 827 333"/>
+    <path d="M808 329L831 338L824 314"/>
+  </g>
+
+  <g stroke="#E6A23C" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M866 370C825 435 530 488 513 488"/>
+    <path d="M524 478L507 488L524 498"/>
+    <path d="M510 488H547"/>
+    <path d="M537 478L553 488L537 498"/>
+    <path d="M762 488C825 462 883 416 912 404"/>
+    <path d="M897 399L918 402L905 421"/>
+  </g>
+
+  <text x="600" y="650" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="20" font-weight="700" fill="#222222">核心结构</text>
+  <text x="600" y="685" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="18" fill="#4B5563">x = x + Attention(LN(x))，再 x = x + FFN(LN(x))</text>
+</svg>
+

@@ -42,41 +42,62 @@
       </section>
 
       <section class="article-list" aria-label="文章列表">
-        <a class="article-card" href="transformer.html">
-          <span class="article-card-index">01</span>
-          <div>
-            <h2 data-i18n="articleOneTitle">Transformer 到底解决了什么问题？</h2>
-            <p data-i18n="articleOneBody">从 RNN 的顺序处理限制讲到 Attention 和并行训练的意义。</p>
-          </div>
-          <span class="read-time" data-i18n="readTimeSix">约 6 分钟</span>
-        </a>
+        <div class="series-phase">
+          <p class="series-phase-label" data-i18n="seriesPhaseOne">第一阶段 · Transformer 原理</p>
 
-        <a class="article-card" href="attention.html">
-          <span class="article-card-index">02</span>
-          <div>
-            <h2 data-i18n="articleTwoTitle">Attention 机制：模型如何决定该看哪里？</h2>
-            <p data-i18n="articleTwoBody">用 Query、Key、Value 的直觉解释注意力权重是怎么来的。</p>
-          </div>
-          <span class="read-time" data-i18n="readTimeSeven">约 7 分钟</span>
-        </a>
+          <a class="article-card" href="transformer.html">
+            <span class="article-card-index">01</span>
+            <div>
+              <h2 data-i18n="articleOneTitle">Transformer 到底解决了什么问题？</h2>
+              <p data-i18n="articleOneBody">从 RNN 的顺序处理限制讲到 Attention 和并行训练的意义。</p>
+            </div>
+            <span class="read-time" data-i18n="readTimeSix">约 6 分钟</span>
+          </a>
 
-        <a class="article-card" href="llm-training.html">
-          <span class="article-card-index">03</span>
-          <div>
-            <h2 data-i18n="articleThreeTitle">LLM 训练过程：从数据到会对话的模型</h2>
-            <p data-i18n="articleThreeBody">拆解预训练、指令微调、偏好对齐和推理阶段各自解决什么问题。</p>
-          </div>
-          <span class="read-time" data-i18n="readTimeEight">约 8 分钟</span>
-        </a>
+          <a class="article-card" href="attention.html">
+            <span class="article-card-index">02</span>
+            <div>
+              <h2 data-i18n="articleTwoTitle">Attention 机制：模型如何决定该看哪里？</h2>
+              <p data-i18n="articleTwoBody">用 Query、Key、Value 的直觉解释注意力权重是怎么来的。</p>
+            </div>
+            <span class="read-time" data-i18n="readTimeSeven">约 7 分钟</span>
+          </a>
 
-        <a class="article-card" href="model-evaluation.html">
-          <span class="article-card-index">04</span>
-          <div>
-            <h2 data-i18n="articleFourTitle">大模型能力评估：怎么判断一个模型强不强？</h2>
-            <p data-i18n="articleFourBody">把 Benchmark、人类偏好、真实任务和 Agent 评估放在同一张地图里看。</p>
-          </div>
-          <span class="read-time" data-i18n="readTimeSeven">约 7 分钟</span>
-        </a>
+          <a class="article-card" href="transformer-block.html">
+            <span class="article-card-index">03</span>
+            <div>
+              <h2 data-i18n="articleThreeTitle">Transformer Block：大模型的一块积木</h2>
+              <p data-i18n="articleThreeBody">拆解 Attention 层与 FFN 层，理解残差连接和 LayerNorm 为何不可缺少。</p>
+            </div>
+            <span class="read-time" data-i18n="readTimeTen">约 10 分钟</span>
+          </a>
+        </div>
+
+        <div class="series-phase">
+          <p class="series-phase-label" data-i18n="seriesPhaseTwo">第二阶段 · LLM 训练过程</p>
+
+          <a class="article-card" href="llm-training.html">
+            <span class="article-card-index">04</span>
+            <div>
+              <h2 data-i18n="articleFourTitle">LLM 训练过程：从数据到会对话的模型</h2>
+              <p data-i18n="articleFourBody">拆解预训练、指令微调、偏好对齐和推理阶段各自解决什么问题。</p>
+            </div>
+            <span class="read-time" data-i18n="readTimeEight">约 8 分钟</span>
+          </a>
+        </div>
+
+        <div class="series-phase">
+          <p class="series-phase-label" data-i18n="seriesPhaseThree">第三阶段 · 大模型能力评估</p>
+
+          <a class="article-card" href="model-evaluation.html">
+            <span class="article-card-index">05</span>
+            <div>
+              <h2 data-i18n="articleFiveTitle">大模型能力评估：怎么判断一个模型强不强？</h2>
+              <p data-i18n="articleFiveBody">把 Benchmark、人类偏好、真实任务和 Agent 评估放在同一张地图里看。</p>
+            </div>
+            <span class="read-time" data-i18n="readTimeSeven">约 7 分钟</span>
+          </a>
+        </div>
       </section>
     </main>
     <script src="../site.js?v=20260524-title-icons"></script>

@@ -12,9 +12,7 @@
 
 ## Preview
 
-直接在浏览器打开 `index.html` 即可预览。后续可以部署到 GitHub Pages、Vercel 或绑定个人域名。
-
-也可以在项目目录启动本地静态服务器：
+直接在浏览器打开 `index.html` 即可预览。也可以在项目目录启动本地静态服务器：
 
 ```bash
 python3 -m http.server 8000
@@ -28,14 +26,6 @@ http://127.0.0.1:8000/
 
 ## Deploy to GitHub Pages
 
-1. 在 GitHub 新建一个仓库，例如 `personal-page`。
-2. 将本地项目推送到仓库：
-
-```bash
-git remote add origin <your-repo-url>
-git push -u origin main
-```
-
-3. 在 GitHub 仓库中打开 `Settings` -> `Pages`。
-4. `Build and deployment` 选择 `Deploy from a branch`。
-5. Branch 选择 `main`，目录选择 `/root`，保存。
+1. 在 GitHub 仓库中打开 `Settings` -> `Pages`。
+2. `Build and deployment` 选择 `Deploy from a branch`。
+3. Branch 选择 `main`，目录选择 `/root`，保存。

@@ -1,0 +1,53 @@
+<svg width="1200" height="620" viewBox="0 0 1200 620" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="620" fill="#F6F7F8"/>
+  <text x="600" y="68" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="34" font-weight="700" fill="#222222">LLM 如何生成下一个 token</text>
+  <text x="600" y="106" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="18" fill="#5F6368">从文字输入到概率分布，再采样生成回复</text>
+
+  <g font-family="Arial, 'PingFang SC', sans-serif">
+    <rect x="70" y="235" width="145" height="86" rx="12" fill="#FFFFFF" stroke="#CBD2D9" stroke-width="2"/>
+    <text x="142.5" y="270" text-anchor="middle" font-size="20" font-weight="700" fill="#222222">文字</text>
+    <text x="142.5" y="296" text-anchor="middle" font-size="16" fill="#6B7280">我今天吃了</text>
+
+    <rect x="250" y="235" width="145" height="86" rx="12" fill="#FFFFFF" stroke="#CBD2D9" stroke-width="2"/>
+    <text x="322.5" y="270" text-anchor="middle" font-size="20" font-weight="700" fill="#222222">Token</text>
+    <text x="322.5" y="296" text-anchor="middle" font-size="16" fill="#6B7280">ID 序列</text>
+
+    <rect x="430" y="235" width="155" height="86" rx="12" fill="#FFFFFF" stroke="#CBD2D9" stroke-width="2"/>
+    <text x="507.5" y="270" text-anchor="middle" font-size="20" font-weight="700" fill="#222222">Embedding</text>
+    <text x="507.5" y="296" text-anchor="middle" font-size="16" fill="#6B7280">向量 + 位置</text>
+
+    <rect x="620" y="213" width="185" height="130" rx="14" fill="#EAF4F4" stroke="#2F6F73" stroke-width="2"/>
+    <text x="712.5" y="253" text-anchor="middle" font-size="20" font-weight="700" fill="#1F4F52">Transformer</text>
+    <text x="712.5" y="281" text-anchor="middle" font-size="16" fill="#2F6F73">Attention</text>
+    <text x="712.5" y="306" text-anchor="middle" font-size="16" fill="#2F6F73">FFN / 残差 / Norm</text>
+
+    <rect x="840" y="235" width="145" height="86" rx="12" fill="#FFFFFF" stroke="#CBD2D9" stroke-width="2"/>
+    <text x="912.5" y="270" text-anchor="middle" font-size="20" font-weight="700" fill="#222222">预测头</text>
+    <text x="912.5" y="296" text-anchor="middle" font-size="16" fill="#6B7280">logits</text>
+
+    <rect x="1020" y="205" width="130" height="146" rx="12" fill="#FFFFFF" stroke="#CBD2D9" stroke-width="2"/>
+    <text x="1085" y="238" text-anchor="middle" font-size="20" font-weight="700" fill="#222222">概率</text>
+    <text x="1085" y="270" text-anchor="middle" font-size="16" fill="#6B7280">面 42%</text>
+    <text x="1085" y="296" text-anchor="middle" font-size="16" fill="#6B7280">饭 28%</text>
+    <text x="1085" y="322" text-anchor="middle" font-size="16" fill="#6B7280">汤 12%</text>
+  </g>
+
+  <g stroke="#C8553D" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M220 278H242"/>
+    <path d="M236 268L248 278L236 288"/>
+    <path d="M400 278H422"/>
+    <path d="M416 268L428 278L416 288"/>
+    <path d="M590 278H612"/>
+    <path d="M606 268L618 278L606 288"/>
+    <path d="M810 278H832"/>
+    <path d="M826 268L838 278L826 288"/>
+    <path d="M990 278H1012"/>
+    <path d="M1006 268L1018 278L1006 288"/>
+  </g>
+
+  <path d="M1085 365C1085 438 145 438 145 338" stroke="#8E6C88" stroke-width="4" stroke-dasharray="10 10" opacity="0.7"/>
+  <path d="M153 349L145 334L137 350" stroke="#8E6C88" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/>
+  <text x="600" y="470" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="19" fill="#4B5563">采样出一个 token 后，把它接回上下文，继续预测下一个 token</text>
+  <text x="600" y="518" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="17" fill="#6B7280">复杂能力的表面背后，是这个预测过程被重复执行很多次</text>
+</svg>
+

@@ -1,0 +1,55 @@
+<svg width="1200" height="700" viewBox="0 0 1200 700" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="700" fill="#F6F7F8"/>
+  <text x="600" y="62" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="34" font-weight="700" fill="#222222">残差流：深层 Transformer 的信息主干</text>
+  <text x="600" y="100" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="18" fill="#5F6368">每一层不是重写全部信息，而是在主干上叠加增量</text>
+
+  <path d="M115 360H1085" stroke="#2F6F73" stroke-width="22" stroke-linecap="round"/>
+  <g stroke="#FFFFFF" stroke-width="3" opacity="0.85">
+    <path d="M260 349V371"/>
+    <path d="M420 349V371"/>
+    <path d="M580 349V371"/>
+    <path d="M740 349V371"/>
+    <path d="M900 349V371"/>
+  </g>
+
+  <g font-family="Arial, 'PingFang SC', sans-serif">
+    <text x="120" y="405" font-size="18" font-weight="700" fill="#1F4F52">原始输入 x</text>
+    <text x="1030" y="405" text-anchor="end" font-size="18" font-weight="700" fill="#1F4F52">最终表示 x'</text>
+
+    <rect x="190" y="190" width="150" height="72" rx="12" fill="#FFFFFF" stroke="#CBD2D9" stroke-width="2"/>
+    <text x="265" y="220" text-anchor="middle" font-size="18" font-weight="700" fill="#222222">Block 1</text>
+    <text x="265" y="244" text-anchor="middle" font-size="15" fill="#6B7280">增量 Δ1</text>
+
+    <rect x="350" y="460" width="150" height="72" rx="12" fill="#FFFFFF" stroke="#CBD2D9" stroke-width="2"/>
+    <text x="425" y="490" text-anchor="middle" font-size="18" font-weight="700" fill="#222222">Block 2</text>
+    <text x="425" y="514" text-anchor="middle" font-size="15" fill="#6B7280">增量 Δ2</text>
+
+    <rect x="510" y="190" width="150" height="72" rx="12" fill="#FFFFFF" stroke="#CBD2D9" stroke-width="2"/>
+    <text x="585" y="220" text-anchor="middle" font-size="18" font-weight="700" fill="#222222">Block 3</text>
+    <text x="585" y="244" text-anchor="middle" font-size="15" fill="#6B7280">增量 Δ3</text>
+
+    <rect x="670" y="460" width="150" height="72" rx="12" fill="#FFFFFF" stroke="#CBD2D9" stroke-width="2"/>
+    <text x="745" y="490" text-anchor="middle" font-size="18" font-weight="700" fill="#222222">Block 4</text>
+    <text x="745" y="514" text-anchor="middle" font-size="15" fill="#6B7280">增量 Δ4</text>
+
+    <rect x="830" y="190" width="150" height="72" rx="12" fill="#FFFFFF" stroke="#CBD2D9" stroke-width="2"/>
+    <text x="905" y="220" text-anchor="middle" font-size="18" font-weight="700" fill="#222222">Block N</text>
+    <text x="905" y="244" text-anchor="middle" font-size="15" fill="#6B7280">增量 ΔN</text>
+  </g>
+
+  <g stroke="#C8553D" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M265 266C270 300 270 322 266 337"/>
+    <path d="M257 322L266 340L278 325"/>
+    <path d="M425 456C425 420 425 393 425 382"/>
+    <path d="M415 398L425 380L435 398"/>
+    <path d="M585 266C590 300 590 322 586 337"/>
+    <path d="M577 322L586 340L598 325"/>
+    <path d="M745 456C745 420 745 393 745 382"/>
+    <path d="M735 398L745 380L755 398"/>
+    <path d="M905 266C910 300 910 322 906 337"/>
+    <path d="M897 322L906 340L918 325"/>
+  </g>
+
+  <text x="600" y="620" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="18" fill="#4B5563">输出 = 原始输入 + 每层学到的增量；信息沿主干向前流动，不必每层从头重写</text>
+</svg>
+

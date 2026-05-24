@@ -1,0 +1,64 @@
+<svg width="1200" height="700" viewBox="0 0 1200 700" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="700" fill="#F7F5EF"/>
+  <text x="600" y="62" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="34" font-weight="700" fill="#222222">Add &amp; Norm：原论文结构 vs 现代 LLM 常见结构</text>
+  <text x="600" y="100" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="18" fill="#5F6368">核心模块相同，但 LayerNorm 放置顺序常见有两种写法</text>
+
+  <rect x="85" y="150" width="480" height="430" rx="18" fill="#FFFFFF" stroke="#D6D0C4" stroke-width="2"/>
+  <text x="325" y="200" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="25" font-weight="700" fill="#222222">Post-Norm</text>
+  <text x="325" y="232" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="17" fill="#6B7280">Attention is All You Need 原论文写法</text>
+
+  <g font-family="Arial, 'PingFang SC', sans-serif">
+    <rect x="145" y="315" width="110" height="58" rx="10" fill="#2F6F73"/>
+    <text x="200" y="351" text-anchor="middle" font-size="18" font-weight="700" fill="#FFFFFF">x</text>
+    <rect x="320" y="250" width="155" height="70" rx="12" fill="#EAF4F4" stroke="#2F6F73" stroke-width="2"/>
+    <text x="397.5" y="292" text-anchor="middle" font-size="18" font-weight="700" fill="#1F4F52">Sublayer</text>
+    <circle cx="315" cy="345" r="27" fill="#C8553D"/>
+    <text x="315" y="354" text-anchor="middle" font-size="27" font-weight="700" fill="#FFFFFF">+</text>
+    <rect x="380" y="315" width="130" height="58" rx="10" fill="#FFF4E0" stroke="#E6A23C" stroke-width="2"/>
+    <text x="445" y="351" text-anchor="middle" font-size="18" font-weight="700" fill="#7A4D00">LayerNorm</text>
+  </g>
+
+  <g stroke="#C8553D" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M260 345H286"/>
+    <path d="M276 335L292 345L276 355"/>
+    <path d="M200 315C210 270 270 285 312 285"/>
+    <path d="M302 275L318 285L302 295"/>
+    <path d="M397 322C380 337 356 344 345 345"/>
+    <path d="M358 334L342 346L362 354"/>
+    <path d="M342 345H372"/>
+    <path d="M362 335L378 345L362 355"/>
+  </g>
+  <text x="325" y="455" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="20" font-weight="700" fill="#222222">LayerNorm(x + Sublayer(x))</text>
+  <text x="325" y="492" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="16" fill="#6B7280">先做子层和残差相加，再归一化</text>
+
+  <rect x="635" y="150" width="480" height="430" rx="18" fill="#FFFFFF" stroke="#D6D0C4" stroke-width="2"/>
+  <text x="875" y="200" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="25" font-weight="700" fill="#222222">Pre-Norm</text>
+  <text x="875" y="232" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="17" fill="#6B7280">很多现代 LLM 常见写法</text>
+
+  <g font-family="Arial, 'PingFang SC', sans-serif">
+    <rect x="695" y="315" width="110" height="58" rx="10" fill="#2F6F73"/>
+    <text x="750" y="351" text-anchor="middle" font-size="18" font-weight="700" fill="#FFFFFF">x</text>
+    <rect x="850" y="250" width="130" height="58" rx="10" fill="#FFF4E0" stroke="#E6A23C" stroke-width="2"/>
+    <text x="915" y="286" text-anchor="middle" font-size="18" font-weight="700" fill="#7A4D00">LayerNorm</text>
+    <rect x="850" y="340" width="155" height="70" rx="12" fill="#EAF4F4" stroke="#2F6F73" stroke-width="2"/>
+    <text x="927.5" y="382" text-anchor="middle" font-size="18" font-weight="700" fill="#1F4F52">Sublayer</text>
+    <circle cx="1030" cy="345" r="27" fill="#C8553D"/>
+    <text x="1030" y="354" text-anchor="middle" font-size="27" font-weight="700" fill="#FFFFFF">+</text>
+  </g>
+
+  <g stroke="#C8553D" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M810 345H1000"/>
+    <path d="M990 335L1006 345L990 355"/>
+    <path d="M750 315C765 280 805 279 842 279"/>
+    <path d="M832 269L848 279L832 289"/>
+    <path d="M915 310C918 322 920 331 923 336"/>
+    <path d="M913 324L925 342L934 321"/>
+    <path d="M1008 375C1012 365 1018 356 1022 352"/>
+    <path d="M1002 359L1025 348L1021 373"/>
+  </g>
+  <text x="875" y="455" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="20" font-weight="700" fill="#222222">x + Sublayer(LayerNorm(x))</text>
+  <text x="875" y="492" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="16" fill="#6B7280">先归一化，再做子层，最后加回残差流</text>
+
+  <text x="600" y="635" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="18" fill="#4B5563">这两种结构都保留“子层 + 残差 + 归一化”的核心思想；文章主图采用 Pre-Norm 方便解释现代 LLM</text>
+</svg>
+
