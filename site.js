@@ -32,6 +32,7 @@ const copy = {
     skillCloudEight: "Product Analytics",
     skillCloudNine: "Quant Modeling",
     skillCloudTen: "Experiment Design",
+    skillsKicker: "Core Skills",
     backgroundKicker: "Background",
     backgroundTitle: "数据科学、AI 产品分析与量化建模背景",
     homeBioOne:
@@ -274,6 +275,7 @@ const copy = {
     skillCloudEight: "Product Analytics",
     skillCloudNine: "Quant Modeling",
     skillCloudTen: "Experiment Design",
+    skillsKicker: "Core Skills",
     backgroundKicker: "Background",
     backgroundTitle: "Data science, AI product analytics, and quantitative modeling",
     homeBioOne:
