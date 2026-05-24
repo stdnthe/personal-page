@@ -183,6 +183,11 @@ const copy = {
     transformerHeadingThree: "一句话总结",
     transformerBodyFour:
       "Transformer 解决的是“长文本关系怎么高效建模”的问题。后来的大语言模型之所以能扩展到很大规模，很大一部分基础就来自这个结构。",
+    transformerBlockTitleMeta: "Transformer Block：大模型的一块积木 | Jiaqi He",
+    transformerBlockDescription:
+      "拆开 Multi-Head Attention、FFN、残差连接和 LayerNorm，理解 Transformer Block 如何支撑大模型一层层堆起来。",
+    transformerBlockSummary:
+      "Transformer Block 不是 Attention 的简单包装，而是一套分工明确的计算单元：Attention 负责跨 token 交流，FFN 负责逐 token 加工，残差连接负责保留信息主干，LayerNorm 负责稳定数值。",
     attentionTitleMeta: "Attention 机制：模型如何决定该看哪里？ | Jiaqi He",
     attentionDescription: "用 Query、Key、Value 的直觉解释注意力权重是怎么来的。",
     attentionSummary:
@@ -449,6 +454,11 @@ const copy = {
     transformerHeadingThree: "One-sentence takeaway",
     transformerBodyFour:
       "The Transformer solved a practical question: how can we model relationships in long text efficiently? Much of modern LLM scaling rests on that answer.",
+    transformerBlockTitleMeta: "Transformer Block: the building block of LLMs | Jiaqi He",
+    transformerBlockDescription:
+      "Unpacking Multi-Head Attention, FFN, residual connections, and LayerNorm — the four components that make a Transformer Block stackable.",
+    transformerBlockSummary:
+      "A Transformer Block is more than a wrapper around attention. It is a set of clearly divided computation units: attention for cross-token exchange, FFN for per-token processing, residuals to preserve the signal highway, and LayerNorm to keep values stable.",
     attentionTitleMeta: "Attention: how does a model decide where to look? | Jiaqi He",
     attentionDescription:
       "An intuitive explanation of Query, Key, Value, and attention weights.",
