@@ -857,11 +857,6 @@ a.project-status:hover {
   padding: clamp(42px, 7vw, 78px) clamp(20px, 4vw, 44px);
 }
 
-.article-layout .article-header,
-.article-layout .article-body,
-.article-layout .article-nav {
-  max-width: 720px;
-}
 
 .series-progress {
   margin-bottom: 38px;
