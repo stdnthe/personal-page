@@ -1,35 +1,34 @@
 <!doctype html>
-<html lang="zh-CN">
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Attention 机制：模型如何决定该看哪里？ | Jiaqi He</title>
+    <title>Attention: how does a model decide where to look? | Jiaqi He</title>
     <meta
       name="description"
-      data-i18n-content="attentionDescription"
-      content="用 Query、Key、Value 的直觉解释注意力权重是怎么来的。"
+      content="An intuitive explanation of Query, Key, Value, and attention weights."
     />
     <link rel="stylesheet" href="../site.css?v=20260524-c" />
   </head>
-  <body class="article-page" data-title-key="attentionTitleMeta">
+  <body class="article-page">
     <header class="site-header">
-      <a class="brand" href="../index.html" aria-label="回到首页">
+      <a class="brand" href="../index.html" aria-label="Back to home">
         <span>
           <strong><span>Jiaqi</span> <em>He</em></strong>
           <small>AI Eval Lab</small>
         </span>
       </a>
-      <nav class="nav" aria-label="主导航">
-        <a href="../blogs.html" data-i18n="navWriting">Blogs</a>
-        <a href="../projects.html" data-i18n="navWork">Project</a>
+      <nav class="nav" aria-label="Main navigation">
+        <a href="../blogs.html">Blogs</a>
+        <a href="../projects.html">Project</a>
       </nav>
     </header>
 
     <main class="article-layout">
-      <section class="series-progress" aria-label="系列进度">
+      <section class="series-progress" aria-label="Series progress">
         <div class="progress-meta">
-          <span data-i18n="progressTwo">第 2 / 5 篇</span>
-          <span data-i18n="readEstimateSeven">预计阅读 7 分钟</span>
+          <span>Article 2 / 5</span>
+          <span>7 min read</span>
         </div>
         <div class="progress-track" aria-hidden="true">
           <div class="progress-fill" style="width: 40%"></div>
@@ -37,23 +36,23 @@
         <div class="series-steps">
           <a href="transformer.html">
             <span class="step-index">01</span>
-            <span class="step-title" data-i18n="articleOneTitle">Transformer 到底解决了什么问题？</span>
+            <span class="step-title">What problem did the Transformer actually solve?</span>
           </a>
           <a class="active" href="attention.html">
             <span class="step-index">02</span>
-            <span class="step-title" data-i18n="articleTwoTitle">Attention 机制：模型如何决定该看哪里？</span>
+            <span class="step-title">Attention: how does a model decide where to look?</span>
           </a>
           <a href="transformer-block.html">
             <span class="step-index">03</span>
-            <span class="step-title" data-i18n="articleThreeTitle">Transformer Block：大模型的一块积木</span>
+            <span class="step-title">Transformer Block: the building block of LLMs</span>
           </a>
           <a href="llm-training.html">
             <span class="step-index">04</span>
-            <span class="step-title" data-i18n="articleFourTitle">LLM 训练过程：从数据到会对话的模型</span>
+            <span class="step-title">How LLMs are trained: from data to dialogue</span>
           </a>
           <a href="model-evaluation.html">
             <span class="step-index">05</span>
-            <span class="step-title" data-i18n="articleFiveTitle">大模型能力评估：怎么判断一个模型强不强？</span>
+            <span class="step-title">How do we know whether a model is strong?</span>
           </a>
         </div>
       </section>
@@ -61,63 +60,50 @@
       <article>
         <header class="article-header">
           <p class="section-kicker">LLM Basics</p>
-          <h1 data-i18n="articleTwoTitle">Attention 机制：模型如何决定该看哪里？</h1>
-          <p class="article-summary" data-i18n="attentionSummary">
-            Attention 可以理解成一种“相关性搜索”：当前词提出问题，其他词拿出线索，模型再决定重点参考谁。
-          </p>
+          <h1>Attention: how does a model decide where to look?</h1>
+          <p class="article-summary">Attention is a kind of relevance search: the current token asks a question, other tokens offer clues, and the model decides what to reference.</p>
         </header>
 
         <div class="article-body">
-          <p data-i18n="attentionIntro">
-            当模型处理一句话时，每个词都不应该孤立理解。比如“它很好用”里的“它”指什么，需要回到前文寻找线索。Attention 就是在做这种寻找。
-          </p>
+          <p>When a model reads a sentence, each word should not be understood in isolation. If a sentence says ‘it works well,’ the model needs earlier context to know what ‘it’ refers to. Attention performs that search.</p>
 
-          <div class="concept-map" aria-label="QKV 直觉">
+          <div class="concept-map" aria-label="QKV intuition">
             <div class="concept-node">
               <strong>Query</strong>
-              <span data-i18n="attentionNodeOneBody">当前词提出的问题：我现在需要什么信息？</span>
+              <span>The current token asks: what information do I need right now?</span>
             </div>
             <div class="concept-node">
               <strong>Key</strong>
-              <span data-i18n="attentionNodeTwoBody">其他词提供的索引：我这里有什么线索？</span>
+              <span>Other tokens provide an index: what clues do I contain?</span>
             </div>
             <div class="concept-node">
               <strong>Value</strong>
-              <span data-i18n="attentionNodeThreeBody">真正被取走的信息：如果相关，就把内容贡献出来。</span>
+              <span>The actual information passed along when a token is judged relevant.</span>
             </div>
           </div>
 
-          <h2 data-i18n="attentionHeadingOne">注意力权重是什么？</h2>
-          <p data-i18n="attentionBodyOne">
-            模型会比较 Query 和每个 Key 的匹配程度。越匹配，权重越高；权重越高，对应的 Value 就越会影响当前词的表示。
-          </p>
-          <p data-i18n="attentionBodyTwo">
-            这不是人类显式写规则，而是在大量训练数据中学出来的统计关系。模型学会了哪些词之间经常互相解释、互相限定、互相补充。
-          </p>
+          <h2>What are attention weights?</h2>
+          <p>The model compares the Query with each Key. The better they match, the higher the weight; the higher the weight, the more that Value influences the current representation.</p>
+          <p>These relationships are not hand-written rules. They are learned from large amounts of text, where the model discovers which words tend to explain, limit, or complete each other.</p>
 
-          <h2 data-i18n="attentionHeadingTwo">为什么要多头注意力？</h2>
-          <p data-i18n="attentionBodyThree">
-            一句话里常常同时存在多种关系：主谓关系、指代关系、时间关系、因果关系。多头注意力让模型从多个角度观察同一句话。
-          </p>
+          <h2>Why use multiple heads?</h2>
+          <p>A sentence can contain many relationships at once: subject-verb links, references, time, cause and effect. Multi-head attention lets the model inspect the same sentence from several angles.</p>
 
-          <h2 data-i18n="attentionHeadingThree">一句话总结</h2>
-          <p data-i18n="attentionBodyFour">
-            Attention 让模型不只是按顺序读字，而是能动态判断“当前理解最需要参考哪里”。这也是 Transformer 能处理复杂上下文的关键。
-          </p>
+          <h2>One-sentence takeaway</h2>
+          <p>Attention lets a model do more than read in order. It dynamically decides where the current understanding should look for support.</p>
         </div>
       </article>
 
-      <nav class="article-nav" aria-label="上一篇下一篇">
+      <nav class="article-nav" aria-label="Article navigation">
         <a href="transformer.html">
-          <span data-i18n="navPrevious">上一篇</span>
-          <strong data-i18n="articleOneTitle">Transformer 到底解决了什么问题？</strong>
+          <span>Previous</span>
+          <strong>What problem did the Transformer actually solve?</strong>
         </a>
         <a href="transformer-block.html">
-          <span data-i18n="navNext">下一篇</span>
-          <strong data-i18n="articleThreeTitle">Transformer Block：大模型的一块积木</strong>
+          <span>Next</span>
+          <strong>Transformer Block: the building block of LLMs</strong>
         </a>
       </nav>
     </main>
-    <script src="../site.js?v=20260524-c"></script>
   </body>
 </html>

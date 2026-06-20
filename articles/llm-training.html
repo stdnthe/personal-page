@@ -1,35 +1,34 @@
 <!doctype html>
-<html lang="zh-CN">
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>LLM 训练过程：从数据到会对话的模型 | Jiaqi He</title>
+    <title>How LLMs are trained: from data to dialogue | Jiaqi He</title>
     <meta
       name="description"
-      data-i18n-content="trainingDescription"
-      content="拆解预训练、指令微调、偏好对齐和推理阶段各自解决什么问题。"
+      content="Pretraining, instruction tuning, preference alignment, and what each stage is for."
     />
     <link rel="stylesheet" href="../site.css?v=20260524-c" />
   </head>
-  <body class="article-page" data-title-key="trainingTitleMeta">
+  <body class="article-page">
     <header class="site-header">
-      <a class="brand" href="../index.html" aria-label="回到首页">
+      <a class="brand" href="../index.html" aria-label="Back to home">
         <span>
           <strong><span>Jiaqi</span> <em>He</em></strong>
           <small>AI Eval Lab</small>
         </span>
       </a>
-      <nav class="nav" aria-label="主导航">
-        <a href="../blogs.html" data-i18n="navWriting">Blogs</a>
-        <a href="../projects.html" data-i18n="navWork">Project</a>
+      <nav class="nav" aria-label="Main navigation">
+        <a href="../blogs.html">Blogs</a>
+        <a href="../projects.html">Project</a>
       </nav>
     </header>
 
     <main class="article-layout">
-      <section class="series-progress" aria-label="系列进度">
+      <section class="series-progress" aria-label="Series progress">
         <div class="progress-meta">
-          <span data-i18n="progressFour">第 4 / 5 篇</span>
-          <span data-i18n="readEstimateEight">预计阅读 8 分钟</span>
+          <span>Article 4 / 5</span>
+          <span>8 min read</span>
         </div>
         <div class="progress-track" aria-hidden="true">
           <div class="progress-fill" style="width: 80%"></div>
@@ -37,89 +36,76 @@
         <div class="series-steps">
           <a href="transformer.html">
             <span class="step-index">01</span>
-            <span class="step-title" data-i18n="articleOneTitle">Transformer 到底解决了什么问题？</span>
+            <span class="step-title">What problem did the Transformer actually solve?</span>
           </a>
           <a href="attention.html">
             <span class="step-index">02</span>
-            <span class="step-title" data-i18n="articleTwoTitle">Attention 机制：模型如何决定该看哪里？</span>
+            <span class="step-title">Attention: how does a model decide where to look?</span>
           </a>
           <a href="transformer-block.html">
             <span class="step-index">03</span>
-            <span class="step-title" data-i18n="articleThreeTitle">Transformer Block：大模型的一块积木</span>
+            <span class="step-title">Transformer Block: the building block of LLMs</span>
           </a>
           <a class="active" href="llm-training.html">
             <span class="step-index">04</span>
-            <span class="step-title" data-i18n="articleFourTitle">LLM 训练过程：从数据到会对话的模型</span>
+            <span class="step-title">How LLMs are trained: from data to dialogue</span>
           </a>
           <a href="model-evaluation.html">
             <span class="step-index">05</span>
-            <span class="step-title" data-i18n="articleFiveTitle">大模型能力评估：怎么判断一个模型强不强？</span>
+            <span class="step-title">How do we know whether a model is strong?</span>
           </a>
         </div>
       </section>
 
       <article>
         <header class="article-header">
-          <p class="section-kicker" data-i18n="trainingKicker">LLM Training</p>
-          <h1 data-i18n="articleFourTitle">LLM 训练过程：从数据到会对话的模型</h1>
-          <p class="article-summary" data-i18n="trainingSummary">
-            大模型不是一开始就会聊天，它通常先学习语言规律，再学习按照人的指令工作，最后学习什么回答更符合人类偏好。
-          </p>
+          <p class="section-kicker">LLM Training</p>
+          <h1>How LLMs are trained: from data to dialogue</h1>
+          <p class="article-summary">An LLM does not start out as a chat assistant. It first learns language patterns, then learns to follow instructions, then learns which answers people tend to prefer.</p>
         </header>
 
         <div class="article-body">
-          <p data-i18n="trainingIntro">
-            可以把训练过程理解成三层能力的叠加：先会“续写”，再会“听指令”，最后更会“给出有帮助的回答”。
-          </p>
+          <p>You can think of training as three layers of ability: first continue text, then follow instructions, then give answers that are more helpful.</p>
 
           <div class="concept-map" aria-label="LLM 训练三阶段">
             <div class="concept-node">
-              <strong data-i18n="trainingNodeOneTitle">预训练</strong>
-              <span data-i18n="trainingNodeOneBody">从海量文本中学习语言结构、事实关联和常识模式。</span>
+              <strong>Pretraining</strong>
+              <span>Learning language structure, factual associations, and common patterns from massive text.</span>
             </div>
             <div class="concept-node">
-              <strong data-i18n="trainingNodeTwoTitle">指令微调</strong>
-              <span data-i18n="trainingNodeTwoBody">让模型理解用户是在提问、要求总结、改写或推理。</span>
+              <strong>Instruction tuning</strong>
+              <span>Teaching the model that users may ask it to answer, summarize, rewrite, classify, or reason.</span>
             </div>
             <div class="concept-node">
-              <strong data-i18n="trainingNodeThreeTitle">偏好对齐</strong>
-              <span data-i18n="trainingNodeThreeBody">用人类偏好信号调整回答风格、帮助性和安全边界。</span>
+              <strong>Preference alignment</strong>
+              <span>Using human preference signals to tune helpfulness, style, and safety boundaries.</span>
             </div>
           </div>
 
-          <h2 data-i18n="trainingHeadingOne">预训练：先学会语言世界</h2>
-          <p data-i18n="trainingBodyOne">
-            预训练常见目标是预测下一个 token。这个任务看起来简单，但当数据足够大、模型足够大时，它会逼着模型学习语法、知识、推理痕迹和领域模式。
-          </p>
+          <h2>Pretraining: learning the language world</h2>
+          <p>A common pretraining objective is next-token prediction. The task looks simple, but with enough data and model capacity it forces the model to learn grammar, knowledge, reasoning traces, and domain patterns.</p>
 
-          <h2 data-i18n="trainingHeadingTwo">指令微调：从续写变成助手</h2>
-          <p data-i18n="trainingBodyTwo">
-            只做预训练的模型更像一个“文本续写器”。指令微调会给它很多问答、总结、分类、代码、推理样例，让它学会按照任务格式完成请求。
-          </p>
+          <h2>Instruction tuning: from continuation to assistant</h2>
+          <p>A model trained only with pretraining behaves more like a text completer. Instruction tuning gives it examples of Q&A, summarization, classification, code, and reasoning so it learns to complete tasks.</p>
 
-          <h2 data-i18n="trainingHeadingThree">偏好对齐：回答不只要对，还要有用</h2>
-          <p data-i18n="trainingBodyThree">
-            同一个问题可能有很多回答。偏好对齐会告诉模型哪些回答更清楚、更稳妥、更符合用户需求。RLHF 和 DPO 都属于这个方向的代表方法。
-          </p>
+          <h2>Preference alignment: useful answers, not just plausible ones</h2>
+          <p>The same question can have many possible answers. Preference alignment teaches the model which responses are clearer, safer, and more useful. RLHF and DPO are two representative methods.</p>
 
-          <h2 data-i18n="trainingHeadingFour">一句话总结</h2>
-          <p data-i18n="trainingBodyFour">
-            LLM 训练不是单次魔法，而是从语言建模到任务理解、再到人类偏好对齐的连续工程。
-          </p>
+          <h2>One-sentence takeaway</h2>
+          <p>LLM training is not a single magic step. It is a sequence from language modeling, to task following, to alignment with human preferences.</p>
         </div>
       </article>
 
-      <nav class="article-nav" aria-label="上一篇下一篇">
+      <nav class="article-nav" aria-label="Article navigation">
         <a href="transformer-block.html">
-          <span data-i18n="navPrevious">上一篇</span>
-          <strong data-i18n="articleThreeTitle">Transformer Block：大模型的一块积木</strong>
+          <span>Previous</span>
+          <strong>Transformer Block: the building block of LLMs</strong>
         </a>
         <a href="model-evaluation.html">
-          <span data-i18n="navNext">下一篇</span>
-          <strong data-i18n="articleFiveTitle">大模型能力评估：怎么判断一个模型强不强？</strong>
+          <span>Next</span>
+          <strong>How do we know whether a model is strong?</strong>
         </a>
       </nav>
     </main>
-    <script src="../site.js?v=20260524-c"></script>
   </body>
 </html>

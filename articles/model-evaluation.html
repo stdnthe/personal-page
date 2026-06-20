@@ -1,35 +1,34 @@
 <!doctype html>
-<html lang="zh-CN">
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>大模型能力评估：怎么判断一个模型强不强？ | Jiaqi He</title>
+    <title>How do we know whether a model is strong? | Jiaqi He</title>
     <meta
       name="description"
-      data-i18n-content="evaluationDescription"
-      content="把 Benchmark、人类偏好、真实任务和 Agent 评估放在同一张地图里看。"
+      content="A map of benchmarks, human preference, real tasks, and agent evaluation."
     />
     <link rel="stylesheet" href="../site.css?v=20260524-c" />
   </head>
-  <body class="article-page" data-title-key="evaluationTitleMeta">
+  <body class="article-page">
     <header class="site-header">
-      <a class="brand" href="../index.html" aria-label="回到首页">
+      <a class="brand" href="../index.html" aria-label="Back to home">
         <span>
           <strong><span>Jiaqi</span> <em>He</em></strong>
           <small>AI Eval Lab</small>
         </span>
       </a>
-      <nav class="nav" aria-label="主导航">
-        <a href="../blogs.html" data-i18n="navWriting">Blogs</a>
-        <a href="../projects.html" data-i18n="navWork">Project</a>
+      <nav class="nav" aria-label="Main navigation">
+        <a href="../blogs.html">Blogs</a>
+        <a href="../projects.html">Project</a>
       </nav>
     </header>
 
     <main class="article-layout">
-      <section class="series-progress" aria-label="系列进度">
+      <section class="series-progress" aria-label="Series progress">
         <div class="progress-meta">
-          <span data-i18n="progressFive">第 5 / 5 篇</span>
-          <span data-i18n="readEstimateSeven">预计阅读 7 分钟</span>
+          <span>Article 5 / 5</span>
+          <span>7 min read</span>
         </div>
         <div class="progress-track" aria-hidden="true">
           <div class="progress-fill" style="width: 100%"></div>
@@ -37,89 +36,76 @@
         <div class="series-steps">
           <a href="transformer.html">
             <span class="step-index">01</span>
-            <span class="step-title" data-i18n="articleOneTitle">Transformer 到底解决了什么问题？</span>
+            <span class="step-title">What problem did the Transformer actually solve?</span>
           </a>
           <a href="attention.html">
             <span class="step-index">02</span>
-            <span class="step-title" data-i18n="articleTwoTitle">Attention 机制：模型如何决定该看哪里？</span>
+            <span class="step-title">Attention: how does a model decide where to look?</span>
           </a>
           <a href="transformer-block.html">
             <span class="step-index">03</span>
-            <span class="step-title" data-i18n="articleThreeTitle">Transformer Block：大模型的一块积木</span>
+            <span class="step-title">Transformer Block: the building block of LLMs</span>
           </a>
           <a href="llm-training.html">
             <span class="step-index">04</span>
-            <span class="step-title" data-i18n="articleFourTitle">LLM 训练过程：从数据到会对话的模型</span>
+            <span class="step-title">How LLMs are trained: from data to dialogue</span>
           </a>
           <a class="active" href="model-evaluation.html">
             <span class="step-index">05</span>
-            <span class="step-title" data-i18n="articleFiveTitle">大模型能力评估：怎么判断一个模型强不强？</span>
+            <span class="step-title">How do we know whether a model is strong?</span>
           </a>
         </div>
       </section>
 
       <article>
         <header class="article-header">
-          <p class="section-kicker" data-i18n="evaluationKicker">AI Evaluation</p>
-          <h1 data-i18n="articleFiveTitle">大模型能力评估：怎么判断一个模型强不强？</h1>
-          <p class="article-summary" data-i18n="evaluationSummary">
-            一个模型强不强，不能只看榜单分数。真正重要的是：它在你的任务里是否稳定、可控、可解释。
-          </p>
+          <p class="section-kicker">AI Evaluation</p>
+          <h1>How do we know whether a model is strong?</h1>
+          <p class="article-summary">A model’s strength is not just a leaderboard score. What matters is whether it is stable, controllable, and explainable in your task.</p>
         </header>
 
         <div class="article-body">
-          <p data-i18n="evaluationIntro">
-            大模型评估最容易陷入一个误区：把单个分数当作全部答案。分数有价值，但它通常只照亮能力地图的一小块。
-          </p>
+          <p>The easiest mistake in model evaluation is treating one score as the whole answer. Scores are useful, but they usually illuminate only one small part of the capability map.</p>
 
           <div class="concept-map" aria-label="模型评估地图">
             <div class="concept-node">
-              <strong data-i18n="evaluationNodeOneTitle">Benchmark</strong>
-              <span data-i18n="evaluationNodeOneBody">适合快速横向比较，但可能和真实业务任务有距离。</span>
+              <strong>Benchmark</strong>
+              <span>Useful for quick comparison, but often far from real business tasks.</span>
             </div>
             <div class="concept-node">
-              <strong data-i18n="evaluationNodeTwoTitle">人类偏好</strong>
-              <span data-i18n="evaluationNodeTwoBody">能衡量回答是否自然、清楚、有帮助，但成本更高。</span>
+              <strong>Human preference</strong>
+              <span>Measures whether answers feel natural, clear, and helpful, but costs more.</span>
             </div>
             <div class="concept-node">
-              <strong data-i18n="evaluationNodeThreeTitle">真实任务</strong>
-              <span data-i18n="evaluationNodeThreeBody">最接近落地价值，需要明确数据、约束和成功标准。</span>
+              <strong>Real tasks</strong>
+              <span>Closest to product value, but requires clear data, constraints, and success criteria.</span>
             </div>
           </div>
 
-          <h2 data-i18n="evaluationHeadingOne">榜单分数适合做起点</h2>
-          <p data-i18n="evaluationBodyOne">
-            Benchmark 能帮助我们快速了解模型的知识、数学、代码、推理等能力。但如果模型在榜单上表现很好，不代表它一定适合你的业务流程。
-          </p>
+          <h2>Leaderboard scores are a starting point</h2>
+          <p>Benchmarks help us compare knowledge, math, code, and reasoning. But a high score does not guarantee that a model fits your actual workflow.</p>
 
-          <h2 data-i18n="evaluationHeadingTwo">真实任务评估更接近产品判断</h2>
-          <p data-i18n="evaluationBodyTwo">
-            如果你要评估一个数据分析 Agent，问题就不只是“答案对不对”，还包括它能否理解业务问题、选择合适数据、写出可运行代码、解释结果并发现异常。
-          </p>
+          <h2>Real-task evaluation is closer to product judgment</h2>
+          <p>For a data analysis agent, the question is not only whether the answer is correct. It also needs to understand the business question, choose data, write runnable code, explain results, and notice anomalies.</p>
 
-          <h2 data-i18n="evaluationHeadingThree">好的评估需要可复现</h2>
-          <p data-i18n="evaluationBodyThree">
-            评估集、评分规则、失败原因分类和样例记录都要清楚。否则今天觉得模型好，明天觉得模型差，很可能只是测试方式变了。
-          </p>
+          <h2>Good evaluation must be reproducible</h2>
+          <p>The test set, scoring rules, failure categories, and example records all need to be explicit. Otherwise a model may look better or worse simply because the test changed.</p>
 
-          <h2 data-i18n="evaluationHeadingFour">一句话总结</h2>
-          <p data-i18n="evaluationBodyFour">
-            判断模型强不强，要把通用分数、人类体验和真实任务结果结合起来看。尤其在产品落地时，稳定解决目标任务比单纯冲高分更重要。
-          </p>
+          <h2>One-sentence takeaway</h2>
+          <p>To judge a model, combine general scores, human experience, and real-task results. In product work, reliably solving the target task matters more than chasing one high score.</p>
         </div>
       </article>
 
-      <nav class="article-nav" aria-label="上一篇下一篇">
+      <nav class="article-nav" aria-label="Article navigation">
         <a href="llm-training.html">
-          <span data-i18n="navPrevious">上一篇</span>
-          <strong data-i18n="articleFourTitle">LLM 训练过程：从数据到会对话的模型</strong>
+          <span>Previous</span>
+          <strong>How LLMs are trained: from data to dialogue</strong>
         </a>
         <a href="index.html">
-          <span data-i18n="navBackSeries">返回目录</span>
-          <strong data-i18n="seriesTitle">大模型科普系列</strong>
+          <span>Back to series</span>
+          <strong>LLM Explainer Series</strong>
         </a>
       </nav>
     </main>
-    <script src="../site.js?v=20260524-c"></script>
   </body>
 </html>

@@ -1,35 +1,34 @@
 <!doctype html>
-<html lang="zh-CN">
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Transformer Block：大模型的一块积木 | Jiaqi He</title>
+    <title>Transformer Block: the building block of LLMs | Jiaqi He</title>
     <meta
       name="description"
-      data-i18n-content="transformerBlockDescription"
-      content="拆开 Multi-Head Attention、FFN、残差连接和 LayerNorm，理解 Transformer Block 如何支撑大模型一层层堆起来。"
+      content="Unpacking Multi-Head Attention, FFN, residual connections, and LayerNorm."
     />
     <link rel="stylesheet" href="../site.css?v=20260524-c" />
   </head>
-  <body class="article-page" data-title-key="transformerBlockTitleMeta">
+  <body class="article-page">
     <header class="site-header">
-      <a class="brand" href="../index.html" aria-label="回到首页">
+      <a class="brand" href="../index.html" aria-label="Back to home">
         <span>
           <strong><span>Jiaqi</span> <em>He</em></strong>
           <small>AI Eval Lab</small>
         </span>
       </a>
-      <nav class="nav" aria-label="主导航">
-        <a href="../blogs.html" data-i18n="navWriting">Blogs</a>
-        <a href="../projects.html" data-i18n="navWork">Project</a>
+      <nav class="nav" aria-label="Main navigation">
+        <a href="../blogs.html">Blogs</a>
+        <a href="../projects.html">Project</a>
       </nav>
     </header>
 
     <main class="article-layout">
-      <section class="series-progress" aria-label="系列进度">
+      <section class="series-progress" aria-label="Series progress">
         <div class="progress-meta">
-          <span data-i18n="progressThree">第 3 / 5 篇</span>
-          <span data-i18n="readEstimateTen">预计阅读 10 分钟</span>
+          <span>Article 3 / 5</span>
+          <span>10 min read</span>
         </div>
         <div class="progress-track" aria-hidden="true">
           <div class="progress-fill" style="width: 60%"></div>
@@ -37,23 +36,23 @@
         <div class="series-steps">
           <a href="transformer.html">
             <span class="step-index">01</span>
-            <span class="step-title" data-i18n="articleOneTitle">Transformer 到底解决了什么问题？</span>
+            <span class="step-title">What problem did the Transformer actually solve?</span>
           </a>
           <a href="attention.html">
             <span class="step-index">02</span>
-            <span class="step-title" data-i18n="articleTwoTitle">Attention 机制：模型如何决定该看哪里？</span>
+            <span class="step-title">Attention: how does a model decide where to look?</span>
           </a>
           <a class="active" href="transformer-block.html">
             <span class="step-index">03</span>
-            <span class="step-title" data-i18n="articleThreeTitle">Transformer Block：大模型的一块积木</span>
+            <span class="step-title">Transformer Block: the building block of LLMs</span>
           </a>
           <a href="llm-training.html">
             <span class="step-index">04</span>
-            <span class="step-title" data-i18n="articleFourTitle">LLM 训练过程：从数据到会对话的模型</span>
+            <span class="step-title">How LLMs are trained: from data to dialogue</span>
           </a>
           <a href="model-evaluation.html">
             <span class="step-index">05</span>
-            <span class="step-title" data-i18n="articleFiveTitle">大模型能力评估：怎么判断一个模型强不强？</span>
+            <span class="step-title">How do we know whether a model is strong?</span>
           </a>
         </div>
       </section>
@@ -61,16 +60,14 @@
       <article>
         <header class="article-header">
           <p class="section-kicker">LLM Basics</p>
-          <h1 data-i18n="articleThreeTitle">Transformer Block：大模型的一块积木</h1>
-          <p class="article-summary" data-i18n="transformerBlockSummary">
-            Transformer Block 不是 Attention 的简单包装，而是一套分工明确的计算单元：Attention 负责跨 token 交流，FFN 负责逐 token 加工，残差连接负责保留信息主干，LayerNorm 负责稳定数值。
-          </p>
+          <h1>Transformer Block: the building block of LLMs</h1>
+          <p class="article-summary">A Transformer Block is more than a wrapper around attention. It is a set of clearly divided computation units: attention for cross-token exchange, FFN for per-token processing, residuals to preserve the signal highway, and LayerNorm to keep values stable.</p>
         </header>
 
         <div class="article-body">
 
-          <nav class="article-toc" aria-label="页内目录">
-            <span class="article-toc-label">本文目录</span>
+          <nav class="article-toc" aria-label="Table of contents">
+            <span class="article-toc-label">Contents</span>
             <ol>
               <li><span class="toc-num">一</span><a href="#attention-exchange">Attention 只解决了"交流"，还没解决"加工"</a></li>
               <li><span class="toc-num">二</span><a href="#ffn">FFN：每个 token 的独立加工层</a></li>
@@ -284,17 +281,16 @@ x = x + FFN(LayerNorm(x))</code></pre>
         </div>
       </article>
 
-      <nav class="article-nav" aria-label="上一篇下一篇">
+      <nav class="article-nav" aria-label="Article navigation">
         <a href="attention.html">
-          <span data-i18n="navPrevious">上一篇</span>
-          <strong data-i18n="articleTwoTitle">Attention 机制：模型如何决定该看哪里？</strong>
+          <span>Previous</span>
+          <strong>Attention: how does a model decide where to look?</strong>
         </a>
         <a href="llm-training.html">
-          <span data-i18n="navNext">下一篇</span>
-          <strong data-i18n="articleFourTitle">LLM 训练过程：从数据到会对话的模型</strong>
+          <span>Next</span>
+          <strong>How LLMs are trained: from data to dialogue</strong>
         </a>
       </nav>
     </main>
-    <script src="../site.js?v=20260524-c"></script>
   </body>
 </html>

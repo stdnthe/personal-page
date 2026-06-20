@@ -1,34 +1,34 @@
 <!doctype html>
-<html lang="zh-CN">
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Transformer 到底解决了什么问题？ | Jiaqi He</title>
+    <title>What problem did the Transformer actually solve? | Jiaqi He</title>
     <meta
       name="description"
-      content="从 RNN 的限制讲到 Transformer、Attention 和并行训练的意义。"
+      content="From RNN limitations to Transformers, attention, and parallel training."
     />
     <link rel="stylesheet" href="../site.css?v=20260524-c" />
   </head>
-  <body class="article-page" data-title-key="transformerTitleMeta">
+  <body class="article-page">
     <header class="site-header">
-      <a class="brand" href="../index.html" aria-label="回到首页">
+      <a class="brand" href="../index.html" aria-label="Back to home">
         <span>
           <strong><span>Jiaqi</span> <em>He</em></strong>
           <small>AI Eval Lab</small>
         </span>
       </a>
-      <nav class="nav" aria-label="主导航">
-        <a href="../blogs.html" data-i18n="navWriting">Blogs</a>
-        <a href="../projects.html" data-i18n="navWork">Project</a>
+      <nav class="nav" aria-label="Main navigation">
+        <a href="../blogs.html">Blogs</a>
+        <a href="../projects.html">Project</a>
       </nav>
     </header>
 
     <main class="article-layout">
-      <section class="series-progress" aria-label="系列进度">
+      <section class="series-progress" aria-label="Series progress">
         <div class="progress-meta">
-          <span data-i18n="progressOne">第 1 / 5 篇</span>
-          <span data-i18n="readEstimateSix">预计阅读 6 分钟</span>
+          <span>Article 1 / 5</span>
+          <span>6 min read</span>
         </div>
         <div class="progress-track" aria-hidden="true">
           <div class="progress-fill" style="width: 20%"></div>
@@ -36,23 +36,23 @@
         <div class="series-steps">
           <a class="active" href="transformer.html">
             <span class="step-index">01</span>
-            <span class="step-title" data-i18n="articleOneTitle">Transformer 到底解决了什么问题？</span>
+            <span class="step-title">What problem did the Transformer actually solve?</span>
           </a>
           <a href="attention.html">
             <span class="step-index">02</span>
-            <span class="step-title" data-i18n="articleTwoTitle">Attention 机制：模型如何决定该看哪里？</span>
+            <span class="step-title">Attention: how does a model decide where to look?</span>
           </a>
           <a href="transformer-block.html">
             <span class="step-index">03</span>
-            <span class="step-title" data-i18n="articleThreeTitle">Transformer Block：大模型的一块积木</span>
+            <span class="step-title">Transformer Block: the building block of LLMs</span>
           </a>
           <a href="llm-training.html">
             <span class="step-index">04</span>
-            <span class="step-title" data-i18n="articleFourTitle">LLM 训练过程：从数据到会对话的模型</span>
+            <span class="step-title">How LLMs are trained: from data to dialogue</span>
           </a>
           <a href="model-evaluation.html">
             <span class="step-index">05</span>
-            <span class="step-title" data-i18n="articleFiveTitle">大模型能力评估：怎么判断一个模型强不强？</span>
+            <span class="step-title">How do we know whether a model is strong?</span>
           </a>
         </div>
       </section>
@@ -60,16 +60,14 @@
       <article>
         <header class="article-header">
           <p class="section-kicker">LLM Basics</p>
-          <h1 data-i18n="articleOneTitle">Transformer 到底解决了什么问题？</h1>
-          <p class="article-summary" data-i18n="transformerSummary">
-            Transformer 的核心价值，不是"让模型变聪明"这么简单，而是让模型能高效地看见长文本里的关系。
-          </p>
+          <h1>What problem did the Transformer actually solve?</h1>
+          <p class="article-summary">The Transformer was not just a way to make models smarter. It made long-range relationships in text much easier to model efficiently.</p>
         </header>
 
         <div class="article-body">
 
-          <nav class="article-toc" aria-label="页内目录">
-            <span class="article-toc-label">本文目录</span>
+          <nav class="article-toc" aria-label="Table of contents">
+            <span class="article-toc-label">Contents</span>
             <ol>
               <li><span class="toc-num">一</span><a href="#language-relationships">语言理解，本质上是关系理解</a></li>
               <li><span class="toc-num">二</span><a href="#rnn-bottleneck">早期方法：顺序传话的瓶颈</a></li>
@@ -263,17 +261,16 @@
         </div>
       </article>
 
-      <nav class="article-nav" aria-label="上一篇下一篇">
+      <nav class="article-nav" aria-label="Article navigation">
         <a href="index.html">
-          <span data-i18n="navBackSeries">返回目录</span>
-          <strong data-i18n="seriesTitle">大模型科普系列</strong>
+          <span>Back to series</span>
+          <strong>LLM Explainer Series</strong>
         </a>
         <a href="attention.html">
-          <span data-i18n="navNext">下一篇</span>
-          <strong data-i18n="articleTwoTitle">Attention 机制：模型如何决定该看哪里？</strong>
+          <span>Next</span>
+          <strong>Attention: how does a model decide where to look?</strong>
         </a>
       </nav>
     </main>
-    <script src="../site.js?v=20260524-c"></script>
   </body>
 </html>

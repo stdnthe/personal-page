@@ -1,104 +1,100 @@
 <!doctype html>
-<html lang="zh-CN">
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>大模型科普系列 | Jiaqi He</title>
+    <title>LLM Explainer Series | Jiaqi He</title>
     <meta
       name="description"
-      data-i18n-content="seriesIndexDescription"
-      content="大模型科普系列文章：Transformer、Attention、LLM 训练流程和模型能力评估。"
+      content="An explainer series on Transformers, attention, LLM training, and model evaluation."
     />
     <link rel="stylesheet" href="../site.css?v=20260524-c" />
   </head>
-  <body class="series-shell" data-title-key="seriesIndexTitleMeta">
+  <body class="series-shell">
     <header class="site-header">
-      <a class="brand" href="../index.html" aria-label="回到首页">
+      <a class="brand" href="../index.html" aria-label="Back to home">
         <span>
           <strong><span>Jiaqi</span> <em>He</em></strong>
           <small>AI Eval Lab</small>
         </span>
       </a>
-      <nav class="nav" aria-label="主导航">
-        <a href="../blogs.html" data-i18n="navWriting">Blogs</a>
-        <a href="../projects.html" data-i18n="navWork">Project</a>
+      <nav class="nav" aria-label="Main navigation">
+        <a href="../blogs.html">Blogs</a>
+        <a href="../projects.html">Project</a>
       </nav>
     </header>
 
     <main>
       <section class="series-hero" aria-labelledby="series-title">
         <div>
-          <p class="section-kicker" data-i18n="seriesKicker">LLM Explainer Series</p>
-          <h1 id="series-title" data-i18n="seriesTitle">大模型科普系列</h1>
-          <p data-i18n="seriesIntro">
-            用尽量直观的语言拆开大模型的几个核心问题：它为什么需要 Transformer、Attention 到底在做什么、模型如何训练，以及我们该怎样评估它。
-          </p>
+          <p class="section-kicker">LLM Explainer Series</p>
+          <h1 id="series-title">LLM Explainer Series</h1>
+          <p>A plain-language series unpacking why modern models use Transformers, what attention does, how LLMs are trained, and how we should evaluate them.</p>
         </div>
-        <aside class="series-note" aria-label="系列说明">
-          <strong data-i18n="seriesNoteTitle">建议阅读顺序</strong>
-          <span data-i18n="seriesNoteBody">先理解结构，再理解训练，最后理解评估。每篇都可以单独阅读，也可以作为后续内容整理的初稿。</span>
+        <aside class="series-note" aria-label="Series note">
+          <strong>Suggested order</strong>
+          <span>Start with model structure, move into training, then finish with evaluation. Each article can stand alone or become a draft for future notes.</span>
         </aside>
       </section>
 
-      <section class="article-list" aria-label="文章列表">
+      <section class="article-list" aria-label="Article list">
         <div class="series-phase">
-          <p class="series-phase-label" data-i18n="seriesPhaseOne">第一阶段 · Transformer 原理</p>
+          <p class="series-phase-label">Phase 1 · Transformer fundamentals</p>
 
           <a class="article-card" href="transformer.html">
             <span class="article-card-index">01</span>
             <div>
-              <h2 data-i18n="articleOneTitle">Transformer 到底解决了什么问题？</h2>
-              <p data-i18n="articleOneBody">从 RNN 的顺序处理限制讲到 Attention 和并行训练的意义。</p>
+              <h2>What problem did the Transformer actually solve?</h2>
+              <p>From the sequential limits of RNNs to attention and parallel training.</p>
             </div>
-            <span class="read-time" data-i18n="readTimeSix">约 6 分钟</span>
+            <span class="read-time">6 min read</span>
           </a>
 
           <a class="article-card" href="attention.html">
             <span class="article-card-index">02</span>
             <div>
-              <h2 data-i18n="articleTwoTitle">Attention 机制：模型如何决定该看哪里？</h2>
-              <p data-i18n="articleTwoBody">用 Query、Key、Value 的直觉解释注意力权重是怎么来的。</p>
+              <h2>Attention: how does a model decide where to look?</h2>
+              <p>An intuitive explanation of Query, Key, Value, and attention weights.</p>
             </div>
-            <span class="read-time" data-i18n="readTimeSeven">约 7 分钟</span>
+            <span class="read-time">7 min read</span>
           </a>
 
           <a class="article-card" href="transformer-block.html">
             <span class="article-card-index">03</span>
             <div>
-              <h2 data-i18n="articleThreeTitle">Transformer Block：大模型的一块积木</h2>
-              <p data-i18n="articleThreeBody">拆解 Attention 层与 FFN 层，理解残差连接和 LayerNorm 为何不可缺少。</p>
+              <h2>Transformer Block: the building block of LLMs</h2>
+              <p>Multi-Head Attention, FFN, residual connections, and LayerNorm — what each component actually does.</p>
             </div>
-            <span class="read-time" data-i18n="readTimeTen">约 10 分钟</span>
+            <span class="read-time">10 min read</span>
           </a>
         </div>
 
         <div class="series-phase">
-          <p class="series-phase-label" data-i18n="seriesPhaseTwo">第二阶段 · LLM 训练过程</p>
+          <p class="series-phase-label">Phase 2 · LLM training</p>
 
           <a class="article-card" href="llm-training.html">
             <span class="article-card-index">04</span>
             <div>
-              <h2 data-i18n="articleFourTitle">LLM 训练过程：从数据到会对话的模型</h2>
-              <p data-i18n="articleFourBody">拆解预训练、指令微调、偏好对齐和推理阶段各自解决什么问题。</p>
+              <h2>How LLMs are trained: from data to dialogue</h2>
+              <p>Pretraining, instruction tuning, preference alignment, and what each stage is for.</p>
             </div>
-            <span class="read-time" data-i18n="readTimeEight">约 8 分钟</span>
+            <span class="read-time">8 min read</span>
           </a>
         </div>
 
         <div class="series-phase">
-          <p class="series-phase-label" data-i18n="seriesPhaseThree">第三阶段 · 大模型能力评估</p>
+          <p class="series-phase-label">Phase 3 · Model evaluation</p>
 
           <a class="article-card" href="model-evaluation.html">
             <span class="article-card-index">05</span>
             <div>
-              <h2 data-i18n="articleFiveTitle">大模型能力评估：怎么判断一个模型强不强？</h2>
-              <p data-i18n="articleFiveBody">把 Benchmark、人类偏好、真实任务和 Agent 评估放在同一张地图里看。</p>
+              <h2>How do we know whether a model is strong?</h2>
+              <p>A map of benchmarks, human preference, real tasks, and agent evaluation.</p>
             </div>
-            <span class="read-time" data-i18n="readTimeSeven">约 7 分钟</span>
+            <span class="read-time">7 min read</span>
           </a>
         </div>
       </section>
     </main>
-    <script src="../site.js?v=20260524-c"></script>
   </body>
 </html>
