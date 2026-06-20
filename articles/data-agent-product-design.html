@@ -1,0 +1,1090 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>增长 Data Agent 产品设计 | Jiaqi He</title>
+<meta name="description" content="一篇关于增长 Data Agent 的产品设计文档，梳理产品定位、架构、评估体系和落地路线图。">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#FAF7F2;color:#1C1917;font-family:"PingFang SC","Noto Sans SC",-apple-system,"Helvetica Neue",sans-serif;font-size:16px;line-height:1.85}
+.site-link{position:fixed;right:20px;top:18px;z-index:20;display:inline-flex;align-items:center;gap:6px;padding:8px 12px;border:1px solid #DDD5C8;border-radius:999px;background:rgba(250,247,242,.92);color:#1B5E82;text-decoration:none;font-size:12px;font-weight:700;box-shadow:0 8px 20px rgba(28,25,23,.08);backdrop-filter:blur(10px)}
+.site-link:hover{background:#E0EDF5}
+
+/* ── 侧边栏 ── */
+.sidebar{position:fixed;top:0;left:0;width:240px;height:100vh;overflow-y:auto;background:#F0EAE0;border-right:1px solid #DDD5C8;display:flex;flex-direction:column;scrollbar-width:thin;scrollbar-color:#C8BEAE transparent}
+.sidebar::-webkit-scrollbar{width:4px}
+.sidebar::-webkit-scrollbar-track{background:transparent}
+.sidebar::-webkit-scrollbar-thumb{background:#C8BEAE;border-radius:2px}
+.sidebar-header{padding:22px 16px 12px;border-bottom:1px solid #DDD5C8}
+.sidebar-logo{font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#9A8F87;margin-bottom:4px}
+.sidebar-title{font-size:12.5px;font-weight:600;color:#1C1917;line-height:1.45;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.toc{list-style:none;padding:10px 0 32px}
+.toc-h2>a{display:block;padding:5px 18px;font-size:13px;font-weight:500;color:#3D3530;text-decoration:none;border-left:2px solid transparent;transition:all .12s}
+.toc-h3>a{display:block;padding:4px 18px 4px 30px;font-size:12px;color:#7A7068;text-decoration:none;border-left:2px solid transparent;transition:all .12s}
+.toc-h2>a:hover,.toc-h3>a:hover{background:#E8E1D6;color:#1C1917}
+.toc-h2>a.active,.toc-h3>a.active{color:#1B5E82;background:#E0EDF5;border-left-color:#1B5E82}
+.toc-sep{height:1px;background:#DDD5C8;margin:8px 18px}
+
+/* ── 主内容 ── */
+.content{margin-left:240px}
+.content-inner{max-width:1000px;margin:0 auto;padding:52px 64px 80px}
+
+/* ── 文档标题 ── */
+.doc-header{margin-bottom:36px;padding-bottom:24px;border-bottom:1px solid #DDD5C8}
+h1{font-size:26px;font-weight:700;color:#0C0A09;line-height:1.3;margin-bottom:8px;text-align:center}
+.doc-author{font-size:14px;color:#3D3530;margin-bottom:6px;text-align:right}
+.doc-note{color:#9A8F87;font-size:13.5px;font-style:italic}
+
+/* ── 标题 ── */
+h2{font-size:20px;font-weight:700;color:#0C0A09;margin:44px 0 14px;padding-bottom:9px;border-bottom:1px solid #DDD5C8;scroll-margin-top:20px}
+h3{font-size:15.5px;font-weight:600;color:#1B5E82;margin:26px 0 10px;padding-left:11px;border-left:3px solid #1B5E82;scroll-margin-top:20px}
+h4{font-size:15px;font-weight:700;color:#0C0A09;margin:22px 0 9px;scroll-margin-top:20px}
+
+/* ── 段落 & 列表 ── */
+p{margin:9px 0}
+ul,ol{padding-left:22px;margin:9px 0}
+li{margin:5px 0;line-height:1.8}
+li p{margin:3px 0}
+
+/* ── 引用块 ── */
+blockquote{border-left:4px solid #C9A96E;background:#FBF6ED;margin:14px 0;padding:13px 18px;border-radius:0 6px 6px 0}
+blockquote p{margin:3px 0;color:#3D3530;font-size:15px}
+
+/* ── 表格 ── */
+.table-wrapper{overflow-x:auto;margin:12px 0}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th{background:#EDE7DB;font-weight:600;text-align:left;padding:9px 13px;border:1px solid #DDD5C8;color:#1C1917}
+td{padding:8px 13px;border:1px solid #DDD5C8;vertical-align:top;line-height:1.7}
+tr:nth-child(even) td{background:#F5F0E8}
+
+/* ── 代码 ── */
+code{background:#EDE8DF;padding:2px 5px;border-radius:3px;font-family:"SFMono-Regular",Consolas,monospace;font-size:.86em}
+pre{background:#EDE8DF;padding:13px 18px;border-radius:6px;overflow-x:auto;margin:11px 0}
+pre code{background:none;padding:0;font-size:.88em;line-height:1.6}
+
+/* ── 杂项 ── */
+hr{border:none;border-top:1px solid #DDD5C8;margin:32px 0}
+.example-q{color:#7A7068;font-size:13.5px;font-style:italic;margin-top:2px}
+.editorial-note{color:#9A8F87;font-style:italic;font-size:13px;padding:7px 12px;border-left:2px dashed #C8BEAE;background:#F5F2EE;margin:5px 0 12px;border-radius:0 4px 4px 0}
+.blog-link{font-size:13px;color:#9A8F87;margin-top:18px}
+.blog-link a{color:#1B5E82;text-decoration:none}
+.blog-link a:hover{text-decoration:underline}
+
+/* ── 子 Tab（节内切换）── */
+.sub-tabs{margin:20px 0 0}
+.sub-tab-bar{display:flex;background:#F0EAE0;border-radius:7px 7px 0 0;border:1px solid #DDD5C8;border-bottom:none;overflow:hidden}
+.sub-tab-btn{padding:9px 22px;border:none;background:transparent;cursor:pointer;font-size:13.5px;font-weight:500;color:#6B6560;font-family:inherit;border-top:2.5px solid transparent;transition:all .12s;white-space:nowrap}
+.sub-tab-btn:hover{background:#E8E1D6;color:#1C1917}
+.sub-tab-btn.active{background:#FAF7F2;color:#1B5E82;border-top-color:#1B5E82;font-weight:600}
+.sub-tab-panel{display:none;padding:28px 32px 32px;border:1px solid #DDD5C8;border-radius:0 7px 7px 7px;background:#FAF7F2}
+.sub-tab-panel.active{display:block}
+.sub-tab-panel h3{margin-top:0}
+.sub-tab-panel h4{scroll-margin-top:20px}
+
+/* ── 架构图 ── */
+.arch-diagram{background:#EBF3FF;border:1.5px solid #90B8E0;border-radius:10px;padding:20px 18px;margin:20px 0 28px;font-size:13px}
+.arch-section{display:flex;align-items:stretch;gap:8px;margin:5px 0}
+.arch-row-label{writing-mode:vertical-rl;text-orientation:mixed;font-weight:600;color:#2C5FA8;font-size:12px;padding:6px 4px;display:flex;align-items:center;justify-content:center;white-space:nowrap;min-width:26px}
+.arch-zone{border:1.5px dashed #6B9DDB;border-radius:8px;padding:11px 12px;background:rgba(255,255,255,.5)}
+.arch-zone-wide{flex:1}
+.arch-zone-narrow{flex:.6}
+.arch-items-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.arch-items-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px}
+.arch-items-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.arch-box{border:1.5px solid #6B9DDB;border-radius:5px;padding:5px 10px;background:#fff;text-align:center;white-space:nowrap;color:#1C4E8A;line-height:1.4}
+.arch-insights{border:1.5px solid #7C5EE0;border-radius:5px;padding:5px 10px;background:#fff;text-align:center;font-style:italic;font-weight:700;color:#7C5EE0;font-size:12px;line-height:1.35;white-space:nowrap}
+.arch-connector{display:flex;justify-content:center;gap:48px;margin:10px 0 4px}
+.arch-oval{border:1.5px dashed #6B9DDB;border-radius:50px;padding:5px 28px;background:#fff;color:#1C4E8A;font-weight:500}
+.arch-model-cards{display:flex;gap:8px;width:100%}
+.arch-model-card{flex:1;border:1.5px solid #6B9DDB;border-radius:6px;padding:8px 7px 6px;background:rgba(220,235,255,.55);display:flex;flex-direction:column;gap:5px;align-items:stretch}
+.arch-model-card .arch-box{font-size:12px}
+.arch-caption{font-size:11px;color:#5A7AB5;text-align:center;margin-top:3px}
+.arch-divider{width:1px;background:#C0D5EE;margin:0 2px;align-self:stretch}
+
+/* ── 上下文金字塔 ── */
+.ctx-pyramid{display:flex;flex-direction:column;align-items:center;gap:5px;padding:20px 16px 14px;background:#F5F0E8;border-radius:10px;margin:16px 0 20px}
+.pyr-layer{display:flex;align-items:center;justify-content:center;gap:8px;border-radius:40px;padding:8px 20px;font-size:13px;font-weight:600;transition:opacity .15s;cursor:default}
+.pyr-layer:hover{opacity:.85}
+.pyr-n{font-size:11px;opacity:0.7;font-weight:500;min-width:14px;text-align:right}
+.pyr-caption{font-size:12px;color:#9A8F87;margin-top:10px;text-align:center}
+
+/* ── 眉标 ── */
+.section-eyebrow{font-size:16px;font-weight:700;color:#1B5E82;margin-bottom:6px;margin-top:0}
+
+/* ── 产品 Demo 卡片 ── */
+.demo-card{background:#FAF7F2;border:1px solid #DDD5C8;border-radius:10px;padding:28px 32px;margin:8px 0}
+.demo-user-bubble{display:flex;justify-content:flex-end;margin-bottom:16px}
+.demo-bubble-text{background:#1B5E82;color:#fff;border-radius:12px 12px 2px 12px;padding:12px 18px;font-size:14px;max-width:75%;line-height:1.6}
+.demo-think-toggle{display:flex;align-items:center;gap:8px;cursor:pointer;padding:9px 0;color:#7A7068;font-size:13px;user-select:none;border-bottom:1px solid #E8E1D6;margin-bottom:16px;transition:color .15s}
+.demo-think-toggle:hover{color:#1C1917}
+.demo-think-arrow{display:inline-block;transition:transform .2s;font-size:11px}
+.demo-think-panel{overflow:hidden;max-height:0;transition:max-height .35s ease}
+.demo-think-panel.open{max-height:500px}
+.demo-think-steps{background:#EDE7DB;border-radius:8px;padding:14px 18px;margin-bottom:4px}
+.demo-think-step{display:flex;gap:10px;padding:5px 0;line-height:1.5;align-items:baseline;font-size:13px}
+.demo-think-icon{color:#1B5E82;font-weight:700;min-width:16px;flex-shrink:0}
+.demo-think-lbl{font-weight:600;color:#3D3530;min-width:72px;flex-shrink:0}
+.demo-think-desc{color:#7A7068}
+.demo-insight-label{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#C9A96E;margin-bottom:8px}
+.demo-insight-text{color:#1C1917;font-size:14.5px;line-height:1.75;margin-bottom:20px}
+.demo-result-tabs{margin-top:4px}
+.demo-result-bar{display:flex;background:#EDE7DB;border-radius:6px 6px 0 0;border:1px solid #DDD5C8;border-bottom:none;overflow:hidden}
+.demo-result-btn{padding:8px 20px;border:none;background:transparent;cursor:pointer;font-size:13px;font-weight:500;color:#6B6560;font-family:inherit;border-top:2px solid transparent;transition:all .12s;white-space:nowrap}
+.demo-result-btn:hover{background:#E4DDD3;color:#1C1917}
+.demo-result-btn.active{background:#FAF7F2;color:#1B5E82;border-top-color:#1B5E82;font-weight:600}
+.demo-result-panel{display:none;border:1px solid #DDD5C8;border-radius:0 6px 6px 6px;background:#FAF7F2;padding:20px 24px}
+.demo-result-panel.active{display:block}
+.demo-sql-light{font-family:"SFMono-Regular",Consolas,monospace;font-size:12.5px;color:#1B5E82;background:#EDE7DB;padding:16px 18px;border-radius:6px;line-height:1.7;white-space:pre;overflow-x:auto;margin:0}
+.demo-placeholder{color:#6B6560;font-style:italic;padding:40px 0;text-align:center;font-size:14px}
+
+@media (max-width: 860px){
+  body{font-size:15px;line-height:1.75}
+  .site-link{position:sticky;top:0;right:auto;left:0;width:100%;justify-content:center;border-width:0 0 1px;border-radius:0;box-shadow:none}
+  .sidebar{position:relative;width:100%;height:auto;max-height:42vh;border-right:none;border-bottom:1px solid #DDD5C8}
+  .sidebar-title{white-space:normal}
+  .toc{display:grid;grid-template-columns:1fr 1fr;padding-bottom:14px}
+  .toc-h2>a,.toc-h3>a{padding:6px 14px;font-size:12px;border-left:none}
+  .toc-h3>a{padding-left:18px}
+  .toc-sep{display:none}
+  .content{margin-left:0}
+  .content-inner{padding:34px 18px 56px}
+  h1{font-size:23px;text-align:left}
+  h2{font-size:19px;margin-top:34px}
+  .doc-author{text-align:left}
+  .sub-tab-bar,.demo-result-bar{overflow-x:auto}
+  .sub-tab-panel{padding:20px 16px}
+  .demo-card{padding:20px 16px}
+  .demo-bubble-text{max-width:100%}
+  .arch-section,.arch-model-cards{flex-direction:column}
+  .arch-row-label{writing-mode:horizontal-tb;min-width:auto}
+  .arch-items-grid,.arch-items-grid-2{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════ 侧边栏 ══════════════════════════════ -->
+<a class="site-link" href="../blogs.html">&larr; Back to Jiaqi He</a>
+<nav class="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-logo">Product Design Doc</div>
+    <div class="sidebar-title">增长 Data Agent 产品设计</div>
+  </div>
+  <ul class="toc">
+    <li class="toc-h2"><a class="toc-link" href="#first-principles">核心判断</a></li>
+    <li class="toc-h2"><a class="toc-link" href="#product">一、产品定位与核心功能</a></li>
+    <li class="toc-h3"><a class="toc-link" href="#value">产品价值</a></li>
+    <li class="toc-h2"><a class="toc-link" href="#arch-section">二、产品整体架构</a></li>
+    <li class="toc-h3"><a class="toc-link" href="#arch-21">2.1 模型底座</a></li>
+    <li class="toc-h3"><a class="toc-link" href="#arch-22">2.2 数据底座</a></li>
+    <li class="toc-h3"><a class="toc-link" href="#arch-23">2.3 基础能力</a></li>
+    <li class="toc-h3"><a class="toc-link toc-subtab-link" href="#arch-24" data-group="arch-detail" data-tab="ad24">2.4 分析能力</a></li>
+    <li class="toc-h3"><a class="toc-link toc-subtab-link" href="#arch-25" data-group="arch-detail" data-tab="ad25">2.5 编排层</a></li>
+    <li class="toc-sep"></li>
+    <li class="toc-h2"><a class="toc-link" href="#bigco-section">三、大厂落地经验</a></li>
+    <li class="toc-h3"><a class="toc-link toc-subtab-link" href="#bigco-openai" data-group="bigco" data-tab="openai">OpenAI</a></li>
+    <li class="toc-h3"><a class="toc-link toc-subtab-link" href="#bigco-meta" data-group="bigco" data-tab="meta">Meta</a></li>
+    <li class="toc-h2"><a class="toc-link" href="#tech-section">四、核心技术实践</a></li>
+    <li class="toc-h3"><a class="toc-link toc-subtab-link" href="#tech-31" data-group="tech" data-tab="t31">4.1 理解业务问题</a></li>
+    <li class="toc-h3"><a class="toc-link toc-subtab-link" href="#tech-32" data-group="tech" data-tab="t32">4.2 数据目录管理</a></li>
+    <li class="toc-h2"><a class="toc-link" href="#eval-section">五、评估体系</a></li>
+    <li class="toc-h3"><a class="toc-link toc-subtab-link" href="#eval-41" data-group="eval" data-tab="e41">5.1 指标体系</a></li>
+    <li class="toc-h3"><a class="toc-link toc-subtab-link" href="#eval-42" data-group="eval" data-tab="e42">5.2 取数评估</a></li>
+    <li class="toc-h3"><a class="toc-link toc-subtab-link" href="#eval-43" data-group="eval" data-tab="e43">5.3 分析评估</a></li>
+    <li class="toc-h3"><a class="toc-link toc-subtab-link" href="#eval-44" data-group="eval" data-tab="e44">5.4 反馈闭环</a></li>
+    <li class="toc-h3"><a class="toc-link toc-subtab-link" href="#eval-45" data-group="eval" data-tab="e45">5.5 发布门禁</a></li>
+    <li class="toc-sep"></li>
+    <li class="toc-h2"><a class="toc-link" href="#roadmap">六、落地路线图</a></li>
+  </ul>
+</nav>
+
+<!-- ══════════════════════════════ 主内容 ══════════════════════════════ -->
+<main class="content">
+<div class="content-inner">
+
+  <header class="doc-header">
+    <h1>增长 Data Agent 产品设计</h1>
+    <p class="doc-author"><strong>作者：何佳琦 · 2026.06</strong></p>
+    <p class="doc-note">【注】本文梳理 data agent 产品的设计思路，聚焦产品形态、核心能力框架与关键技术判断，不涉及太细节的实施方案。撰写过程中，结合个人数据科学领域的学习和实践经验，并借鉴了 OpenAI、Meta 等科技大厂团队推进 data agent 产品落地的经验，追求以科学、严谨、贴近前沿的方式做事。</p>
+  </header>
+
+  <!-- ── 第一性原理 ── -->
+  <section id="first-principles">
+    <h2>第一性原理：为 data agent 造一个"验算器"</h2>
+    <p>过去两年 coding agent 突飞猛进，出现了 claude code 这样颠覆性的产品形态，而 data agent 始终停留在"高级辅助"的水平。这并不是因为数据分析比写代码更难，而是因为：</p>
+    <blockquote>
+      <p><strong>写代码这件事自带验算器</strong>——编译器、单元测试、运行结果会立刻告诉 agent"你错了"。agent 能自己试错、自己发现错误、自己修正，这个<strong>闭环</strong>正是 RL 与 agent loop 能够起飞的前提。</p>
+      <p style="margin-top:8px"><strong>而 data agent 缺少这个闭环</strong>—— SQL 跑通了不代表算对了业务口径；一份归因结论看起来很合理，也可能完全是错的。没有现成的"对错信号"，agent 就无法自我纠正，产品也就无法持续进化。</p>
+      <p style="margin-top:8px">严格说，coding agent 的验算器也只覆盖<strong>语法与功能正确</strong>，并不保证"做对了需求"——它一样会写出测试全过却逻辑错的代码。但它至少白拿了编译、运行、测试这层<strong>廉价的对错信号</strong>；而 data agent 连这一层都没有，每一步都得我们人为去造。</p>
+    </blockquote>
+    <p><strong>我们做的每一项设计，本质上都在回答同一个问题：data agent 天生没有评估标准，我们如何为它人为去构建？</strong></p>
+    <div class="table-wrapper">
+      <table>
+        <thead><tr><th>能力</th><th>Evals</th></tr></thead>
+        <tbody>
+          <tr><td>SQL 语法 / 执行评估</td><td>给<strong>取数</strong>造验算器（可自动验证）</td></tr>
+          <tr><td>业务结果正确性评估</td><td>给<strong>分析</strong>造验算器（最难，也是护城河）</td></tr>
+          <tr><td>Human-in-the-loop 追问与确认</td><td>在没有自动验算器时，<strong>用人当验算器</strong></td></tr>
+          <tr><td>用户反馈闭环 + golden 数据集</td><td>把一次次验算沉淀为<strong>可复用的对错信号</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ── 一、产品定位 ── -->
+  <section id="product">
+    <h2>一、产品定位与核心功能</h2>
+
+    <h3 id="value">产品价值</h3>
+    <p><strong>业务方</strong>：自助取数与分析，每位业务 Owner 都能独立完成数据查询与诊断，无需等待排期、无需会写 SQL，决策提速从几天到几分钟。</p>
+    <p><strong>数分 / 数科</strong>：从重复性 SQL 调试中解放，升级为洞察生产者——精力聚焦于定义指标、验证假设和产出高质量数据洞察，而非被临时取数请求消耗。</p>
+
+    <h3>核心功能</h3>
+    <p>Data Agent 服务于真实的业务场景，核心是把"业务方的自然语言问题"转化为"可信赖的数据洞察"。四大核心功能：</p>
+    <ol>
+      <li>
+        <p><strong>智能取数与可视化</strong><br>将用户自然语言提问转化为精准的查询 SQL，并自动选择最优可视化图表，直观呈现数据洞察。</p>
+        <p class="example-q">业务原型问题：「帮我查过去一段时间某个区域的销售额」</p>
+      </li>
+      <li>
+        <p><strong>数据分析</strong><br>依托 LLM 推理能力、算法库及数据科学领域标准方法论，完成指标归因分析、异常检测、预测等任务，产出可落地的洞察。</p>
+        <p class="example-q">业务原型问题：「为什么某客户/某地区销售额下滑这么多？」</p>
+      </li>
+      <li>
+        <p><strong>专家级深度对话分析</strong><br>面对开放式、需多步探索的问题，通过多轮对话逐层深挖根因，产出专家级分析报告。过程中借助 human-in-the-loop 主动追问、澄清模糊意图，先与用户对齐分析思路再执行——<strong>这一步本质就是在用人补足缺失的验算闭环</strong>。</p>
+        <p class="example-q">业务原型问题：「怎么优化开发信的内容，可以提高客户的邮件打开率？」</p>
+      </li>
+      <li>
+        <p><strong>仪表盘导航</strong><br>根据需求自动生成 Dashboard，实现高频业务场景的数据化监控。解决"找 BI 排期做看板"的痛点，响应更快。</p>
+        <p class="example-q">业务原型问题：「做一个客户分层运营看板，帮我追踪各层级的关键指标变化，我要评估上季度运营策略带来了多少实际增量」</p>
+      </li>
+    </ol>
+
+    <h3>产品 Demo 演示</h3>
+    <div class="sub-tabs">
+      <div class="sub-tab-bar">
+        <button class="sub-tab-btn active" data-group="demo" data-tab="d1">智能取数与可视化</button>
+        <button class="sub-tab-btn" data-group="demo" data-tab="d2">数据分析</button>
+        <button class="sub-tab-btn" data-group="demo" data-tab="d3">专家级深度对话分析</button>
+        <button class="sub-tab-btn" data-group="demo" data-tab="d4">仪表盘导航</button>
+      </div>
+
+      <!-- Tab 1：智能取数与可视化 -->
+      <div class="sub-tab-panel active" data-group="demo" data-tab="d1">
+        <div class="demo-card">
+          <!-- 用户提问气泡 -->
+          <div class="demo-user-bubble">
+            <div class="demo-bubble-text">帮我看看过去一年北美的升降桌销售情况？</div>
+          </div>
+          <!-- 思考过程（折叠） -->
+          <div class="demo-think-toggle" id="think-toggle" onclick="toggleThinking()">
+            <span class="demo-think-arrow" id="think-arrow">▶</span>
+            <span>思考过程</span>
+            <span style="color:#C9A96E;font-size:12px;margin-left:2px">已完成 · 6 步推理</span>
+          </div>
+          <div class="demo-think-panel" id="demo-thinking">
+            <div class="demo-think-steps">
+              <div class="demo-think-step"><span class="demo-think-icon">✓</span><span class="demo-think-lbl">意图识别</span><span class="demo-think-desc">解析用户问题：查询北美地区 · 升降桌品类 · 过去 12 个月 · 销售概况</span></div>
+              <div class="demo-think-step"><span class="demo-think-icon">✓</span><span class="demo-think-lbl">匹配数据表</span><span class="demo-think-desc">命中 orders 表（置信度 96%），关联 region、product_category 维度</span></div>
+              <div class="demo-think-step"><span class="demo-think-icon">✓</span><span class="demo-think-lbl">口径确认</span><span class="demo-think-desc">sales_date 对应下单日期，revenue_usd 为实际成交金额（已排除退款）</span></div>
+              <div class="demo-think-step"><span class="demo-think-icon">✓</span><span class="demo-think-lbl">生成 SQL</span><span class="demo-think-desc">按月聚合，含同比计算，过滤条件：region = 'North America' &amp; category = '升降桌'</span></div>
+              <div class="demo-think-step"><span class="demo-think-icon">✓</span><span class="demo-think-lbl">结果校验</span><span class="demo-think-desc">返回 12 行 · 无空值 · 总金额 $3,314,580 · 同比字段计算正常</span></div>
+              <div class="demo-think-step"><span class="demo-think-icon">✓</span><span class="demo-think-lbl">洞察生成</span><span class="demo-think-desc">识别 Q4 增长峰值与加拿大市场高增速，生成文字摘要</span></div>
+            </div>
+          </div>
+          <!-- 数据洞察（始终可见） -->
+          <p class="demo-insight-label">数据洞察</p>
+          <p class="demo-insight-text">2025 年北美升降桌销售额共计 <strong>$3,314,580</strong>，同比增长 <strong style="color:#2A8A4A">+23.4%</strong>。Q4 表现最突出，占全年销售额的 <strong>33%</strong>；美国市场贡献 78%，加拿大市场增速最快（YoY +41%）。整体呈稳健增长趋势，建议重点关注 Q1 同比增速偏低的原因。</p>
+          <!-- 结果 Tab（互斥，可折叠） -->
+          <div class="demo-result-tabs">
+            <div class="demo-result-bar">
+              <button class="demo-result-btn" data-demo-tab="r-data">数据</button>
+              <button class="demo-result-btn" data-demo-tab="r-chart">图表</button>
+              <button class="demo-result-btn" data-demo-tab="r-sql">查询 SQL</button>
+            </div>
+            <!-- 数据 -->
+            <div class="demo-result-panel" id="r-data">
+              <table>
+                <thead><tr><th>月份</th><th>销售额（USD）</th><th>订单量</th><th>客单价</th><th>同比</th></tr></thead>
+                <tbody>
+                  <tr><td>2025-01</td><td>$198,420</td><td>312</td><td>$636</td><td>+8.2%</td></tr>
+                  <tr><td>2025-02</td><td>$215,630</td><td>338</td><td>$638</td><td>+12.4%</td></tr>
+                  <tr><td>2025-03</td><td>$287,450</td><td>451</td><td>$638</td><td>+18.7%</td></tr>
+                  <tr><td>2025-04</td><td>$268,910</td><td>421</td><td>$639</td><td>+21.3%</td></tr>
+                  <tr><td>2025-05</td><td>$301,240</td><td>472</td><td>$638</td><td>+24.1%</td></tr>
+                  <tr><td>2025-06</td><td>$245,780</td><td>385</td><td>$639</td><td>+19.8%</td></tr>
+                  <tr><td>2025-07</td><td>$198,650</td><td>311</td><td>$639</td><td>+15.2%</td></tr>
+                  <tr><td>2025-08</td><td>$234,120</td><td>367</td><td>$638</td><td>+22.6%</td></tr>
+                  <tr><td>2025-09</td><td>$267,340</td><td>419</td><td>$638</td><td>+25.4%</td></tr>
+                  <tr><td>2025-10</td><td>$312,450</td><td>489</td><td>$639</td><td>+28.7%</td></tr>
+                  <tr><td>2025-11</td><td>$398,760</td><td>625</td><td>$638</td><td>+32.1%</td></tr>
+                  <tr><td>2025-12</td><td>$385,830</td><td>604</td><td>$639</td><td>+29.8%</td></tr>
+                  <tr class="total"><td><strong>全年合计</strong></td><td><strong>$3,314,580</strong></td><td><strong>5,194</strong></td><td><strong>$638</strong></td><td><strong>+23.4%</strong></td></tr>
+                </tbody>
+              </table>
+            </div>
+            <!-- 图表 -->
+            <div class="demo-result-panel" id="r-chart">
+              <svg viewBox="0 0 600 210" style="width:100%;font-family:inherit">
+                <line x1="45" y1="15"  x2="585" y2="15"  stroke="#DDD5C8" stroke-width="0.5"/>
+                <line x1="45" y1="52"  x2="585" y2="52"  stroke="#DDD5C8" stroke-width="0.5"/>
+                <line x1="45" y1="90"  x2="585" y2="90"  stroke="#DDD5C8" stroke-width="0.5"/>
+                <line x1="45" y1="127" x2="585" y2="127" stroke="#DDD5C8" stroke-width="0.5"/>
+                <line x1="45" y1="165" x2="585" y2="165" stroke="#C8BEAE" stroke-width="1"/>
+                <text x="40" y="19"  text-anchor="end" fill="#9A8F87" font-size="10">400k</text>
+                <text x="40" y="56"  text-anchor="end" fill="#9A8F87" font-size="10">300k</text>
+                <text x="40" y="94"  text-anchor="end" fill="#9A8F87" font-size="10">200k</text>
+                <text x="40" y="131" text-anchor="end" fill="#9A8F87" font-size="10">100k</text>
+                <text x="40" y="169" text-anchor="end" fill="#9A8F87" font-size="10">0</text>
+                <rect x="50"  y="91" width="35" height="74"  fill="#4A7A9B" rx="2"/>
+                <rect x="95"  y="84" width="35" height="81"  fill="#4A7A9B" rx="2"/>
+                <rect x="140" y="57" width="35" height="108" fill="#4A7A9B" rx="2"/>
+                <rect x="185" y="64" width="35" height="101" fill="#4A7A9B" rx="2"/>
+                <rect x="230" y="52" width="35" height="113" fill="#4A7A9B" rx="2"/>
+                <rect x="275" y="73" width="35" height="92"  fill="#4A7A9B" rx="2"/>
+                <rect x="320" y="90" width="35" height="75"  fill="#4A7A9B" rx="2"/>
+                <rect x="365" y="77" width="35" height="88"  fill="#4A7A9B" rx="2"/>
+                <rect x="410" y="65" width="35" height="100" fill="#4A7A9B" rx="2"/>
+                <rect x="455" y="48" width="35" height="117" fill="#C9A96E" rx="2"/>
+                <rect x="500" y="15" width="35" height="150" fill="#C9A96E" rx="2"/>
+                <rect x="545" y="20" width="35" height="145" fill="#C9A96E" rx="2"/>
+                <text x="67"  y="183" text-anchor="middle" fill="#9A8F87" font-size="9.5">Jan</text>
+                <text x="112" y="183" text-anchor="middle" fill="#9A8F87" font-size="9.5">Feb</text>
+                <text x="157" y="183" text-anchor="middle" fill="#9A8F87" font-size="9.5">Mar</text>
+                <text x="202" y="183" text-anchor="middle" fill="#9A8F87" font-size="9.5">Apr</text>
+                <text x="247" y="183" text-anchor="middle" fill="#9A8F87" font-size="9.5">May</text>
+                <text x="292" y="183" text-anchor="middle" fill="#9A8F87" font-size="9.5">Jun</text>
+                <text x="337" y="183" text-anchor="middle" fill="#9A8F87" font-size="9.5">Jul</text>
+                <text x="382" y="183" text-anchor="middle" fill="#9A8F87" font-size="9.5">Aug</text>
+                <text x="427" y="183" text-anchor="middle" fill="#9A8F87" font-size="9.5">Sep</text>
+                <text x="472" y="183" text-anchor="middle" fill="#C9A96E" font-size="9.5" font-weight="600">Oct</text>
+                <text x="517" y="183" text-anchor="middle" fill="#C9A96E" font-size="9.5" font-weight="600">Nov</text>
+                <text x="562" y="183" text-anchor="middle" fill="#C9A96E" font-size="9.5" font-weight="600">Dec</text>
+                <rect x="45"  y="196" width="10" height="7" fill="#4A7A9B" rx="1"/>
+                <text x="60"  y="203" fill="#9A8F87" font-size="10">Q1–Q3</text>
+                <rect x="110" y="196" width="10" height="7" fill="#C9A96E" rx="1"/>
+                <text x="125" y="203" fill="#C9A96E" font-size="10">Q4（高亮）</text>
+              </svg>
+            </div>
+            <!-- 查询 SQL -->
+            <div class="demo-result-panel" id="r-sql">
+              <pre class="demo-sql-light">WITH monthly AS (
+  SELECT
+    DATE_TRUNC('month', order_date)  AS 月份,
+    SUM(revenue_usd)                 AS 销售额,   -- revenue_usd 口径为退款后净额
+    COUNT(order_id)                  AS 订单量,
+    ROUND(AVG(revenue_usd), 0)       AS 客单价
+  FROM   orders
+  WHERE  region           = 'North America'
+    AND  product_category = '升降桌'
+    AND  order_date BETWEEN '2024-01-01' AND '2025-12-31'   -- 多取一年，供同比回看
+  GROUP  BY 1
+)
+SELECT
+  月份, 销售额, 订单量, 客单价,
+  ROUND(
+    ( 销售额 - LAG(销售额, 12) OVER (ORDER BY 月份) )
+    / LAG(销售额, 12) OVER (ORDER BY 月份) * 100
+  , 1)                               AS 同比增长
+FROM   monthly
+WHERE  月份 >= DATE '2025-01-01'                              -- 仅输出 2025
+ORDER  BY 月份;</pre>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab 2–4：占位 -->
+      <div class="sub-tab-panel" data-group="demo" data-tab="d2">
+        <p class="demo-placeholder">该能力规划中，详见第六章路线图 …</p>
+      </div>
+      <div class="sub-tab-panel" data-group="demo" data-tab="d3">
+        <p class="demo-placeholder">该能力规划中，详见第六章路线图 …</p>
+      </div>
+      <div class="sub-tab-panel" data-group="demo" data-tab="d4">
+        <p class="demo-placeholder">该能力规划中，详见第六章路线图 …</p>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ── 二、产品整体架构 ── -->
+  <section id="arch-section">
+    <h2>二、产品整体架构</h2>
+    <p>整体采用分层架构，自底向上：底座 → 基础能力 → 分析能力 → 编排层 → 产品形态。</p>
+
+    <!-- 架构图 -->
+    <div class="arch-diagram">
+      <!-- 产品层 -->
+      <div class="arch-section">
+        <div class="arch-row-label">产品</div>
+        <div class="arch-zone arch-zone-wide">
+          <div style="display:flex;align-items:center;gap:8px">
+            <div class="arch-insights">Insights<br>Chatbot</div>
+            <div style="flex:1;display:flex;justify-content:center;gap:8px;flex-wrap:wrap">
+              <div class="arch-box">智能取数与可视化</div>
+              <div class="arch-box">数据分析</div>
+              <div class="arch-box">智能追问与多轮对话</div>
+              <div class="arch-box">仪表盘导航</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- 编排层 -->
+      <div class="arch-section" style="margin-top:6px">
+        <div class="arch-row-label">编排层</div>
+        <div class="arch-zone arch-zone-wide" style="padding:8px 16px">
+          <div class="arch-connector" style="margin:0">
+            <div class="arch-oval">Workflow</div>
+            <div class="arch-oval">Agent</div>
+          </div>
+        </div>
+      </div>
+      <!-- 原子功能 + 分析能力 -->
+      <div class="arch-section" style="margin-top:8px">
+        <div class="arch-row-label">原子功能</div>
+        <div class="arch-zone arch-zone-wide">
+          <div class="arch-items-grid">
+            <div class="arch-box">意图识别</div><div class="arch-box">关键词提取</div><div class="arch-box">智能选表</div>
+            <div class="arch-box">Text2SQL</div><div class="arch-box">SQL 评估</div><div class="arch-box">数据可视化</div>
+          </div>
+        </div>
+        <div class="arch-divider"></div>
+        <div class="arch-zone arch-zone-narrow">
+          <div class="arch-items-grid-2">
+            <div class="arch-box">时序预测</div><div class="arch-box">异常检测</div>
+            <div class="arch-box">漏斗分析</div><div class="arch-box">归因分析</div>
+          </div>
+        </div>
+        <div class="arch-row-label">分析能力</div>
+      </div>
+      <!-- 模型底座 + 数据底座 -->
+      <div class="arch-section" style="margin-top:8px">
+        <div class="arch-row-label">模型底座</div>
+        <div class="arch-zone arch-zone-wide">
+          <div class="arch-model-cards">
+            <div class="arch-model-card" style="flex:1.8">
+              <div class="arch-caption" style="margin-top:0;margin-bottom:5px;font-weight:600">通用推理 / Text2SQL / 分析</div>
+              <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:6px">
+                <div class="arch-box" style="font-size:12px">GPT</div>
+                <div class="arch-box" style="font-size:12px">Claude</div>
+                <div class="arch-box" style="font-size:12px">Gemini</div>
+              </div>
+              <div style="display:flex;justify-content:center;gap:6px">
+                <div class="arch-box" style="font-size:12px">DeepSeek</div>
+                <div class="arch-box" style="font-size:12px">Qwen 等</div>
+              </div>
+            </div>
+            <div class="arch-model-card">
+              <div class="arch-caption" style="margin-top:0;margin-bottom:5px;font-weight:600">专用预测模型</div>
+              <div style="display:flex;gap:6px;flex-wrap:wrap;justify-content:center">
+                <div class="arch-box" style="font-size:12px">XGBoost</div>
+                <div class="arch-box" style="font-size:12px">Prophet</div>
+                <div class="arch-box" style="font-size:12px">LSTM 等</div>
+              </div>
+            </div>
+            <div class="arch-model-card">
+              <div class="arch-caption" style="margin-top:0;margin-bottom:5px;font-weight:600">语义检索模型</div>
+              <div style="display:flex;gap:6px;flex-wrap:wrap;justify-content:center">
+                <div class="arch-box" style="font-size:12px">text-embedding-3</div>
+                <div class="arch-box" style="font-size:12px">BGE 等</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="arch-divider"></div>
+        <div class="arch-zone arch-zone-narrow" style="display:flex;align-items:center;justify-content:center">
+          <div class="arch-items-grid-2">
+            <div class="arch-box">Hive</div><div class="arch-box">指标定义</div>
+            <div class="arch-box">数据仓库</div><div class="arch-box">数据目录</div>
+          </div>
+        </div>
+        <div class="arch-row-label">数据底座</div>
+      </div>
+    </div>
+
+    <h3 id="arch-21">2.1 模型底座</h3>
+    <p>根据任务特性选择合适的模型，不追求单一模型通吃：</p>
+    <ul>
+      <li><strong>通用推理 / Text2SQL / 分析</strong>：GPT、Claude、Gemini、DeepSeek、Qwen 等</li>
+      <li><strong>专用预测模型</strong>：XGBoost、Prophet、LSTM 等</li>
+      <li><strong>语义检索模型</strong>：text-embedding-3、BGE 等，用于数据目录召回与上下文组装</li>
+    </ul>
+
+    <h3 id="arch-22">2.2 数据底座</h3>
+    <p>数据仓库、指标定义、数据目录（详见核心技术实践 4.2）。</p>
+
+    <h3 id="arch-23">2.3 基础能力（原子功能）</h3>
+    <p>意图识别、关键词提取、智能选表、Text2SQL、SQL 评估、数据可视化。</p>
+
+    <div class="sub-tabs">
+      <div class="sub-tab-bar">
+        <button class="sub-tab-btn active" data-group="arch-detail" data-tab="ad24">2.4 分析能力</button>
+        <button class="sub-tab-btn" data-group="arch-detail" data-tab="ad25">2.5 编排层</button>
+      </div>
+      <div class="sub-tab-panel active" data-group="arch-detail" data-tab="ad24" id="arch-24-panel">
+        <h3 id="arch-24">2.4 分析能力</h3>
+        <p>漏斗分析、异常预警、时序预测、归因分析。其中<strong>归因分析较复杂，按复杂度从低到高拆为三类</strong>：</p>
+        <div class="table-wrapper">
+          <table>
+            <thead><tr><th>类型</th><th>方法</th><th>适用场景</th></tr></thead>
+            <tbody>
+              <tr><td><strong>确定性判断</strong>（指标拆解法）</td><td>横向拆解 + 纵向下钻</td><td>适用于指标之间有明确数学逻辑关系的场景，追求贡献度可量化、可相加</td></tr>
+              <tr><td><strong>可能性判断</strong>（建模分析法）</td><td>XGBoost + SHAP</td><td>当指标间缺乏直接公式联系，或因素过多、关系复杂时使用。</td></tr>
+              <tr><td><strong>因果推断</strong></td><td>A/B Test（实验）、DID / PSM（准实验）</td><td>明确"某业务动作是否导致某结果"，如评估新策略效果</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <blockquote>
+          <p>落地建议：<strong>确定性判断</strong>在 V2 落地（成本低、结论可信），可能性判断与因果推断在 V3 接入</p>
+          <p style="margin-top:6px"><strong>因果推断</strong>——A/B Test 需搭建实验平台（事前随机分流）；<strong>DID / PSM 为准实验，纯算法实现</strong>，依赖历史观察数据，无需实验平台，但对数据条件与假设（如平行趋势、可观测混淆）要求较高</p>
+        </blockquote>
+      </div>
+      <div class="sub-tab-panel" data-group="arch-detail" data-tab="ad25" id="arch-25-panel">
+        <h3 id="arch-25">2.5 编排层：Workflow 与 Agent 的边界</h3>
+        <p>这是工程上最关键的决策点。两者融合使用，<strong>判断标准是"问题路径是否可预定义"</strong>：</p>
+        <div class="table-wrapper">
+          <table>
+            <thead><tr><th></th><th>Workflow</th><th>Agent</th></tr></thead>
+            <tbody>
+              <tr><td>适用</td><td>高频、路径确定的问题</td><td>长尾、需多步探索的问题</td></tr>
+              <tr><td>例子</td><td>标准取数、固定口径的异动归因</td><td>开放式根因分析、多轮追问</td></tr>
+              <tr><td>优点</td><td>稳定、可控、可评估、便宜</td><td>灵活、覆盖长尾</td></tr>
+              <tr><td>代价</td><td>覆盖面有限</td><td>慢、贵、结果方差大</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p><strong>原则：能用 Workflow 解决的，绝不交给 Agent。</strong> Workflow 路径确定，更容易造验算器；Agent 是兜底，承接 Workflow 覆盖不到的长尾。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 大厂落地经验（子 Tab：OpenAI | Meta）── -->
+  <section id="bigco-section">
+    <h2>三、前沿科技大厂落地 Data Agent 产品经验总结</h2>
+    <div class="sub-tabs">
+      <div class="sub-tab-bar">
+        <button class="sub-tab-btn active" data-group="bigco" data-tab="openai">OpenAI</button>
+        <button class="sub-tab-btn" data-group="bigco" data-tab="meta">Meta</button>
+      </div>
+
+      <!-- OpenAI -->
+      <div class="sub-tab-panel active" data-group="bigco" data-tab="openai" id="bigco-openai-panel">
+        <h3 id="bigco-openai">OpenAI：Inside Our In-House Data Agent</h3>
+        <p>OpenAI 内部 Data Agent 服务全公司，覆盖 <strong>70,000+ 数据集、600PB</strong> 规模，由此衍生出一套在大规模下维持准确性的工程实践。</p>
+
+        <h4>六层上下文架构：如何让 Agent"读懂"数据</h4>
+        <p>在这个规模下，靠人工标注静态数据目录根本维持不住。OpenAI 的核心工程贡献在于构建了一套<strong>六层自动化上下文组装系统</strong>，让 agent 在查询时能实时拼出足够准确的数据背景：</p>
+        <div class="ctx-pyramid">
+          <div class="pyr-layer" style="width:28%;background:#1B5E82;color:#fff"><span class="pyr-n">6</span><span class="pyr-text">运行时兜底</span></div>
+          <div class="pyr-layer" style="width:44%;background:#2E78A0;color:#fff"><span class="pyr-n">5</span><span class="pyr-text">对话记忆</span></div>
+          <div class="pyr-layer" style="width:58%;background:#7FA8C4;color:#1C1917"><span class="pyr-n">4</span><span class="pyr-text">机构知识</span></div>
+          <div class="pyr-layer" style="width:72%;background:#C9A96E;color:#1C1917"><span class="pyr-n">3</span><span class="pyr-text">代码语义增强</span></div>
+          <div class="pyr-layer" style="width:85%;background:#DDD0B8;color:#1C1917"><span class="pyr-n">2</span><span class="pyr-text">人工标注</span></div>
+          <div class="pyr-layer" style="width:100%;background:#EDE7DB;color:#1C1917"><span class="pyr-n">1</span><span class="pyr-text">表使用元数据</span></div>
+          <p class="pyr-caption">从底层批量自动化数据，到顶层在线实时兜底——自动化程度递减、实时性递增（精准与成本不随层级单调变化，如人工标注最贵也最精准）</p>
+        </div>
+        <div class="table-wrapper">
+          <table>
+            <thead><tr><th>层</th><th>内容</th><th>关键细节</th></tr></thead>
+            <tbody>
+              <tr><td><strong>表使用元数据</strong></td><td>Schema 结构、数据血缘、历史查询，按可信度排序</td><td>三类信号合并为一层；历史查询<strong>按可信度分级</strong>——看板 / 生产 SQL 权重高，一次性探索查询权重低甚至有害</td></tr>
+              <tr><td><strong>人工标注</strong></td><td>owner 手写的业务含义与"坑"</td><td>无法自动化的部分靠人补；是最贵但最精准的一层</td></tr>
+              <tr><td><strong>代码语义增强（Codex Enrichment）</strong></td><td>夜间批跑读取 pipeline 代码，推断表粒度、join key、字段口径</td><td>代码比文档更诚实：字段名可能骗人，建表逻辑不会。这是人工标注覆盖不到时的自动兜底</td></tr>
+              <tr><td><strong>机构知识</strong></td><td>Slack、Wiki、设计文档</td><td><strong>带访问控制</strong>——不同角色读到不同上下文，敏感讨论不会越权流出</td></tr>
+              <tr><td><strong>对话记忆</strong></td><td>历次对话中的纠错与口径修正</td><td>分<strong>全局 / 个人</strong>两种范围；下次对话自动复用，无需重新解释口径</td></tr>
+              <tr><td><strong>运行时兜底</strong></td><td>离线上下文缺失或过时时，实时查数仓补齐</td><td>最慢但最准确；作为离线层的安全网</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <blockquote>
+          <p><strong>核心判断：</strong>OpenAI 的 agent 架构其实相当克制——单 LLM + 运行时 + 上下文组装 + 精简工具集（工具从初期约 40 个砍到 13 个精选）。它能在 70k 数据集、600PB 规模下成立，靠的不是复杂的 agent 编排，而是底下那套统一扎实的上下文与数据底座。</p>
+        </blockquote>
+
+        <h4>AI Evals 体系：快速迭代而不失信任</h4>
+        <p>OpenAI 把"评估"做成发布流程的<strong>硬门禁</strong>，而非上线后的事后验收。每次模型或 prompt 变更，必须通过三类测试才允许发布：</p>
+        <div class="table-wrapper">
+          <table>
+            <thead><tr><th>类型</th><th>验证内容</th><th>说明</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Correctness</strong></td><td>对错</td><td>golden test set 比对，SQL 结果是否符合预期</td></tr>
+              <tr><td><strong>Bias</strong></td><td>口径 / 样本偏差</td><td>结果是否因选表或过滤条件错误而系统性偏移</td></tr>
+              <tr><td><strong>Leakage</strong></td><td>越权访问</td><td>agent 是否被诱导查询了用户无权访问的数据</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <ul>
+          <li>golden test set 从真实线上问题采样、由业务专家标注，每次迭代必须跑回归——防止"改好一个、改坏三个"</li>
+          <li>模型版本、指标定义、数据血缘<strong>全部打快照</strong>，出问题可追溯可回滚</li>
+          <li>关键原则：<strong>"不是测得越多越好，而是测的方向要对"</strong>——三类风险覆盖是最小必要集合</li>
+        </ul>
+
+        <h4>智能体安全性与鉴权</h4>
+        <ul>
+          <li><strong>权限与数据目录绑定</strong>：用户能访问哪些表，agent 生成的 SQL 就只能查哪些表</li>
+          <li><strong>机构知识按访问控制分级嵌入</strong>：不同角色看到的上下文不同，敏感的内部讨论不会流出</li>
+          <li><strong>查询日志全量记录</strong>：每次 agent 操作可追溯到发起人和具体 SQL，满足合规审计要求</li>
+          <li><strong>数据字段脱敏与 SQL 限制</strong>：敏感字段在数据目录中标注，查询时自动屏蔽或脱敏</li>
+        </ul>
+        <p class="blog-link">原文：<a href="https://openai.com/index/inside-our-in-house-data-agent/" target="_blank">Inside Our In-House Data Agent — OpenAI ↗</a></p>
+      </div>
+
+      <!-- Meta -->
+      <div class="sub-tab-panel" data-group="bigco" data-tab="meta" id="bigco-meta-panel">
+        <h3 id="bigco-meta">Meta：Inside Meta's Home-Grown AI Analytics Agent</h3>
+        <p>Meta 的 Analytics Agent 是一个从内部需求出发、完全自研的数据分析智能体，最终成为全公司最高频使用的内部工具之一。</p>
+
+        <h4>Analytics Agent 是如何工作的</h4>
+        <blockquote>
+          <p>核心设计哲学：利用上下文丰富用户提示词（数据发现 + 背景收集），再提供正确的推理逻辑（迭代推理循环）。答案呈现时，把透明度作为信任的基石。</p>
+        </blockquote>
+        <p><strong>Step 1 — 发现数据与收集上下文</strong></p>
+        <p>用户的问题往往是模糊的，数据则极其复杂（成百上千张表、互相嵌套的指标定义）。Analytics Agent 的第一步不是直接生成 SQL，而是<strong>先把问题说清楚</strong>：</p>
+        <ul>
+          <li>语义搜索数据目录，自动找到相关表和指标</li>
+          <li>拉取该领域的 Cookbook，了解这个业务域的惯用分析套路</li>
+          <li>查找匹配的 Recipe，看有没有现成的分析 SOP 可复用</li>
+          <li>解析 Ingredient 中的字段口径（如"l7_active = 近 7 天活跃且排除流失账号"）</li>
+        </ul>
+        <p><strong>Step 2 — 迭代推理循环</strong></p>
+        <pre><code>生成计划 → 执行（SQL / Python）→ 验证结果 → 发现问题 → 修正 → 再执行</code></pre>
+        <p>每一步执行结果都会反馈给下一步用于校正，agent 能在循环中自我纠错。遇到数据异常、逻辑矛盾或结果超出常识范围时，会主动触发澄清追问或重试。</p>
+        <p><strong>Step 3 — 全透明原则（非确定性 LLM 的最务实解法）</strong></p>
+        <blockquote>
+          <p><em>"在分析场景里，一个被自信地给出的错误数字，比没有数字更糟糕。"</em></p>
+        </blockquote>
+        <p>每一个呈现给用户的数据点，背后生成它的 SQL 都被放在<strong>最显眼的位置</strong>。用户随时可以核对口径，把验算的能力部分还给用户。</p>
+
+        <h4>三层知识系统：Cookbook / Recipe / Ingredient</h4>
+        <div class="table-wrapper">
+          <table>
+            <thead><tr><th>层级</th><th>类比</th><th>内容</th><th>由谁维护</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Cookbook</strong></td><td>领域入口</td><td>某业务域的分析入口，打包该域的惯用方法、背景知识、参考专家</td><td>业务 / 数据负责人</td></tr>
+              <tr><td><strong>Recipe</strong></td><td>分析 SOP</td><td>标准分析流程，如"做留存分析应当这样拆解""归因时需要控制哪些混淆变量"</td><td>数据分析师</td></tr>
+              <tr><td><strong>Ingredient</strong></td><td>语义原子</td><td>字段定义、指标口径、历史纠错记录，如"l7_active = 近 7 天有行为且排除已流失账号"</td><td>数据工程</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>知识由专家<strong>录入一次，所有对话复用</strong>。这比单纯堆 RAG 文档更有结构，更重要的是：<strong>它让业务方从使用者变成共建者</strong>。</p>
+
+        <h4>核心启示与落地数据</h4>
+        <p>Meta 在正式立项前，先分析了一批历史业务问题，发现其中 <strong>88% 的分析类问题在上下文充分的情况下 LLM 能稳定回答</strong>。这个数字是项目成立的硬依据——证明了问题是"有界的"。</p>
+        <div class="table-wrapper">
+          <table>
+            <thead><tr><th>指标</th><th>数字</th></tr></thead>
+            <tbody>
+              <tr><td>上线 6 个月内周活用户占比（数据科学家/工程师）</td><td><strong>77%</strong></td></tr>
+              <tr><td>非数据岗采用率 vs 数据岗</td><td><strong>5 倍</strong>（数据工作真正民主化）</td></tr>
+              <tr><td>社区共建 Recipe 数量</td><td><strong>4,500+</strong></td></tr>
+              <tr><td>Recipe 累计使用次数</td><td><strong>150,000+</strong></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <ol>
+          <li><strong>速度优于完美</strong>："最大的风险不是发得太早，而是发得太晚"</li>
+          <li><strong>把早期用户当共建者，而非小白鼠</strong>：让用户能录入 Recipe / Ingredient，贡献知识资产</li>
+          <li><strong>Sanity Check 是性价比最高的自动验算器</strong>：如"WAU 不可能 &gt; 80 亿""环比波动 &gt; 500% 需复核"</li>
+        </ol>
+        <p class="blog-link">原文：<a href="https://medium.com/@AnalyticsAtMeta/inside-metas-home-grown-ai-analytics-agent" target="_blank">Inside Meta's Home-Grown AI Analytics Agent — Medium ↗</a></p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── 四、核心技术实践（子 Tab：3.1 | 3.2 | 3.5）── -->
+  <section id="tech-section">
+    <h2>四、核心技术实践</h2>
+
+    <h3>Agent 内部流转流程</h3>
+    <p>当用户提出问题时，Agent 内部按以下流程流转：</p>
+    <div style="overflow-x:auto;margin:16px 0">
+    <svg viewBox="0 0 800 770" style="width:100%;max-width:800px;font-family:'PingFang SC','Noto Sans SC',sans-serif;display:block;margin:0 auto">
+      <defs>
+        <marker id="arr" markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto">
+          <polygon points="0 0,9 3.5,0 7" fill="#5A5248"/>
+        </marker>
+        <marker id="arr-loop" markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto">
+          <polygon points="0 0,9 3.5,0 7" fill="#C9733A"/>
+        </marker>
+        <marker id="arr-clar" markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto">
+          <polygon points="0 0,9 3.5,0 7" fill="#6E8FA6"/>
+        </marker>
+      </defs>
+
+      <!-- 图例：LLM 参与度 -->
+      <rect x="566" y="14" width="150" height="80" rx="5" fill="#FBF9F5" stroke="#E0D8CA" stroke-width="1"/>
+      <text x="576" y="30" font-size="10" font-weight="700" fill="#7A7068">图例 · LLM 参与</text>
+      <circle cx="580" cy="46" r="4.5" fill="#1B5E82"/>
+      <text x="592" y="50" font-size="10" fill="#3D3530">LLM 推理</text>
+      <circle cx="580" cy="64" r="4.5" fill="#fff" stroke="#1B5E82" stroke-width="1.3"/>
+      <path d="M 580 59.5 A 4.5 4.5 0 0 1 580 68.5 Z" fill="#1B5E82"/>
+      <text x="592" y="68" font-size="10" fill="#3D3530">混合（部分 LLM）</text>
+      <circle cx="580" cy="82" r="4.5" fill="#fff" stroke="#1B5E82" stroke-width="1.3"/>
+      <text x="592" y="86" font-size="10" fill="#3D3530">embedding / 程序</text>
+
+      <!-- ① 用户问题 -->
+      <rect x="210" y="16" width="300" height="44" rx="6" fill="#EDE7DB" stroke="#C8BEAE" stroke-width="1.5"/>
+      <text x="360" y="43" text-anchor="middle" font-size="14" font-weight="700" fill="#1C1917">用户问题</text>
+
+      <line x1="360" y1="60" x2="360" y2="82" stroke="#5A5248" stroke-width="1.5" marker-end="url(#arr)"/>
+
+      <!-- ② Intent Understanding -->
+      <rect x="160" y="84" width="400" height="58" rx="6" fill="#E0EDF5" stroke="#1B5E82" stroke-width="1.5"/>
+      <circle cx="173" cy="103" r="4.5" fill="#1B5E82"/>
+      <text x="360" y="107" text-anchor="middle" font-size="12.5" font-weight="700" fill="#1B5E82">Intent Understanding</text>
+      <text x="360" y="126" text-anchor="middle" font-size="11" fill="#4A7A9B">意图识别 · 类型路由 · Query 改写</text>
+
+      <!-- 澄清分支：问题模糊 → 追问用户（左侧回环） -->
+      <path d="M 160 113 L 80 113 L 80 38 L 210 38" stroke="#6E8FA6" stroke-width="1.4" fill="none" stroke-dasharray="4 2" marker-end="url(#arr-clar)"/>
+      <text x="73" y="74" text-anchor="end" font-size="10.5" fill="#6E8FA6">问题模糊</text>
+      <text x="73" y="89" text-anchor="end" font-size="10.5" fill="#6E8FA6">→ 追问澄清</text>
+
+      <line x1="360" y1="142" x2="360" y2="164" stroke="#5A5248" stroke-width="1.5" marker-end="url(#arr)"/>
+
+      <!-- ③ Initial Context Assembly -->
+      <rect x="130" y="166" width="460" height="64" rx="6" fill="#E0EDF5" stroke="#1B5E82" stroke-width="1.5"/>
+      <circle cx="143" cy="185" r="4.5" fill="#fff" stroke="#1B5E82" stroke-width="1.3"/>
+      <text x="360" y="189" text-anchor="middle" font-size="12.5" font-weight="700" fill="#1B5E82">Initial Context Assembly</text>
+      <text x="582" y="180" text-anchor="end" font-size="9" font-style="italic" fill="#9A8F87">预装一次</text>
+      <text x="360" y="208" text-anchor="middle" font-size="11" fill="#4A7A9B">system prompt · permissions · memory</text>
+      <text x="360" y="223" text-anchor="middle" font-size="11" fill="#4A7A9B">数据目录概述 · 业务知识</text>
+      <!-- 设计注释：只给"地图"不给"数据"，渐进式披露 -->
+      <rect x="590" y="170" width="202" height="44" rx="5" fill="#FBF9F5" stroke="#E0D8CA" stroke-width="1"/>
+      <text x="598" y="187" font-size="10" fill="#3D3530">只给"哪里有线索"，不给具体数据；</text>
+      <text x="598" y="204" font-size="10" fill="#3D3530">按需深入，类似Skill渐进式披露设计理念</text>
+
+      <line x1="360" y1="230" x2="360" y2="252" stroke="#5A5248" stroke-width="1.5" marker-end="url(#arr)"/>
+
+      <!-- ④ AGENT LOOP 虚线框 -->
+      <rect x="108" y="254" width="484" height="348" rx="8" fill="rgba(201,169,110,0.06)" stroke="#C9A96E" stroke-width="1.5" stroke-dasharray="6 3"/>
+      <text x="126" y="271" font-size="10" font-weight="700" fill="#C9A96E" letter-spacing="1">AGENT LOOP</text>
+      <text x="584" y="271" text-anchor="end" font-size="10" fill="#C9A96E" font-style="italic">LLM 主导 · RAG 增强</text>
+
+      <!-- Plan (LLM) -->
+      <rect x="138" y="278" width="424" height="44" rx="5" fill="#FAF7F2" stroke="#DDD5C8" stroke-width="1.5"/>
+      <circle cx="150" cy="300" r="4.5" fill="#1B5E82"/>
+      <text x="165" y="304" font-size="12" font-weight="700" fill="#1B5E82">Plan</text>
+      <text x="205" y="304" font-size="11.5" fill="#3D3530">拆解问题 · 选指标 · 圈定候选表 · 设计方案</text>
+
+      <line x1="360" y1="322" x2="360" y2="336" stroke="#5A5248" stroke-width="1.4" marker-end="url(#arr)"/>
+
+      <!-- Retrieve Context (动态·按需) -->
+      <rect x="138" y="338" width="424" height="48" rx="5" fill="#FAF7F2" stroke="#DDD5C8" stroke-width="1.5"/>
+      <circle cx="150" cy="355" r="4.5" fill="#fff" stroke="#1B5E82" stroke-width="1.3"/>
+      <text x="165" y="359" font-size="12" font-weight="700" fill="#1B5E82">Retrieve Context</text>
+      <text x="288" y="359" font-size="9.5" font-style="italic" fill="#C9A96E">动态 · 按需</text>
+      <text x="165" y="376" font-size="11" fill="#3D3530">候选表完整字段 · 取值样例 · 血缘 · 相似历史查询</text>
+
+      <line x1="360" y1="386" x2="360" y2="400" stroke="#5A5248" stroke-width="1.4" marker-end="url(#arr)"/>
+
+      <!-- Execute (LLM → 引擎) -->
+      <rect x="138" y="402" width="424" height="44" rx="5" fill="#FAF7F2" stroke="#DDD5C8" stroke-width="1.5"/>
+      <circle cx="150" cy="424" r="4.5" fill="#fff" stroke="#1B5E82" stroke-width="1.3"/>
+      <path d="M 150 419.5 A 4.5 4.5 0 0 1 150 428.5 Z" fill="#1B5E82"/>
+      <text x="165" y="428" font-size="12" font-weight="700" fill="#1B5E82">Execute</text>
+      <text x="232" y="428" font-size="11" fill="#3D3530">生成 SQL/Python → MCP 调数仓 → 取结果</text>
+
+      <line x1="360" y1="446" x2="360" y2="460" stroke="#5A5248" stroke-width="1.4" marker-end="url(#arr)"/>
+
+      <!-- Observe & Validate (LLM) -->
+      <rect x="138" y="462" width="424" height="66" rx="5" fill="#FAF7F2" stroke="#DDD5C8" stroke-width="1.5"/>
+      <circle cx="150" cy="479" r="4.5" fill="#fff" stroke="#1B5E82" stroke-width="1.3"/>
+      <path d="M 150 474.5 A 4.5 4.5 0 0 1 150 483.5 Z" fill="#1B5E82"/>
+      <text x="165" y="483" font-size="11.5" font-weight="700" fill="#1B5E82">Observe &amp; Validate</text>
+      <circle cx="170" cy="499" r="4" fill="#2A8A4A"/>
+      <text x="182" y="503" font-size="10.5" fill="#3D3530">确定性〔可信〕：执行成功 · 结果非空 · 权限 · 粒度</text>
+      <circle cx="170" cy="517" r="4" fill="#C9733A"/>
+      <text x="182" y="521" font-size="10.5" fill="#3D3530">启发式〔LLM 自审〕：语义 · 业务规则（不在 loop 内闭环）</text>
+
+      <line x1="360" y1="528" x2="360" y2="542" stroke="#5A5248" stroke-width="1.4" marker-end="url(#arr)"/>
+
+      <!-- Reflect (LLM) -->
+      <rect x="138" y="544" width="424" height="44" rx="5" fill="#FAF7F2" stroke="#DDD5C8" stroke-width="1.5"/>
+      <circle cx="150" cy="566" r="4.5" fill="#1B5E82"/>
+      <text x="165" y="570" font-size="12" font-weight="700" fill="#1B5E82">Reflect</text>
+      <text x="218" y="570" font-size="11.5" fill="#3D3530">充分→收尾 · 需补充→继续 · 有误→纠错</text>
+
+      <!-- 回环箭头：Reflect 右侧 → Plan 右侧（保留原样式） -->
+      <path d="M 562 566 L 620 566 L 620 300 L 562 300" stroke="#C9733A" stroke-width="1.5" fill="none" stroke-dasharray="4 2" marker-end="url(#arr-loop)"/>
+      <text x="626" y="426" text-anchor="start" font-size="11" fill="#C9733A">未完成</text>
+      <text x="626" y="442" text-anchor="start" font-size="11" fill="#C9733A">（纠错/补充）</text>
+
+      <!-- ↓ 分析完成 -->
+      <line x1="360" y1="602" x2="360" y2="620" stroke="#5A5248" stroke-width="1.5" marker-end="url(#arr)"/>
+      <text x="370" y="615" font-size="11" fill="#7A7068">分析完成</text>
+
+      <!-- ⑤ Synthesize Findings -->
+      <rect x="130" y="622" width="460" height="58" rx="6" fill="#E0EDF5" stroke="#1B5E82" stroke-width="1.5"/>
+      <circle cx="143" cy="642" r="4.5" fill="#1B5E82"/>
+      <text x="360" y="646" text-anchor="middle" font-size="12.5" font-weight="700" fill="#1B5E82">Synthesize Findings</text>
+      <text x="360" y="665" text-anchor="middle" font-size="11" fill="#4A7A9B">结论 · 假设 · 查询依据 · caveats · 可视化</text>
+
+      <line x1="360" y1="680" x2="360" y2="702" stroke="#5A5248" stroke-width="1.5" marker-end="url(#arr)"/>
+
+      <!-- ⑥ 返回答案 -->
+      <rect x="180" y="704" width="360" height="44" rx="6" fill="#1B5E82" stroke="#1B5E82" stroke-width="1.5"/>
+      <text x="360" y="731" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">返回答案（数据洞察 + 可视化）</text>
+    </svg>
+    </div>
+    <p style="color:#9A8F87;font-size:12.5px;font-style:italic;margin-bottom:32px">注：<span style="color:#2A8A4A">●</span> 确定性校验可在 loop 内自动闭环（执行成功、结果非空、权限、粒度）；<span style="color:#C9733A">●</span> 业务语义正确性<strong>无法在 loop 内自证</strong>，需结合第五章评估体系（golden set + 反馈闭环）持续校准，并通过透明化（每个数字附来源 SQL）让用户兜底。</p>
+
+    <p>综上，从工作流拆解来看，做好 data agent 核心需要解决以下几点：</p>
+    <ol>
+      <li><strong>如何让 LLM 理解业务问题，收集上下文</strong>——意图识别、Query 改写、Initial Context Assembly 的工程质量，决定了 agent 从第一步就能走对方向。</li>
+      <li><strong>如何保证 LLM 选对表与字段</strong>——数据目录的完整性与元数据质量，是 Text2SQL 准确率的天花板，也是动态检索能否命中的基础。</li>
+      <li><strong>如何构建好的迭代推理循环，让 agent 自主纠错</strong>——Plan → Retrieve → Execute → Observe &amp; Validate → Reflect 的闭环设计，是 agent 能否从"高级辅助"走向"自主分析"的关键。</li>
+      <li><strong>保证产品的透明化</strong>——每个数字附上来源 SQL，把验算能力还给用户，是 AI 分析产品建立信任的最务实路径。</li>
+      <li><strong>设计好 AI Evals，科学进行产品迭代</strong>——评估体系是 data agent 的发动机；没有 Evals，agent 的每次升级都是在"裸奔"。</li>
+    </ol>
+
+    <div class="sub-tabs">
+      <div class="sub-tab-bar">
+        <button class="sub-tab-btn active" data-group="tech" data-tab="t31">4.1 理解业务问题</button>
+        <button class="sub-tab-btn" data-group="tech" data-tab="t32">4.2 数据目录管理</button>
+      </div>
+
+      <!-- 3.1 -->
+      <div class="sub-tab-panel active" data-group="tech" data-tab="t31" id="tech-31-panel">
+        <h3 id="tech-31">4.1 如何让 LLM 理解业务问题</h3>
+        <p>让 LLM 从"懂语言"到"懂业务"，分四步：</p>
+        <h4>1）传递核心业务知识</h4>
+        <p>提炼业务核心概念（如外销业务获客流程、复购逻辑等），整理成千余字的业务概述，作为 System Prompt 注入，提供基本业务背景。</p>
+        <h4>2）引入业务术语与知识库</h4>
+        <ul>
+          <li><em>高频术语与黑话</em>：直接写入 System Prompt；</li>
+          <li><em>全量术语、指标定义等复杂知识资产</em>：存入向量数据库，通过 RAG 动态检索，辅助模型理解细节问题。</li>
+        </ul>
+        <h4>3）用户意图识别</h4>
+        <p>将业务问题分为四类，对应四大功能：<strong>智能取数与可视化、数据分析、专家级深度对话分析、仪表盘导航</strong>。把常见业务问题整理进向量库，用 RAG 提升意图识别准确率，再路由到相应模块。</p>
+        <h4>4）关键词提取与 Query 改写</h4>
+        <p>意图识别后做结构化抽取，精准识别<strong>维度、查询指标、过滤条件、时间区间、时区</strong>等关键词。同时把业务知识嵌入知识库，解决别名/同义问题（如本业务中"收入"与"销售额"同义）。最后结合上下文将口语化提问<strong>改写</strong>为结构清晰、逻辑严谨的查询/分析请求。</p>
+        <blockquote>
+          <p><strong>让专家"教" agent，而非只是"用" agent（借鉴 Meta）。</strong> 把领域知识沉淀为可复用资产（三层结构详见第三章 Meta），由专家录入一次、所有对话复用——agent 从第一个问题起就像领域专家，并随每次对话变得更好。这比单纯堆 RAG 文档更结构化，也让业务方从使用者变成共建者。</p>
+        </blockquote>
+      </div>
+
+      <!-- 3.2 -->
+      <div class="sub-tab-panel" data-group="tech" data-tab="t32" id="tech-32-panel">
+        <h3 id="tech-32">4.2 智能数据查询：数据目录与元数据管理</h3>
+        <p>建立数据目录和元数据管理系统，对数仓统一梳理标注。<strong>这是智能选表与 Text2SQL 准确率的地基</strong>，涵盖：</p>
+        <ol>
+          <li><strong>数仓概述</strong>：分层架构、数据来源、表的种类、业务场景等高层描述。</li>
+          <li><strong>表的详细说明</strong>：每张表的功能及在数据产品中的应用场景。</li>
+          <li><strong>表的选择逻辑</strong>：明确适用范围与<strong>不适用场景</strong>，避免误用导致分析偏差。</li>
+          <li><strong>字段详情</strong>：字段类型、是维度还是指标、含义、取值范围；维度字段标注关联维度表。
+            <ul><li><em>衍生指标</em>：解释计算逻辑与业务含义（如"新客户 = 统计期内首次下单的客户"）。</li></ul>
+          </li>
+          <li><strong>字段唯一性保障</strong>：梳理跨表同名/同义字段，明确语义一致性，特殊情况详细标注。</li>
+          <li><strong>SQL 限制条件</strong>：列出查询限制，如敏感字段访问限制、特定业务逻辑下的检索约束，确保合规与准确。</li>
+        </ol>
+        <p><strong>如何把目录"喂"得更准</strong></p>
+        <p>仅靠人工标注的静态目录会很快过时、覆盖不全。第三章 OpenAI 的六层上下文给了参考方法——靠多层信号自动组装，而非全靠人写。</p>
+        <blockquote>
+          <p><strong>真正的工程难点在"上下文组装"这层基础设施，而非 agent 架构本身——OpenAI 的 agent 架构其实很"朴素"（单 LLM + 运行时 + 上下文组装 + 精简工具集），强大的能力来自统一扎实的数据底座。</strong></p>
+        </blockquote>
+        <blockquote>
+          <p><strong>为什么不直接用 Markdown？</strong> 表少、业务知识较少时完全可以用 Markdown 静态注入，类似索引文件的方式构建知识库，简单有效。随着数据源扩展、表数量增多，全量注入成本急剧上升，且"客单价"→ <code>avg_revenue_usd</code> 这类语义映射靠关键词匹配会直接 miss。Embedding 动态召回只把语义最相关的少量表元数据送给 LLM，精准、省 token、降噪。</p>
+        </blockquote>
+      </div>
+
+      <!-- 3.5 -->
+    </div>
+  </section>
+
+  <!-- ── 五、评估体系（子 Tab：4.1-4.5）── -->
+  <section id="eval-section">
+    <h2>五、AI Evals（产品的护城河）</h2>
+    <p><strong>为什么评估对 data agent 格外重要？</strong> 回到第一性原理：<strong>LLM 本质是自回归地做 next-token prediction，输出有概率性</strong>；data agent 又缺少天然验算器。因此评估不是上线后的验收环节，而是产品能否自我进化的发动机。</p>
+    <blockquote>
+      <p>AI Evals 本质就是数科同学 <strong>Measurement 能力的一次迁移</strong>，不过分析对象从传统互联网产品变成了 <strong>LLM 与 Agent 工作流</strong>，分析任务则是：<strong>LLM 是否遵循指令、工具调用是否准确、以及 Agent 整体产出是否达到业务分析质量标准</strong>。</p>
+    </blockquote>
+    <div class="sub-tabs">
+      <div class="sub-tab-bar">
+        <button class="sub-tab-btn active" data-group="eval" data-tab="e41">5.1 指标体系</button>
+        <button class="sub-tab-btn" data-group="eval" data-tab="e42">5.2 取数评估</button>
+        <button class="sub-tab-btn" data-group="eval" data-tab="e43">5.3 分析评估</button>
+        <button class="sub-tab-btn" data-group="eval" data-tab="e44">5.4 反馈闭环</button>
+        <button class="sub-tab-btn" data-group="eval" data-tab="e45">5.5 发布门禁</button>
+      </div>
+
+      <!-- 4.1 -->
+      <div class="sub-tab-panel active" data-group="eval" data-tab="e41" id="eval-41-panel">
+        <h3 id="eval-41">5.1 北极星与评估指标体系</h3>
+        <p>先定义"什么叫好"，否则一切优化都没有baseline：</p>
+        <div class="table-wrapper">
+          <table>
+            <thead><tr><th>层面</th><th>核心指标</th><th>说明</th></tr></thead>
+            <tbody>
+              <tr><td>取数</td><td>SQL 执行成功率、结果准确率</td><td>依赖 golden dataset</td></tr>
+              <tr><td>分析</td><td>洞察准确率、业务采纳率</td><td>采纳率是最贴近价值的北极星</td></tr>
+              <tr><td>体验</td><td>多轮澄清成功率、首次响应满意度</td><td>衡量交互质量</td></tr>
+              <tr><td>工程</td><td>P50/P95 延迟、单次成本</td><td>保障可用性与规模化可行性；P95 超 30s 需流式输出兜底，单次成本决定全员铺开的账单上限</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- 4.2 -->
+      <div class="sub-tab-panel" data-group="eval" data-tab="e42" id="eval-42-panel">
+        <h3 id="eval-42">5.2 取数评估：三层验算器</h3>
+        <ol>
+          <li><strong>语法层</strong>：SQL 静态语法审查（可自动，零成本）。</li>
+          <li><strong>执行层</strong>：在沙箱/受限库实际执行，验证可跑通、无超时（可自动）。</li>
+          <li><strong>结果正确性层</strong>：维护 <strong>golden dataset</strong>（业务专家标注的「问题→正确 SQL/结果」对），新生成结果与之比对。
+            <ul><li>golden dataset 的建设是一项持续工程：从线上真实问题中采样、由业务专家标注、纳入回归测试，每次模型/prompt 迭代跑一遍，<strong>防止"改好一个、改坏三个"</strong>。</li></ul>
+          </li>
+        </ol>
+        <blockquote>
+          <p><strong>加一层"业务常识校验"（借鉴 Meta）。</strong> 在结果呈现给用户前，用独立的规则/AI 做体检，例如"WAU 不可能 &gt; 80 亿""环比波动 &gt; 500% 需复核"。这类轻量 sanity check 成本极低，却能拦住大量离谱结果，是自动验算器里性价比最高的一层。</p>
+        </blockquote>
+      </div>
+
+      <!-- 4.3 -->
+      <div class="sub-tab-panel" data-group="eval" data-tab="e43" id="eval-43-panel">
+        <h3 id="eval-43">5.3 分析评估：如何评"洞察质量"这种主观的东西</h3>
+        <p>这是最难的部分（缺乏标准答案），采用三管齐下：</p>
+        <ol>
+          <li><strong>LLM-as-judge</strong>：用更强模型按预设 rubric（逻辑是否自洽、是否引用了正确数据、结论是否回答了问题）打分，规模化、低成本，但需先与人工标注校准一致性。</li>
+          <li><strong>人工专家标注</strong>：抽样由数科/数分同事评估洞察的正确性与有用性，作为 LLM-judge 的"金标准"与校准锚点。</li>
+          <li><strong>业务采纳率（线上）</strong>：用户是否采纳了这条洞察、是否基于它做了决策——<strong>这是最诚实的评估信号</strong>。</li>
+        </ol>
+      </div>
+
+      <!-- 4.4 -->
+      <div class="sub-tab-panel" data-group="eval" data-tab="e44" id="eval-44-panel">
+        <h3 id="eval-44">5.4 在线评估与反馈闭环</h3>
+        <p>把线上每一次交互变成"人造验算信号"：</p>
+        <ul>
+          <li>显式反馈：👍/👎、"这个口径不对"等；</li>
+          <li>隐式反馈：用户是否追问、是否复制 SQL、是否导出报告；</li>
+          <li>闭环：反馈 → 归因（是意图识别错？选表错？SQL 错？）→ 沉淀进 golden 集 / 优化 prompt / 补充数据目录 → 回归验证。</li>
+        </ul>
+        <blockquote>
+          <p>这正是开篇第一性原理那个缺失闭环的最终落地：<strong>我们用评估体系 + 反馈闭环，为 data agent 人工补上了 coding agent 天生就有的验算器。</strong></p>
+        </blockquote>
+      </div>
+
+      <!-- 4.5 -->
+      <div class="sub-tab-panel" data-group="eval" data-tab="e45" id="eval-45-panel">
+        <h3 id="eval-45">5.5 发布门禁与版本管理（借鉴 OpenAI）</h3>
+        <p>把评估固化进发布流程，而非靠人主观经验：</p>
+        <ul>
+          <li><strong>测试集覆盖三类风险</strong>：correctness（对错）、bias（口径/样本偏差）、leakage（越权/数据泄露）；</li>
+          <li><strong>回归门禁</strong>：每次模型或 prompt 变更，必须跑通测试集才能发布；</li>
+          <li><strong>版本化与血缘快照</strong>：模型版本、指标定义、数据血缘都打快照，出问题可追溯、可回滚。</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 六、落地路线图 ── -->
+  <section id="roadmap">
+    <h2>六、落地路线图（分阶段规划）</h2>
+    <div class="table-wrapper">
+      <table>
+        <thead><tr><th>阶段</th><th>核心目标</th><th>分析能力</th><th>数据源</th></tr></thead>
+        <tbody>
+          <tr><td><strong>V1 取数可信</strong></td><td>能取数、取准数</td><td>智能取数 + 可视化 + 失败兜底</td><td>外销销售域数据</td></tr>
+          <tr><td><strong>V2 诊断分析</strong></td><td>能回答「为什么」</td><td>漏斗分析、归因分析（异动检测 + 指标多维拆解）</td><td>外销销售域数据、邮件数据</td></tr>
+          <tr><td><strong>V3 深度因果</strong></td><td>能回答「做什么有效」</td><td>机器学习归因（XGBoost+SHAP）、因果推断（DID/PSM）、Dashboard 自动生成、多轮根因对话</td><td>同 V2</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <blockquote>
+      <p><strong>V2 典型分析链路：</strong></p>
+      <p style="margin-top:8px">📊 <strong>漏斗分析</strong>（纵向，找流失节点）：营销触达 → 客户首次回复 → 客户询盘深化 → 送样 → 正式成交</p>
+      <p style="margin-top:6px">🔍 <strong>归因分析</strong>（解释波动）：某月成交额下滑 → 异动检测 → 拆解到区域 / 品类 / 客户层级 → 定位原因</p>
+    </blockquote>
+    <p><strong>贯穿全程的原则</strong>：先有评估、再有功能。每上一个新能力，先想清楚"它的验算器是什么"——这是 data agent 从"辅助"走向"可信赖"的唯一路径。</p>
+    <p style="margin-top:14px"><strong>几条来自 Meta / OpenAI 的落地心法：</strong></p>
+    <ul>
+      <li><strong>先用数据证明"可处理性"，再立项。</strong> 别从"AI 大有可为"的愿景出发，要从"这个范围内的问题 LLM 确实能稳定做对"的事实出发（如 Meta 先用数据证明问题有界，详见第三章）。</li>
+      <li><strong>速度优于完美。</strong> 先发粗糙可用的版本快速迭代——"最大的风险不是发得太早，而是发得太晚"。</li>
+      <li><strong>把早期用户当共建者，而非小白鼠。</strong> 让用户能录入并贡献知识资产，是规模化的关键——Meta 的采用率与社区共建数据（见第三章）就是这条路径跑通的证据。</li>
+    </ul>
+  </section>
+
+</div>
+</main>
+
+<script>
+// ── Demo 思考过程折叠 ──
+function toggleThinking() {
+  var panel = document.getElementById('demo-thinking');
+  var arrow = document.getElementById('think-arrow');
+  var isOpen = panel.classList.contains('open');
+  panel.classList.toggle('open', !isOpen);
+  arrow.style.transform = isOpen ? '' : 'rotate(90deg)';
+}
+
+// ── Demo 结果 Tab（互斥，可折叠） ──
+document.querySelectorAll('.demo-result-btn').forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    var target = btn.dataset.demoTab;
+    var isActive = btn.classList.contains('active');
+    document.querySelectorAll('.demo-result-btn').forEach(function(b) { b.classList.remove('active'); });
+    document.querySelectorAll('.demo-result-panel').forEach(function(p) { p.classList.remove('active'); });
+    if (!isActive) {
+      btn.classList.add('active');
+      document.getElementById(target).classList.add('active');
+    }
+  });
+});
+
+// ── 子 Tab 切换 ──
+function switchSubTab(group, tab) {
+  document.querySelectorAll('.sub-tab-btn[data-group="' + group + '"]').forEach(function(b) { b.classList.remove('active'); });
+  document.querySelectorAll('.sub-tab-panel[data-group="' + group + '"]').forEach(function(p) { p.classList.remove('active'); });
+  var btn = document.querySelector('.sub-tab-btn[data-group="' + group + '"][data-tab="' + tab + '"]');
+  var panel = document.querySelector('.sub-tab-panel[data-group="' + group + '"][data-tab="' + tab + '"]');
+  if (btn) btn.classList.add('active');
+  if (panel) panel.classList.add('active');
+}
+
+document.querySelectorAll('.sub-tab-btn').forEach(function(btn) {
+  btn.addEventListener('click', function() { switchSubTab(btn.dataset.group, btn.dataset.tab); });
+});
+
+// ── TOC 点击 ──
+document.querySelectorAll('.toc-link').forEach(function(link) {
+  link.addEventListener('click', function(e) {
+    e.preventDefault();
+    var targetId = link.getAttribute('href').slice(1);
+    var targetEl = document.getElementById(targetId);
+    if (!targetEl) return;
+
+    // 如果目标在子 Tab panel 里，先切换 Tab
+    var parentPanel = targetEl.closest('.sub-tab-panel');
+    if (parentPanel) {
+      switchSubTab(parentPanel.dataset.group, parentPanel.dataset.tab);
+    }
+
+    document.querySelectorAll('.toc-link').forEach(function(l) { l.classList.remove('active'); });
+    link.classList.add('active');
+
+    setTimeout(function() { targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 60);
+  });
+});
+
+// ── 滚动高亮（section 级别）──
+var sectionIds = ['first-principles', 'product', 'arch-section', 'bigco-section', 'tech-section', 'eval-section', 'roadmap'];
+var observer = new IntersectionObserver(function(entries) {
+  entries.forEach(function(entry) {
+    if (entry.isIntersecting) {
+      var id = entry.target.id;
+      document.querySelectorAll('.toc-link').forEach(function(link) {
+        link.classList.toggle('active', link.getAttribute('href') === '#' + id);
+      });
+    }
+  });
+}, { rootMargin: '-8% 0px -75% 0px', threshold: 0 });
+
+sectionIds.forEach(function(id) {
+  var el = document.getElementById(id);
+  if (el) observer.observe(el);
+});
+</script>
+</body>
+</html>
