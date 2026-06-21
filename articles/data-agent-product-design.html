@@ -161,53 +161,179 @@ hr{border:none;border-top:1px solid #DDD5C8;margin:32px 0}
   .arch-items-grid,.arch-items-grid-2{grid-template-columns:1fr}
 }
 </style>
+<link rel="stylesheet" href="../site.css?v=20260524-c" />
+<style>
+.data-agent-page .article-layout {
+  max-width: 1160px;
+}
+
+.data-agent-page,
+.data-agent-page .site-header {
+  background: var(--paper);
+}
+
+.data-agent-page .article-header {
+  margin-bottom: 30px;
+}
+
+.data-agent-page .article-summary {
+  max-width: 920px;
+}
+
+.data-agent-page .article-body h2 {
+  margin: 42px 0 14px;
+  padding-bottom: 0;
+  border-bottom: 0;
+  color: var(--ink);
+  font-size: clamp(25px, 3vw, 34px);
+  line-height: 1.18;
+}
+
+.data-agent-page .article-body h3 {
+  margin: 28px 0 10px;
+  padding-left: 0;
+  border-left: 0;
+  color: var(--accent-dark);
+  font-size: clamp(19px, 2vw, 24px);
+  line-height: 1.25;
+}
+
+.data-agent-page .article-body h4 {
+  margin: 24px 0 8px;
+  color: var(--ink);
+  font-size: 18px;
+}
+
+.data-agent-page .article-body section {
+  scroll-margin-top: 24px;
+}
+
+.data-agent-page .article-body .article-toc {
+  margin-bottom: 46px;
+}
+
+.data-agent-page .article-toc ol {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 28px;
+}
+
+.data-agent-page .article-toc li {
+  grid-template-columns: 30px minmax(0, 1fr);
+}
+
+.data-agent-page .article-toc a.active {
+  color: var(--accent-dark);
+}
+
+.data-agent-page .sub-tabs,
+.data-agent-page .arch-diagram,
+.data-agent-page .ctx-pyramid,
+.data-agent-page .demo-card {
+  font-size: 16px;
+}
+
+.data-agent-page .sub-tab-bar,
+.data-agent-page .demo-result-bar {
+  overflow-x: auto;
+}
+
+.data-agent-page .sub-tab-btn,
+.data-agent-page .demo-result-btn {
+  font-size: 14px;
+}
+
+.data-agent-page .sub-tab-panel {
+  background: #ffffff;
+  border-color: var(--line);
+}
+
+.data-agent-page .sub-tab-bar,
+.data-agent-page .demo-result-bar,
+.data-agent-page .demo-think-steps,
+.data-agent-page .demo-sql-light {
+  background: #f4f1eb;
+  border-color: var(--line);
+}
+
+.data-agent-page .sub-tab-btn.active,
+.data-agent-page .demo-result-btn.active,
+.data-agent-page .demo-card,
+.data-agent-page .demo-result-panel {
+  background: #ffffff;
+  border-color: var(--line);
+}
+
+.data-agent-page .article-body tr:nth-child(even) td {
+  background: #ffffff;
+}
+
+.data-agent-page .demo-sql-light {
+  max-width: 100%;
+}
+
+.data-agent-page .arch-diagram,
+.data-agent-page .ctx-pyramid {
+  overflow-x: auto;
+}
+
+@media (max-width: 760px) {
+  .data-agent-page .article-toc ol {
+    grid-template-columns: 1fr;
+  }
+
+  .data-agent-page .arch-section,
+  .data-agent-page .arch-model-cards {
+    flex-direction: column;
+  }
+
+  .data-agent-page .arch-row-label {
+    min-width: auto;
+    writing-mode: horizontal-tb;
+  }
+
+  .data-agent-page .arch-items-grid,
+  .data-agent-page .arch-items-grid-2 {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
 </head>
-<body>
-
-<!-- ══════════════════════════════ 侧边栏 ══════════════════════════════ -->
-<a class="site-link" href="../blogs.html">&larr; Back to Jiaqi He</a>
-<nav class="sidebar">
-  <div class="sidebar-header">
-    <div class="sidebar-logo">Product Design Doc</div>
-    <div class="sidebar-title">增长 Data Agent 产品设计</div>
-  </div>
-  <ul class="toc">
-    <li class="toc-h2"><a class="toc-link" href="#first-principles">核心判断</a></li>
-    <li class="toc-h2"><a class="toc-link" href="#product">一、产品定位与核心功能</a></li>
-    <li class="toc-h3"><a class="toc-link" href="#value">产品价值</a></li>
-    <li class="toc-h2"><a class="toc-link" href="#arch-section">二、产品整体架构</a></li>
-    <li class="toc-h3"><a class="toc-link" href="#arch-21">2.1 模型底座</a></li>
-    <li class="toc-h3"><a class="toc-link" href="#arch-22">2.2 数据底座</a></li>
-    <li class="toc-h3"><a class="toc-link" href="#arch-23">2.3 基础能力</a></li>
-    <li class="toc-h3"><a class="toc-link toc-subtab-link" href="#arch-24" data-group="arch-detail" data-tab="ad24">2.4 分析能力</a></li>
-    <li class="toc-h3"><a class="toc-link toc-subtab-link" href="#arch-25" data-group="arch-detail" data-tab="ad25">2.5 编排层</a></li>
-    <li class="toc-sep"></li>
-    <li class="toc-h2"><a class="toc-link" href="#bigco-section">三、大厂落地经验</a></li>
-    <li class="toc-h3"><a class="toc-link toc-subtab-link" href="#bigco-openai" data-group="bigco" data-tab="openai">OpenAI</a></li>
-    <li class="toc-h3"><a class="toc-link toc-subtab-link" href="#bigco-meta" data-group="bigco" data-tab="meta">Meta</a></li>
-    <li class="toc-h2"><a class="toc-link" href="#tech-section">四、核心技术实践</a></li>
-    <li class="toc-h3"><a class="toc-link toc-subtab-link" href="#tech-31" data-group="tech" data-tab="t31">4.1 理解业务问题</a></li>
-    <li class="toc-h3"><a class="toc-link toc-subtab-link" href="#tech-32" data-group="tech" data-tab="t32">4.2 数据目录管理</a></li>
-    <li class="toc-h2"><a class="toc-link" href="#eval-section">五、评估体系</a></li>
-    <li class="toc-h3"><a class="toc-link toc-subtab-link" href="#eval-41" data-group="eval" data-tab="e41">5.1 指标体系</a></li>
-    <li class="toc-h3"><a class="toc-link toc-subtab-link" href="#eval-42" data-group="eval" data-tab="e42">5.2 取数评估</a></li>
-    <li class="toc-h3"><a class="toc-link toc-subtab-link" href="#eval-43" data-group="eval" data-tab="e43">5.3 分析评估</a></li>
-    <li class="toc-h3"><a class="toc-link toc-subtab-link" href="#eval-44" data-group="eval" data-tab="e44">5.4 反馈闭环</a></li>
-    <li class="toc-h3"><a class="toc-link toc-subtab-link" href="#eval-45" data-group="eval" data-tab="e45">5.5 发布门禁</a></li>
-    <li class="toc-sep"></li>
-    <li class="toc-h2"><a class="toc-link" href="#roadmap">六、落地路线图</a></li>
-  </ul>
-</nav>
-
-<!-- ══════════════════════════════ 主内容 ══════════════════════════════ -->
-<main class="content">
-<div class="content-inner">
-
-  <header class="doc-header">
-    <h1>增长 Data Agent 产品设计</h1>
-    <p class="doc-author"><strong>作者：何佳琦 · 2026.06</strong></p>
-    <p class="doc-note">【注】本文梳理 data agent 产品的设计思路，聚焦产品形态、核心能力框架与关键技术判断，不涉及太细节的实施方案。撰写过程中，结合个人数据科学领域的学习和实践经验，并借鉴了 OpenAI、Meta 等科技大厂团队推进 data agent 产品落地的经验，追求以科学、严谨、贴近前沿的方式做事。</p>
+<body class="article-page data-agent-page">
+  <header class="site-header">
+    <a class="brand" href="../index.html" aria-label="Back to home">
+      <span>
+        <strong><span>Jiaqi</span> <em>He</em></strong>
+        <small>AI Eval Lab</small>
+      </span>
+    </a>
+    <nav class="nav" aria-label="Main navigation">
+      <a href="../blogs.html">Blogs</a>
+      <a href="../projects.html">Project</a>
+    </nav>
   </header>
+
+<main class="article-layout">
+  <article>
+  <header class="article-header">
+    <p class="section-kicker">Data Product</p>
+    <h1>增长 Data Agent 产品设计</h1>
+    <p class="article-summary">一篇围绕增长分析场景的 Data Agent 产品设计文档，重点讨论产品形态、上下文工程与 AI Evals。</p>
+  </header>
+
+  <div class="article-body">
+  <nav class="article-toc" aria-label="Table of contents">
+    <span class="article-toc-label">Contents</span>
+    <ol>
+      <li><span class="toc-num">01</span><a class="toc-link" href="#first-principles">核心判断</a></li>
+      <li><span class="toc-num">02</span><a class="toc-link" href="#product">产品定位与核心功能</a></li>
+      <li><span class="toc-num">03</span><a class="toc-link" href="#arch-section">产品整体架构</a></li>
+      <li><span class="toc-num">04</span><a class="toc-link" href="#bigco-section">大厂落地经验</a></li>
+      <li><span class="toc-num">05</span><a class="toc-link" href="#tech-section">核心技术实践</a></li>
+      <li><span class="toc-num">06</span><a class="toc-link" href="#eval-section">评估体系</a></li>
+    </ol>
+  </nav>
+
+  <p><em>本文梳理 data agent 产品的设计思路，聚焦产品形态、核心能力框架与关键技术判断，不涉及太细节的实施方案。撰写过程中，结合个人数据科学领域的学习和实践经验，并借鉴了 OpenAI、Meta 等科技大厂团队推进 data agent 产品落地的经验，追求以科学、严谨、贴近前沿的方式做事。</em></p>
 
   <!-- ── 第一性原理 ── -->
   <section id="first-principles">
@@ -979,34 +1105,8 @@ ORDER  BY 月份;</pre>
     </div>
   </section>
 
-  <!-- ── 六、落地路线图 ── -->
-  <section id="roadmap">
-    <h2>六、落地路线图（分阶段规划）</h2>
-    <div class="table-wrapper">
-      <table>
-        <thead><tr><th>阶段</th><th>核心目标</th><th>分析能力</th><th>数据源</th></tr></thead>
-        <tbody>
-          <tr><td><strong>V1 取数可信</strong></td><td>能取数、取准数</td><td>智能取数 + 可视化 + 失败兜底</td><td>外销销售域数据</td></tr>
-          <tr><td><strong>V2 诊断分析</strong></td><td>能回答「为什么」</td><td>漏斗分析、归因分析（异动检测 + 指标多维拆解）</td><td>外销销售域数据、邮件数据</td></tr>
-          <tr><td><strong>V3 深度因果</strong></td><td>能回答「做什么有效」</td><td>机器学习归因（XGBoost+SHAP）、因果推断（DID/PSM）、Dashboard 自动生成、多轮根因对话</td><td>同 V2</td></tr>
-        </tbody>
-      </table>
-    </div>
-    <blockquote>
-      <p><strong>V2 典型分析链路：</strong></p>
-      <p style="margin-top:8px">📊 <strong>漏斗分析</strong>（纵向，找流失节点）：营销触达 → 客户首次回复 → 客户询盘深化 → 送样 → 正式成交</p>
-      <p style="margin-top:6px">🔍 <strong>归因分析</strong>（解释波动）：某月成交额下滑 → 异动检测 → 拆解到区域 / 品类 / 客户层级 → 定位原因</p>
-    </blockquote>
-    <p><strong>贯穿全程的原则</strong>：先有评估、再有功能。每上一个新能力，先想清楚"它的验算器是什么"——这是 data agent 从"辅助"走向"可信赖"的唯一路径。</p>
-    <p style="margin-top:14px"><strong>几条来自 Meta / OpenAI 的落地心法：</strong></p>
-    <ul>
-      <li><strong>先用数据证明"可处理性"，再立项。</strong> 别从"AI 大有可为"的愿景出发，要从"这个范围内的问题 LLM 确实能稳定做对"的事实出发（如 Meta 先用数据证明问题有界，详见第三章）。</li>
-      <li><strong>速度优于完美。</strong> 先发粗糙可用的版本快速迭代——"最大的风险不是发得太早，而是发得太晚"。</li>
-      <li><strong>把早期用户当共建者，而非小白鼠。</strong> 让用户能录入并贡献知识资产，是规模化的关键——Meta 的采用率与社区共建数据（见第三章）就是这条路径跑通的证据。</li>
-    </ul>
-  </section>
-
 </div>
+</article>
 </main>
 
 <script>
@@ -1069,7 +1169,7 @@ document.querySelectorAll('.toc-link').forEach(function(link) {
 });
 
 // ── 滚动高亮（section 级别）──
-var sectionIds = ['first-principles', 'product', 'arch-section', 'bigco-section', 'tech-section', 'eval-section', 'roadmap'];
+var sectionIds = ['first-principles', 'product', 'arch-section', 'bigco-section', 'tech-section', 'eval-section'];
 var observer = new IntersectionObserver(function(entries) {
   entries.forEach(function(entry) {
     if (entry.isIntersecting) {
