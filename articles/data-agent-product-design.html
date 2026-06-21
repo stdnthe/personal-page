@@ -4,15 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Growth Data Agent Product Design | Jiaqi He</title>
-<meta name="description" content="A product design note for a growth analytics agent covering business questions, agent workflows, AI evals, and rollout planning.">
+<meta name="description" content="A product design note for a growth analytics agent covering business questions, agent workflows, and AI evals.">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:#FAF7F2;color:#1C1917;font-family:"PingFang SC","Noto Sans SC",-apple-system,"Helvetica Neue",sans-serif;font-size:16px;line-height:1.85}
-.site-link{position:fixed;right:20px;top:18px;z-index:20;display:inline-flex;align-items:center;gap:6px;padding:8px 12px;border:1px solid #DDD5C8;border-radius:999px;background:rgba(250,247,242,.92);color:#1B5E82;text-decoration:none;font-size:12px;font-weight:700;box-shadow:0 8px 20px rgba(28,25,23,.08);backdrop-filter:blur(10px)}
+body{background:#FFFDF8;color:#1C1917;font-family:"PingFang SC","Noto Sans SC",-apple-system,"Helvetica Neue",sans-serif;font-size:16px;line-height:1.85}
+.site-link{position:fixed;right:20px;top:18px;z-index:20;display:inline-flex;align-items:center;gap:6px;padding:8px 12px;border:1px solid #DDD5C8;border-radius:999px;background:rgba(255,253,248,.92);color:#1B5E82;text-decoration:none;font-size:12px;font-weight:700;box-shadow:0 8px 20px rgba(28,25,23,.08);backdrop-filter:blur(10px)}
 .site-link:hover{background:#E0EDF5}
 
 /* ── 侧边栏 ── */
-.sidebar{position:fixed;top:0;left:0;width:240px;height:100vh;overflow-y:auto;background:#F0EAE0;border-right:1px solid #DDD5C8;display:flex;flex-direction:column;scrollbar-width:thin;scrollbar-color:#C8BEAE transparent}
+.sidebar{position:fixed;top:0;left:0;width:240px;height:100vh;overflow-y:auto;background:#F9F8F5;border-right:1px solid #DDD5C8;display:flex;flex-direction:column;scrollbar-width:thin;scrollbar-color:#C8BEAE transparent}
 .sidebar::-webkit-scrollbar{width:4px}
 .sidebar::-webkit-scrollbar-track{background:transparent}
 .sidebar::-webkit-scrollbar-thumb{background:#C8BEAE;border-radius:2px}
@@ -56,7 +56,7 @@ blockquote p{margin:3px 0;color:#3D3530;font-size:15px}
 table{width:100%;border-collapse:collapse;font-size:14px}
 th{background:#EDE7DB;font-weight:600;text-align:left;padding:9px 13px;border:1px solid #DDD5C8;color:#1C1917}
 td{padding:8px 13px;border:1px solid #DDD5C8;vertical-align:top;line-height:1.7}
-tr:nth-child(even) td{background:#F5F0E8}
+tr:nth-child(even) td{background:#FFFFFF}
 
 /* ── 代码 ── */
 code{background:#EDE8DF;padding:2px 5px;border-radius:3px;font-family:"SFMono-Regular",Consolas,monospace;font-size:.86em}
@@ -73,11 +73,11 @@ hr{border:none;border-top:1px solid #DDD5C8;margin:32px 0}
 
 /* ── 子 Tab（节内切换）── */
 .sub-tabs{margin:20px 0 0}
-.sub-tab-bar{display:flex;background:#F0EAE0;border-radius:7px 7px 0 0;border:1px solid #DDD5C8;border-bottom:none;overflow:hidden}
+.sub-tab-bar{display:flex;background:#F4F1EB;border-radius:7px 7px 0 0;border:1px solid #DDD5C8;border-bottom:none;overflow:hidden}
 .sub-tab-btn{padding:9px 22px;border:none;background:transparent;cursor:pointer;font-size:13.5px;font-weight:500;color:#6B6560;font-family:inherit;border-top:2.5px solid transparent;transition:all .12s;white-space:nowrap}
 .sub-tab-btn:hover{background:#E8E1D6;color:#1C1917}
-.sub-tab-btn.active{background:#FAF7F2;color:#1B5E82;border-top-color:#1B5E82;font-weight:600}
-.sub-tab-panel{display:none;padding:28px 32px 32px;border:1px solid #DDD5C8;border-radius:0 7px 7px 7px;background:#FAF7F2}
+.sub-tab-btn.active{background:#FFFDF8;color:#1B5E82;border-top-color:#1B5E82;font-weight:600}
+.sub-tab-panel{display:none;padding:28px 32px 32px;border:1px solid #DDD5C8;border-radius:0 7px 7px 7px;background:#FFFDF8}
 .sub-tab-panel.active{display:block}
 .sub-tab-panel h3{margin-top:0}
 .sub-tab-panel h4{scroll-margin-top:20px}
@@ -103,7 +103,7 @@ hr{border:none;border-top:1px solid #DDD5C8;margin:32px 0}
 .arch-divider{width:1px;background:#C0D5EE;margin:0 2px;align-self:stretch}
 
 /* ── 上下文金字塔 ── */
-.ctx-pyramid{display:flex;flex-direction:column;align-items:center;gap:5px;padding:20px 16px 14px;background:#F5F0E8;border-radius:10px;margin:16px 0 20px}
+.ctx-pyramid{display:flex;flex-direction:column;align-items:center;gap:5px;padding:20px 16px 14px;background:#F9F8F5;border-radius:10px;margin:16px 0 20px}
 .pyr-layer{display:flex;align-items:center;justify-content:center;gap:8px;border-radius:40px;padding:8px 20px;font-size:13px;font-weight:600;transition:opacity .15s;cursor:default}
 .pyr-layer:hover{opacity:.85}
 .pyr-n{font-size:11px;opacity:0.7;font-weight:500;min-width:14px;text-align:right}
@@ -113,7 +113,7 @@ hr{border:none;border-top:1px solid #DDD5C8;margin:32px 0}
 .section-eyebrow{font-size:16px;font-weight:700;color:#1B5E82;margin-bottom:6px;margin-top:0}
 
 /* ── 产品 Demo 卡片 ── */
-.demo-card{background:#FAF7F2;border:1px solid #DDD5C8;border-radius:10px;padding:28px 32px;margin:8px 0}
+.demo-card{background:#FFFDF8;border:1px solid #DDD5C8;border-radius:10px;padding:28px 32px;margin:8px 0}
 .demo-user-bubble{display:flex;justify-content:flex-end;margin-bottom:16px}
 .demo-bubble-text{background:#1B5E82;color:#fff;border-radius:12px 12px 2px 12px;padding:12px 18px;font-size:14px;max-width:75%;line-height:1.6}
 .demo-think-toggle{display:flex;align-items:center;gap:8px;cursor:pointer;padding:9px 0;color:#7A7068;font-size:13px;user-select:none;border-bottom:1px solid #E8E1D6;margin-bottom:16px;transition:color .15s}
@@ -132,8 +132,8 @@ hr{border:none;border-top:1px solid #DDD5C8;margin:32px 0}
 .demo-result-bar{display:flex;background:#EDE7DB;border-radius:6px 6px 0 0;border:1px solid #DDD5C8;border-bottom:none;overflow:hidden}
 .demo-result-btn{padding:8px 20px;border:none;background:transparent;cursor:pointer;font-size:13px;font-weight:500;color:#6B6560;font-family:inherit;border-top:2px solid transparent;transition:all .12s;white-space:nowrap}
 .demo-result-btn:hover{background:#E4DDD3;color:#1C1917}
-.demo-result-btn.active{background:#FAF7F2;color:#1B5E82;border-top-color:#1B5E82;font-weight:600}
-.demo-result-panel{display:none;border:1px solid #DDD5C8;border-radius:0 6px 6px 6px;background:#FAF7F2;padding:20px 24px}
+.demo-result-btn.active{background:#FFFDF8;color:#1B5E82;border-top-color:#1B5E82;font-weight:600}
+.demo-result-panel{display:none;border:1px solid #DDD5C8;border-radius:0 6px 6px 6px;background:#FFFDF8;padding:20px 24px}
 .demo-result-panel.active{display:block}
 .demo-sql-light{font-family:"SFMono-Regular",Consolas,monospace;font-size:12.5px;color:#1B5E82;background:#EDE7DB;padding:16px 18px;border-radius:6px;line-height:1.7;white-space:pre;overflow-x:auto;margin:0}
 .demo-placeholder{color:#6B6560;font-style:italic;padding:40px 0;text-align:center;font-size:14px}
@@ -161,179 +161,50 @@ hr{border:none;border-top:1px solid #DDD5C8;margin:32px 0}
   .arch-items-grid,.arch-items-grid-2{grid-template-columns:1fr}
 }
 </style>
-<link rel="stylesheet" href="../site.css?v=20260524-c" />
-<style>
-.data-agent-page .article-layout {
-  max-width: 1160px;
-}
-
-.data-agent-page,
-.data-agent-page .site-header {
-  background: var(--paper);
-}
-
-.data-agent-page .article-header {
-  margin-bottom: 30px;
-}
-
-.data-agent-page .article-summary {
-  max-width: 920px;
-}
-
-.data-agent-page .article-body h2 {
-  margin: 42px 0 14px;
-  padding-bottom: 0;
-  border-bottom: 0;
-  color: var(--ink);
-  font-size: clamp(25px, 3vw, 34px);
-  line-height: 1.18;
-}
-
-.data-agent-page .article-body h3 {
-  margin: 28px 0 10px;
-  padding-left: 0;
-  border-left: 0;
-  color: var(--accent-dark);
-  font-size: clamp(19px, 2vw, 24px);
-  line-height: 1.25;
-}
-
-.data-agent-page .article-body h4 {
-  margin: 24px 0 8px;
-  color: var(--ink);
-  font-size: 18px;
-}
-
-.data-agent-page .article-body section {
-  scroll-margin-top: 24px;
-}
-
-.data-agent-page .article-body .article-toc {
-  margin-bottom: 46px;
-}
-
-.data-agent-page .article-toc ol {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  column-gap: 28px;
-}
-
-.data-agent-page .article-toc li {
-  grid-template-columns: 30px minmax(0, 1fr);
-}
-
-.data-agent-page .article-toc a.active {
-  color: var(--accent-dark);
-}
-
-.data-agent-page .sub-tabs,
-.data-agent-page .arch-diagram,
-.data-agent-page .ctx-pyramid,
-.data-agent-page .demo-card {
-  font-size: 16px;
-}
-
-.data-agent-page .sub-tab-bar,
-.data-agent-page .demo-result-bar {
-  overflow-x: auto;
-}
-
-.data-agent-page .sub-tab-btn,
-.data-agent-page .demo-result-btn {
-  font-size: 14px;
-}
-
-.data-agent-page .sub-tab-panel {
-  background: #ffffff;
-  border-color: var(--line);
-}
-
-.data-agent-page .sub-tab-bar,
-.data-agent-page .demo-result-bar,
-.data-agent-page .demo-think-steps,
-.data-agent-page .demo-sql-light {
-  background: #f4f1eb;
-  border-color: var(--line);
-}
-
-.data-agent-page .sub-tab-btn.active,
-.data-agent-page .demo-result-btn.active,
-.data-agent-page .demo-card,
-.data-agent-page .demo-result-panel {
-  background: #ffffff;
-  border-color: var(--line);
-}
-
-.data-agent-page .article-body tr:nth-child(even) td {
-  background: #ffffff;
-}
-
-.data-agent-page .demo-sql-light {
-  max-width: 100%;
-}
-
-.data-agent-page .arch-diagram,
-.data-agent-page .ctx-pyramid {
-  overflow-x: auto;
-}
-
-@media (max-width: 760px) {
-  .data-agent-page .article-toc ol {
-    grid-template-columns: 1fr;
-  }
-
-  .data-agent-page .arch-section,
-  .data-agent-page .arch-model-cards {
-    flex-direction: column;
-  }
-
-  .data-agent-page .arch-row-label {
-    min-width: auto;
-    writing-mode: horizontal-tb;
-  }
-
-  .data-agent-page .arch-items-grid,
-  .data-agent-page .arch-items-grid-2 {
-    grid-template-columns: 1fr;
-  }
-}
-</style>
 </head>
-<body class="article-page data-agent-page">
-  <header class="site-header">
-    <a class="brand" href="../index.html" aria-label="Back to home">
-      <span>
-        <strong><span>Jiaqi</span> <em>He</em></strong>
-        <small>AI Eval Lab</small>
-      </span>
-    </a>
-    <nav class="nav" aria-label="Main navigation">
-      <a href="../blogs.html">Blogs</a>
-      <a href="../projects.html">Project</a>
-    </nav>
-  </header>
+<body>
 
-<main class="article-layout">
-  <article>
-  <header class="article-header">
-    <p class="section-kicker">Data Product</p>
+<!-- ══════════════════════════════ 侧边栏 ══════════════════════════════ -->
+<a class="site-link" href="../blogs.html">&larr; Back to Jiaqi He</a>
+<nav class="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-logo">Product Design Doc</div>
+    <div class="sidebar-title">增长 Data Agent 产品设计</div>
+  </div>
+  <ul class="toc">
+    <li class="toc-h2"><a class="toc-link" href="#first-principles">核心判断</a></li>
+    <li class="toc-h2"><a class="toc-link" href="#product">一、产品定位与核心功能</a></li>
+    <li class="toc-h3"><a class="toc-link" href="#value">产品价值</a></li>
+    <li class="toc-h2"><a class="toc-link" href="#arch-section">二、产品整体架构</a></li>
+    <li class="toc-h3"><a class="toc-link" href="#arch-21">2.1 模型底座</a></li>
+    <li class="toc-h3"><a class="toc-link" href="#arch-22">2.2 数据底座</a></li>
+    <li class="toc-h3"><a class="toc-link" href="#arch-23">2.3 基础能力</a></li>
+    <li class="toc-h3"><a class="toc-link toc-subtab-link" href="#arch-24" data-group="arch-detail" data-tab="ad24">2.4 分析能力</a></li>
+    <li class="toc-h3"><a class="toc-link toc-subtab-link" href="#arch-25" data-group="arch-detail" data-tab="ad25">2.5 编排层</a></li>
+    <li class="toc-sep"></li>
+    <li class="toc-h2"><a class="toc-link" href="#bigco-section">三、大厂落地经验</a></li>
+    <li class="toc-h3"><a class="toc-link toc-subtab-link" href="#bigco-openai" data-group="bigco" data-tab="openai">OpenAI</a></li>
+    <li class="toc-h3"><a class="toc-link toc-subtab-link" href="#bigco-meta" data-group="bigco" data-tab="meta">Meta</a></li>
+    <li class="toc-h2"><a class="toc-link" href="#tech-section">四、核心技术实践</a></li>
+    <li class="toc-h3"><a class="toc-link toc-subtab-link" href="#tech-31" data-group="tech" data-tab="t31">4.1 理解业务问题</a></li>
+    <li class="toc-h3"><a class="toc-link toc-subtab-link" href="#tech-32" data-group="tech" data-tab="t32">4.2 数据目录管理</a></li>
+    <li class="toc-h2"><a class="toc-link" href="#eval-section">五、评估体系</a></li>
+    <li class="toc-h3"><a class="toc-link toc-subtab-link" href="#eval-41" data-group="eval" data-tab="e41">5.1 指标体系</a></li>
+    <li class="toc-h3"><a class="toc-link toc-subtab-link" href="#eval-42" data-group="eval" data-tab="e42">5.2 取数评估</a></li>
+    <li class="toc-h3"><a class="toc-link toc-subtab-link" href="#eval-43" data-group="eval" data-tab="e43">5.3 分析评估</a></li>
+    <li class="toc-h3"><a class="toc-link toc-subtab-link" href="#eval-44" data-group="eval" data-tab="e44">5.4 反馈闭环</a></li>
+    <li class="toc-h3"><a class="toc-link toc-subtab-link" href="#eval-45" data-group="eval" data-tab="e45">5.5 发布门禁</a></li>
+  </ul>
+</nav>
+
+<!-- ══════════════════════════════ 主内容 ══════════════════════════════ -->
+<main class="content">
+<div class="content-inner">
+
+  <header class="doc-header">
     <h1>增长 Data Agent 产品设计</h1>
-    <p class="article-summary">一篇围绕增长分析场景的 Data Agent 产品设计文档，重点讨论产品形态、上下文工程与 AI Evals。</p>
+    <p class="doc-note">【注】本文梳理 data agent 产品的设计思路，聚焦产品形态、核心能力框架与关键技术判断，不涉及太细节的实施方案。撰写过程中，结合个人数据科学领域的学习和实践经验，并借鉴了 OpenAI、Meta 等科技大厂团队推进 data agent 产品落地的经验，追求以科学、严谨、贴近前沿的方式做事。</p>
   </header>
-
-  <div class="article-body">
-  <nav class="article-toc" aria-label="Table of contents">
-    <span class="article-toc-label">Contents</span>
-    <ol>
-      <li><span class="toc-num">01</span><a class="toc-link" href="#first-principles">核心判断</a></li>
-      <li><span class="toc-num">02</span><a class="toc-link" href="#product">产品定位与核心功能</a></li>
-      <li><span class="toc-num">03</span><a class="toc-link" href="#arch-section">产品整体架构</a></li>
-      <li><span class="toc-num">04</span><a class="toc-link" href="#bigco-section">大厂落地经验</a></li>
-      <li><span class="toc-num">05</span><a class="toc-link" href="#tech-section">核心技术实践</a></li>
-      <li><span class="toc-num">06</span><a class="toc-link" href="#eval-section">评估体系</a></li>
-    </ol>
-  </nav>
-
-  <p><em>本文梳理 data agent 产品的设计思路，聚焦产品形态、核心能力框架与关键技术判断，不涉及太细节的实施方案。撰写过程中，结合个人数据科学领域的学习和实践经验，并借鉴了 OpenAI、Meta 等科技大厂团队推进 data agent 产品落地的经验，追求以科学、严谨、贴近前沿的方式做事。</em></p>
 
   <!-- ── 第一性原理 ── -->
   <section id="first-principles">
@@ -889,7 +760,7 @@ ORDER  BY 月份;</pre>
       <text x="584" y="271" text-anchor="end" font-size="10" fill="#C9A96E" font-style="italic">LLM 主导 · RAG 增强</text>
 
       <!-- Plan (LLM) -->
-      <rect x="138" y="278" width="424" height="44" rx="5" fill="#FAF7F2" stroke="#DDD5C8" stroke-width="1.5"/>
+      <rect x="138" y="278" width="424" height="44" rx="5" fill="#FFFDF8" stroke="#DDD5C8" stroke-width="1.5"/>
       <circle cx="150" cy="300" r="4.5" fill="#1B5E82"/>
       <text x="165" y="304" font-size="12" font-weight="700" fill="#1B5E82">Plan</text>
       <text x="205" y="304" font-size="11.5" fill="#3D3530">拆解问题 · 选指标 · 圈定候选表 · 设计方案</text>
@@ -897,7 +768,7 @@ ORDER  BY 月份;</pre>
       <line x1="360" y1="322" x2="360" y2="336" stroke="#5A5248" stroke-width="1.4" marker-end="url(#arr)"/>
 
       <!-- Retrieve Context (动态·按需) -->
-      <rect x="138" y="338" width="424" height="48" rx="5" fill="#FAF7F2" stroke="#DDD5C8" stroke-width="1.5"/>
+      <rect x="138" y="338" width="424" height="48" rx="5" fill="#FFFDF8" stroke="#DDD5C8" stroke-width="1.5"/>
       <circle cx="150" cy="355" r="4.5" fill="#fff" stroke="#1B5E82" stroke-width="1.3"/>
       <text x="165" y="359" font-size="12" font-weight="700" fill="#1B5E82">Retrieve Context</text>
       <text x="288" y="359" font-size="9.5" font-style="italic" fill="#C9A96E">动态 · 按需</text>
@@ -906,7 +777,7 @@ ORDER  BY 月份;</pre>
       <line x1="360" y1="386" x2="360" y2="400" stroke="#5A5248" stroke-width="1.4" marker-end="url(#arr)"/>
 
       <!-- Execute (LLM → 引擎) -->
-      <rect x="138" y="402" width="424" height="44" rx="5" fill="#FAF7F2" stroke="#DDD5C8" stroke-width="1.5"/>
+      <rect x="138" y="402" width="424" height="44" rx="5" fill="#FFFDF8" stroke="#DDD5C8" stroke-width="1.5"/>
       <circle cx="150" cy="424" r="4.5" fill="#fff" stroke="#1B5E82" stroke-width="1.3"/>
       <path d="M 150 419.5 A 4.5 4.5 0 0 1 150 428.5 Z" fill="#1B5E82"/>
       <text x="165" y="428" font-size="12" font-weight="700" fill="#1B5E82">Execute</text>
@@ -915,7 +786,7 @@ ORDER  BY 月份;</pre>
       <line x1="360" y1="446" x2="360" y2="460" stroke="#5A5248" stroke-width="1.4" marker-end="url(#arr)"/>
 
       <!-- Observe & Validate (LLM) -->
-      <rect x="138" y="462" width="424" height="66" rx="5" fill="#FAF7F2" stroke="#DDD5C8" stroke-width="1.5"/>
+      <rect x="138" y="462" width="424" height="66" rx="5" fill="#FFFDF8" stroke="#DDD5C8" stroke-width="1.5"/>
       <circle cx="150" cy="479" r="4.5" fill="#fff" stroke="#1B5E82" stroke-width="1.3"/>
       <path d="M 150 474.5 A 4.5 4.5 0 0 1 150 483.5 Z" fill="#1B5E82"/>
       <text x="165" y="483" font-size="11.5" font-weight="700" fill="#1B5E82">Observe &amp; Validate</text>
@@ -927,7 +798,7 @@ ORDER  BY 月份;</pre>
       <line x1="360" y1="528" x2="360" y2="542" stroke="#5A5248" stroke-width="1.4" marker-end="url(#arr)"/>
 
       <!-- Reflect (LLM) -->
-      <rect x="138" y="544" width="424" height="44" rx="5" fill="#FAF7F2" stroke="#DDD5C8" stroke-width="1.5"/>
+      <rect x="138" y="544" width="424" height="44" rx="5" fill="#FFFDF8" stroke="#DDD5C8" stroke-width="1.5"/>
       <circle cx="150" cy="566" r="4.5" fill="#1B5E82"/>
       <text x="165" y="570" font-size="12" font-weight="700" fill="#1B5E82">Reflect</text>
       <text x="218" y="570" font-size="11.5" fill="#3D3530">充分→收尾 · 需补充→继续 · 有误→纠错</text>
@@ -1106,7 +977,6 @@ ORDER  BY 月份;</pre>
   </section>
 
 </div>
-</article>
 </main>
 
 <script>
