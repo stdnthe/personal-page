@@ -242,23 +242,24 @@ hr{border:none;border-top:1px solid #DDD5C8;margin:32px 0}
     <ol>
       <li>
         <p><strong>智能取数与可视化</strong><br>将用户自然语言提问转化为精准的查询 SQL，并自动选择最优可视化图表，直观呈现数据洞察。</p>
-        <p class="example-q">业务原型问题：「帮我查过去一段时间某个区域的销售额」</p>
+        <p class="example-q">业务原型问题：「帮我查看过去一年某产品的销售表现」</p>
       </li>
       <li>
         <p><strong>数据分析</strong><br>依托 LLM 推理能力、算法库及数据科学领域标准方法论，完成指标归因分析、异常检测、预测等任务，产出可落地的洞察。</p>
-        <p class="example-q">业务原型问题：「为什么某客户/某地区销售额下滑这么多？」</p>
+        <p class="example-q">业务原型问题：「为什么上个月 GMV 下滑了 20%？」</p>
       </li>
       <li>
         <p><strong>专家级深度对话分析</strong><br>面对开放式、需多步探索的问题，通过多轮对话逐层深挖根因，产出专家级分析报告。过程中借助 human-in-the-loop 主动追问、澄清模糊意图，先与用户对齐分析思路再执行——<strong>这一步本质就是在用人补足缺失的验算闭环</strong>。</p>
-        <p class="example-q">业务原型问题：「怎么优化开发信的内容，可以提高客户的邮件打开率？」</p>
+        <p class="example-q">业务原型问题：「过去一段时间，某类用户群体留存为什么下降？应该采取什么策略？」</p>
       </li>
       <li>
         <p><strong>仪表盘导航</strong><br>根据需求自动生成 Dashboard，实现高频业务场景的数据化监控。解决"找 BI 排期做看板"的痛点，响应更快。</p>
-        <p class="example-q">业务原型问题：「做一个客户分层运营看板，帮我追踪各层级的关键指标变化，我要评估上季度运营策略带来了多少实际增量」</p>
+        <p class="example-q">业务原型问题：「做一个客户分层运营看板，追踪各层级关键指标变化，支撑个性化客户运营策略上线」</p>
       </li>
     </ol>
 
     <h3>产品 Demo 演示</h3>
+    <p class="editorial-note">以下为 Mock 数据与交互原型，用于展示 Data Agent 的产品形态与分析链路。</p>
     <div class="sub-tabs">
       <div class="sub-tab-bar">
         <button class="sub-tab-btn active" data-group="demo" data-tab="d1">智能取数与可视化</button>
@@ -272,7 +273,7 @@ hr{border:none;border-top:1px solid #DDD5C8;margin:32px 0}
         <div class="demo-card">
           <!-- 用户提问气泡 -->
           <div class="demo-user-bubble">
-            <div class="demo-bubble-text">帮我看看过去一年北美的升降桌销售情况？</div>
+            <div class="demo-bubble-text">帮我看看过去一年北美某消费电子产品的销售情况？</div>
           </div>
           <!-- 思考过程（折叠） -->
           <div class="demo-think-toggle" id="think-toggle" onclick="toggleThinking()">
@@ -282,17 +283,17 @@ hr{border:none;border-top:1px solid #DDD5C8;margin:32px 0}
           </div>
           <div class="demo-think-panel" id="demo-thinking">
             <div class="demo-think-steps">
-              <div class="demo-think-step"><span class="demo-think-icon">✓</span><span class="demo-think-lbl">意图识别</span><span class="demo-think-desc">解析用户问题：查询北美地区 · 升降桌品类 · 过去 12 个月 · 销售概况</span></div>
+              <div class="demo-think-step"><span class="demo-think-icon">✓</span><span class="demo-think-lbl">意图识别</span><span class="demo-think-desc">解析用户问题：查询北美地区 · 某消费电子产品 · 过去 12 个月 · 销售概况</span></div>
               <div class="demo-think-step"><span class="demo-think-icon">✓</span><span class="demo-think-lbl">匹配数据表</span><span class="demo-think-desc">命中 orders 表（置信度 96%），关联 region、product_category 维度</span></div>
               <div class="demo-think-step"><span class="demo-think-icon">✓</span><span class="demo-think-lbl">口径确认</span><span class="demo-think-desc">sales_date 对应下单日期，revenue_usd 为实际成交金额（已排除退款）</span></div>
-              <div class="demo-think-step"><span class="demo-think-icon">✓</span><span class="demo-think-lbl">生成 SQL</span><span class="demo-think-desc">按月聚合，含同比计算，过滤条件：region = 'North America' &amp; category = '升降桌'</span></div>
+              <div class="demo-think-step"><span class="demo-think-icon">✓</span><span class="demo-think-lbl">生成 SQL</span><span class="demo-think-desc">按月聚合，含同比计算，过滤条件：region = 'North America' &amp; category = 'Consumer Electronics'</span></div>
               <div class="demo-think-step"><span class="demo-think-icon">✓</span><span class="demo-think-lbl">结果校验</span><span class="demo-think-desc">返回 12 行 · 无空值 · 总金额 $3,314,580 · 同比字段计算正常</span></div>
               <div class="demo-think-step"><span class="demo-think-icon">✓</span><span class="demo-think-lbl">洞察生成</span><span class="demo-think-desc">识别 Q4 增长峰值与加拿大市场高增速，生成文字摘要</span></div>
             </div>
           </div>
           <!-- 数据洞察（始终可见） -->
           <p class="demo-insight-label">数据洞察</p>
-          <p class="demo-insight-text">2025 年北美升降桌销售额共计 <strong>$3,314,580</strong>，同比增长 <strong style="color:#2A8A4A">+23.4%</strong>。Q4 表现最突出，占全年销售额的 <strong>33%</strong>；美国市场贡献 78%，加拿大市场增速最快（YoY +41%）。整体呈稳健增长趋势，建议重点关注 Q1 同比增速偏低的原因。</p>
+          <p class="demo-insight-text">2025 年北美某消费电子产品销售额共计 <strong>$3,314,580</strong>，同比增长 <strong style="color:#2A8A4A">+23.4%</strong>。Q4 表现最突出，占全年销售额的 <strong>33%</strong>；美国市场贡献 78%，加拿大市场增速最快（YoY +41%）。整体呈稳健增长趋势，建议重点关注 Q1 同比增速偏低的原因。</p>
           <!-- 结果 Tab（互斥，可折叠） -->
           <div class="demo-result-tabs">
             <div class="demo-result-bar">
@@ -374,7 +375,7 @@ hr{border:none;border-top:1px solid #DDD5C8;margin:32px 0}
     ROUND(AVG(revenue_usd), 0)       AS 客单价
   FROM   orders
   WHERE  region           = 'North America'
-    AND  product_category = '升降桌'
+    AND  product_category = 'Consumer Electronics'
     AND  order_date BETWEEN '2024-01-01' AND '2025-12-31'   -- 多取一年，供同比回看
   GROUP  BY 1
 )
