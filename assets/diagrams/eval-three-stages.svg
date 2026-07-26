@@ -1,0 +1,57 @@
+<svg width="1200" height="480" viewBox="0 0 1200 480" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="480" fill="#F7F5EF"/>
+  <text x="600" y="56" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="30" font-weight="700" fill="#222222">LLM 评估的三个阶段</text>
+  <text x="600" y="90" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="17" fill="#5F6368">模型怎么训练，评估就怎么分阶段</text>
+
+  <!-- Stage 1: Pre-training -->
+  <rect x="60" y="130" width="300" height="290" rx="18" fill="#EAF4F4" stroke="#2F6F73" stroke-width="2"/>
+  <rect x="60" y="130" width="300" height="58" rx="18" fill="#2F6F73"/>
+  <rect x="60" y="170" width="300" height="18" fill="#2F6F73"/>
+  <text x="210" y="167" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="20" font-weight="700" fill="#FFFFFF">① Pre-Training</text>
+  <text x="210" y="210" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="15" fill="#1F4F52">评测对象：基座模型（Base Model）</text>
+  <text x="210" y="248" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="15" fill="#2F6F73">目标：验证架构与数据质量</text>
+  <line x1="90" y1="268" x2="330" y2="268" stroke="#A8D5D7" stroke-width="1" stroke-dasharray="4,3"/>
+  <text x="210" y="296" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="14" fill="#3A7A7E">· 世界知识</text>
+  <text x="210" y="320" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="14" fill="#3A7A7E">· 语言理解与推理</text>
+  <text x="210" y="344" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="14" fill="#3A7A7E">· 代码与数学</text>
+  <text x="210" y="368" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="14" fill="#3A7A7E">· 长上下文</text>
+  <text x="210" y="398" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="13" fill="#2F6F73">评分：Exact Match（精确匹配）</text>
+
+  <!-- Arrow 1 -->
+  <line x1="370" y1="275" x2="415" y2="275" stroke="#888" stroke-width="2.5"/>
+  <polygon points="415,268 430,275 415,282" fill="#888"/>
+
+  <!-- Stage 2: Post-training -->
+  <rect x="440" y="130" width="320" height="290" rx="18" fill="#FFF4E0" stroke="#E6A23C" stroke-width="2"/>
+  <rect x="440" y="130" width="320" height="58" rx="18" fill="#E6A23C"/>
+  <rect x="440" y="170" width="320" height="18" fill="#E6A23C"/>
+  <text x="600" y="167" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="20" font-weight="700" fill="#FFFFFF">② Post-Training</text>
+  <text x="600" y="210" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="15" fill="#7A4D00">评测对象：对齐后模型（Chat Model）</text>
+  <text x="600" y="248" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="15" fill="#E6A23C">目标：验证真实使用能力</text>
+  <line x1="465" y1="268" x2="745" y2="268" stroke="#F5D5A0" stroke-width="1" stroke-dasharray="4,3"/>
+  <text x="600" y="296" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="14" fill="#8A5A00">· 知识与推理（含前沿难题）</text>
+  <text x="600" y="320" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="14" fill="#8A5A00">· 长上下文（百万 Token）</text>
+  <text x="600" y="344" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="14" fill="#8A5A00">· Agent 能力</text>
+  <text x="600" y="368" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="14" fill="#8A5A00">· 推理预算（Non-Think / Max）</text>
+  <text x="600" y="398" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="13" fill="#E6A23C">评分：Pass@k · Elo · LLM-as-Judge</text>
+
+  <!-- Arrow 2 -->
+  <line x1="770" y1="275" x2="815" y2="275" stroke="#888" stroke-width="2.5"/>
+  <polygon points="815,268 830,275 815,282" fill="#888"/>
+
+  <!-- Stage 3: Real-world -->
+  <rect x="840" y="130" width="300" height="290" rx="18" fill="#FCE9E4" stroke="#C8553D" stroke-width="2"/>
+  <rect x="840" y="130" width="300" height="58" rx="18" fill="#C8553D"/>
+  <rect x="840" y="170" width="300" height="18" fill="#C8553D"/>
+  <text x="990" y="167" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="20" font-weight="700" fill="#FFFFFF">③ Real-World Task</text>
+  <text x="990" y="210" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="15" fill="#7C2D1F">评测对象：真实场景表现</text>
+  <text x="990" y="248" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="15" fill="#C8553D">目标：验证用户价值</text>
+  <line x1="865" y1="268" x2="1115" y2="268" stroke="#F0B0A0" stroke-width="1" stroke-dasharray="4,3"/>
+  <text x="990" y="296" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="14" fill="#8E3322">· 写作质量</text>
+  <text x="990" y="320" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="14" fill="#8E3322">· 搜索与信息检索</text>
+  <text x="990" y="344" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="14" fill="#8E3322">· 企业白领任务</text>
+  <text x="990" y="368" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="14" fill="#8E3322">· 代码 Agent 工程任务</text>
+  <text x="990" y="398" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="13" fill="#C8553D">评分：人工盲评 · Pairwise 胜率</text>
+
+  <text x="600" y="458" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="15" fill="#6B7280">越往右，评估越接近真实体验；越往左，评估越客观可重复</text>
+</svg>

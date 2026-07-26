@@ -14,7 +14,7 @@ EN = {
     "navWriting": "Blogs",
     "heroEyebrow": "Growth Analytics / AI Product Analytics / LLM Evaluation",
     "heroTitle": "About Me",
-    "heroLede": "I'm Jiaqi He. I enjoy turning business problems into data-driven insights and building practical AI-powered analytics products. I have also completed the Certificate in Quantitative Finance (CQF), which strengthened my foundation in quantitative modeling and machine learning in finance.",
+    "heroLede": "I'm Jiaqi He, an AI Product Data Scientist focused on LLM Evaluation, Agent Products, and Growth Analytics. I have also completed the Certificate in Quantitative Finance (CQF), which strengthened my foundation in quantitative modeling, machine learning, and financial applications.",
     "skillsKicker": "Core Skills",
     "homeBioOne": "I focus on turning growth, product, and business questions into verifiable data judgment, then shaping that judgment into more reliable AI analytics products.",
     "homeBioTwo": "My interests sit across Growth Analytics, AI Product Analytics, and LLM Evaluation: not just whether a model is capable, but whether it creates stable value in real tasks.",

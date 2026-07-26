@@ -1,111 +1,449 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>How do we know whether a model is strong? | Jiaqi He</title>
-    <meta
-      name="description"
-      content="A map of benchmarks, human preference, real tasks, and agent evaluation."
-    />
-    <link rel="stylesheet" href="../site.css?v=20260524-c" />
-  </head>
-  <body class="article-page">
-    <header class="site-header">
-      <a class="brand" href="../index.html" aria-label="Back to home">
-        <span>
-          <strong><span>Jiaqi</span> <em>He</em></strong>
-          <small>AI Eval Lab</small>
-        </span>
-      </a>
-      <nav class="nav" aria-label="Main navigation">
-        <a href="../blogs.html">Blogs</a>
-        <a href="../projects.html">Project</a>
-      </nav>
-    </header>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LLM 评估：如何判断模型到底强不强？ | Jiaqi He</title>
+<meta name="description" content="从 Pre-Training、Post-Training 到 Real-World Task，读懂 LLM 评估体系的三个阶段。">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#FFFDF8;color:#1C1917;font-family:"PingFang SC","Noto Sans SC",-apple-system,"Helvetica Neue",sans-serif;font-size:16px;line-height:1.85}
 
-    <main class="article-layout">
-      <section class="series-progress" aria-label="Series progress">
-        <div class="progress-meta">
-          <span>Article 5 / 5</span>
-          <span>7 min read</span>
-        </div>
-        <div class="progress-track" aria-hidden="true">
-          <div class="progress-fill" style="width: 100%"></div>
-        </div>
-        <div class="series-steps">
-          <a href="transformer.html">
-            <span class="step-index">01</span>
-            <span class="step-title">What problem did the Transformer actually solve?</span>
-          </a>
-          <a href="attention.html">
-            <span class="step-index">02</span>
-            <span class="step-title">Attention: how does a model decide where to look?</span>
-          </a>
-          <a href="transformer-block.html">
-            <span class="step-index">03</span>
-            <span class="step-title">Transformer Block: the building block of LLMs</span>
-          </a>
-          <a href="llm-training.html">
-            <span class="step-index">04</span>
-            <span class="step-title">How LLMs are trained: from data to dialogue</span>
-          </a>
-          <a class="active" href="model-evaluation.html">
-            <span class="step-index">05</span>
-            <span class="step-title">How do we know whether a model is strong?</span>
-          </a>
-        </div>
-      </section>
+/* ── 返回链接 ── */
+.site-link{position:fixed;right:20px;top:18px;z-index:20;display:inline-flex;align-items:center;gap:6px;padding:8px 12px;border:1px solid #DDD5C8;border-radius:999px;background:rgba(255,253,248,.92);color:#1B5E82;text-decoration:none;font-size:12px;font-weight:700;box-shadow:0 8px 20px rgba(28,25,23,.08);backdrop-filter:blur(10px)}
+.site-link:hover{background:#E0EDF5}
 
-      <article>
-        <header class="article-header">
-          <p class="section-kicker">AI Evaluation</p>
-          <h1>How do we know whether a model is strong?</h1>
-          <p class="article-summary">A model’s strength is not just a leaderboard score. What matters is whether it is stable, controllable, and explainable in your task.</p>
-        </header>
+/* ── 侧边栏 ── */
+.sidebar{position:fixed;top:0;left:0;width:244px;height:100vh;overflow-y:auto;background:#F9F8F5;border-right:1px solid #DDD5C8;display:flex;flex-direction:column;scrollbar-width:thin;scrollbar-color:#C8BEAE transparent}
+.sidebar::-webkit-scrollbar{width:4px}
+.sidebar::-webkit-scrollbar-thumb{background:#C8BEAE;border-radius:2px}
+.sidebar-header{padding:22px 16px 14px;border-bottom:1px solid #DDD5C8}
+.sidebar-series{font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#9A8F87;margin-bottom:4px}
+.sidebar-title{font-size:12.5px;font-weight:600;color:#1C1917;line-height:1.45}
+.sidebar-sub{font-size:11px;color:#9A8F87;margin-top:4px}
+.toc{list-style:none;padding:10px 0 32px}
+.toc-h2>a{display:block;padding:5px 18px;font-size:13px;font-weight:500;color:#3D3530;text-decoration:none;border-left:2px solid transparent;transition:all .12s}
+.toc-h3>a{display:block;padding:4px 18px 4px 30px;font-size:12px;color:#7A7068;text-decoration:none;border-left:2px solid transparent;transition:all .12s}
+.toc-h2>a:hover,.toc-h3>a:hover{background:#E8E1D6;color:#1C1917}
+.toc-h2>a.active,.toc-h3>a.active{color:#1B5E82;background:#E0EDF5;border-left-color:#1B5E82}
+.toc-sep{height:1px;background:#DDD5C8;margin:8px 18px}
 
-        <div class="article-body">
-          <p>The easiest mistake in model evaluation is treating one score as the whole answer. Scores are useful, but they usually illuminate only one small part of the capability map.</p>
+/* ── 主内容 ── */
+.content{margin-left:244px}
+.content-inner{max-width:960px;margin:0 auto;padding:52px 64px 100px}
 
-          <div class="concept-map" aria-label="模型评估地图">
-            <div class="concept-node">
-              <strong>Benchmark</strong>
-              <span>Useful for quick comparison, but often far from real business tasks.</span>
-            </div>
-            <div class="concept-node">
-              <strong>Human preference</strong>
-              <span>Measures whether answers feel natural, clear, and helpful, but costs more.</span>
-            </div>
-            <div class="concept-node">
-              <strong>Real tasks</strong>
-              <span>Closest to product value, but requires clear data, constraints, and success criteria.</span>
-            </div>
-          </div>
+/* ── 文档标题 ── */
+.doc-header{margin-bottom:36px;padding-bottom:24px;border-bottom:1px solid #DDD5C8}
+.doc-kicker{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#C9A96E;margin-bottom:10px}
+h1{font-size:26px;font-weight:700;color:#0C0A09;line-height:1.3;margin-bottom:10px}
+.doc-note{color:#9A8F87;font-size:13.5px;font-style:italic;line-height:1.7}
 
-          <h2>Leaderboard scores are a starting point</h2>
-          <p>Benchmarks help us compare knowledge, math, code, and reasoning. But a high score does not guarantee that a model fits your actual workflow.</p>
+/* ── 标题 ── */
+h2{font-size:20px;font-weight:700;color:#0C0A09;margin:48px 0 14px;padding-bottom:9px;border-bottom:1px solid #DDD5C8;scroll-margin-top:20px}
+h3{font-size:15.5px;font-weight:600;color:#1B5E82;margin:28px 0 10px;padding-left:11px;border-left:3px solid #1B5E82;scroll-margin-top:20px}
+h4{font-size:15px;font-weight:700;color:#0C0A09;margin:22px 0 9px;scroll-margin-top:20px}
 
-          <h2>Real-task evaluation is closer to product judgment</h2>
-          <p>For a data analysis agent, the question is not only whether the answer is correct. It also needs to understand the business question, choose data, write runnable code, explain results, and notice anomalies.</p>
+/* ── 段落 & 列表 ── */
+p{margin:9px 0}
+ul,ol{padding-left:22px;margin:9px 0}
+li{margin:5px 0;line-height:1.8}
 
-          <h2>Good evaluation must be reproducible</h2>
-          <p>The test set, scoring rules, failure categories, and example records all need to be explicit. Otherwise a model may look better or worse simply because the test changed.</p>
+/* ── 引用块 ── */
+blockquote{border-left:4px solid #C9A96E;background:#FBF6ED;margin:16px 0;padding:13px 18px;border-radius:0 6px 6px 0}
+blockquote p{margin:3px 0;color:#3D3530;font-size:15px}
 
-          <h2>One-sentence takeaway</h2>
-          <p>To judge a model, combine general scores, human experience, and real-task results. In product work, reliably solving the target task matters more than chasing one high score.</p>
-        </div>
-      </article>
+/* ── 编辑注释 ── */
+.editorial-note{color:#9A8F87;font-style:italic;font-size:13px;padding:8px 14px;border-left:2px dashed #C8BEAE;background:#F5F2EE;margin:12px 0;border-radius:0 4px 4px 0}
 
-      <nav class="article-nav" aria-label="Article navigation">
-        <a href="llm-training.html">
-          <span>Previous</span>
-          <strong>How LLMs are trained: from data to dialogue</strong>
-        </a>
-        <a href="index.html">
-          <span>Back to series</span>
-          <strong>LLM Explainer Series</strong>
-        </a>
-      </nav>
-    </main>
-  </body>
+/* ── 表格 ── */
+.table-wrapper{overflow-x:auto;margin:14px 0}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th{background:#EDE7DB;font-weight:600;text-align:left;padding:9px 13px;border:1px solid #DDD5C8;color:#1C1917}
+td{padding:8px 13px;border:1px solid #DDD5C8;vertical-align:top;line-height:1.7}
+tr:nth-child(even) td{background:#FFFFFF}
+
+/* ── 代码 ── */
+code{background:#EDE8DF;padding:2px 5px;border-radius:3px;font-family:"SFMono-Regular",Consolas,monospace;font-size:.86em}
+pre{background:#EDE8DF;padding:14px 18px;border-radius:8px;overflow-x:auto;margin:14px 0;border-left:3px solid #C8BEAE}
+pre code{background:none;padding:0;font-size:.87em;line-height:1.7}
+
+/* ── 图片 ── */
+.diagram{width:100%;border-radius:10px;margin:20px 0;display:block}
+.diagram-caption{font-size:12.5px;color:#9A8F87;text-align:center;margin-top:-10px;margin-bottom:20px}
+
+/* ── 阶段标签 ── */
+.stage-badge{display:inline-block;padding:3px 10px;border-radius:20px;font-size:11.5px;font-weight:700;letter-spacing:.06em;margin-bottom:8px}
+.stage-badge.pre{background:#EAF4F4;color:#1F4F52;border:1px solid #2F6F73}
+.stage-badge.post{background:#FFF4E0;color:#7A4D00;border:1px solid #E6A23C}
+.stage-badge.real{background:#FCE9E4;color:#7C2D1F;border:1px solid #C8553D}
+
+/* ── 分割线 ── */
+hr{border:none;border-top:1px solid #DDD5C8;margin:40px 0}
+
+/* ── 检查清单 ── */
+.checklist{list-style:none;padding:0}
+.checklist li{display:flex;align-items:flex-start;gap:10px;padding:7px 0;border-bottom:1px solid #F0EBE3;font-size:14.5px}
+.checklist li:last-child{border-bottom:none}
+.checklist .check-icon{width:18px;height:18px;border:1.5px solid #C8BEAE;border-radius:4px;flex-shrink:0;margin-top:3px;background:#FFFDF8}
+
+/* ── 总结块 ── */
+.summary-block{background:#EDE7DB;border-radius:10px;padding:24px 28px;margin:32px 0}
+.summary-block p{margin:8px 0;font-size:15px}
+.summary-block strong{color:#1B5E82}
+
+/* ── 响应式 ── */
+@media(max-width:860px){
+  .site-link{position:sticky;top:0;right:auto;left:0;width:100%;justify-content:center;border-width:0 0 1px;border-radius:0;box-shadow:none}
+  .sidebar{position:relative;width:100%;height:auto;max-height:45vh;border-right:none;border-bottom:1px solid #DDD5C8}
+  .toc{display:grid;grid-template-columns:1fr 1fr;padding-bottom:14px}
+  .toc-h2>a,.toc-h3>a{padding:6px 12px;font-size:12px;border-left:none}
+  .toc-h3>a{padding-left:16px}
+  .toc-sep{display:none}
+  .content{margin-left:0}
+  .content-inner{padding:32px 18px 60px}
+  h1{font-size:22px}
+  h2{font-size:18px;margin-top:36px}
+}
+</style>
+</head>
+<body>
+
+<a class="site-link" href="../blogs.html">&larr; Back to Jiaqi He</a>
+
+<!-- ══ 侧边栏 ══ -->
+<nav class="sidebar" aria-label="目录">
+  <div class="sidebar-header">
+    <div class="sidebar-series">LLM 科普系列 · 第 5 篇</div>
+    <div class="sidebar-title">LLM 评估：如何判断模型到底强不强？</div>
+    <div class="sidebar-sub">参考 DeepSeek-V4 论文</div>
+  </div>
+  <ul class="toc">
+    <li class="toc-h2"><a class="toc-link" href="#intro">引言</a></li>
+    <li class="toc-sep"></li>
+    <li class="toc-h2"><a class="toc-link" href="#pre-training">一、Pre-Training 评测</a></li>
+    <li class="toc-h3"><a class="toc-link" href="#pre-what">评测什么</a></li>
+    <li class="toc-h3"><a class="toc-link" href="#pre-bench">主要 Benchmark</a></li>
+    <li class="toc-h3"><a class="toc-link" href="#pre-method">评测方法</a></li>
+    <li class="toc-sep"></li>
+    <li class="toc-h2"><a class="toc-link" href="#post-training">二、Post-Training 评测</a></li>
+    <li class="toc-h3"><a class="toc-link" href="#post-what">评测什么</a></li>
+    <li class="toc-h3"><a class="toc-link" href="#post-bench">主要 Benchmark</a></li>
+    <li class="toc-h3"><a class="toc-link" href="#post-method">评测方法</a></li>
+    <li class="toc-h3"><a class="toc-link" href="#reasoning-budget">推理预算</a></li>
+    <li class="toc-sep"></li>
+    <li class="toc-h2"><a class="toc-link" href="#real-world">三、Real-World Task 评测</a></li>
+    <li class="toc-h3"><a class="toc-link" href="#real-why">为什么还需要真实场景评测</a></li>
+    <li class="toc-h3"><a class="toc-link" href="#real-tasks">主要任务类型</a></li>
+    <li class="toc-h3"><a class="toc-link" href="#real-method">评测方法</a></li>
+    <li class="toc-sep"></li>
+    <li class="toc-h2"><a class="toc-link" href="#checklist">四、报告阅读检查清单</a></li>
+    <li class="toc-h2"><a class="toc-link" href="#summary">总结</a></li>
+  </ul>
+</nav>
+
+<!-- ══ 主内容 ══ -->
+<main class="content">
+<div class="content-inner">
+
+  <!-- 标题 -->
+  <header class="doc-header" id="intro">
+    <p class="doc-kicker">AI Evaluation · 系列第 5 篇</p>
+    <h1>LLM 评估：如何判断模型到底强不强？</h1>
+    <p class="doc-note">本文参考了 DeepSeek-V4 论文中的评估体系。</p>
+  </header>
+
+  <!-- 引言 -->
+  <p>LLM 的能力是多个维度的：一个模型可能数学很强，写作一般；聊天很流畅，但修复真实 bug 不稳定；短题答得好，一放进长文档或 Agent 工作流就掉链子。</p>
+
+  <p><strong>LLM 评估主要有以下几个维度（暂不考虑多模态能力）</strong></p>
+
+  <img class="diagram" src="../assets/diagrams/llm-evaluation-matrix.svg" alt="LLM 评估能力矩阵">
+
+  <p><strong>评估也是分阶段的</strong></p>
+
+  <p>LLM 的训练分 Pre-Training（预训练）和 Post-Training（后训练）两个大阶段。不同阶段出来的模型，能力侧重不同，评估方法也不同。加上最后在真实任务中的表现，完整的评估体系一共有三个阶段。</p>
+
+  <img class="diagram" src="../assets/diagrams/eval-three-stages.svg" alt="LLM 评估的三个阶段">
+  <p class="diagram-caption"></p>
+  <hr>
+
+  <!-- ══ 一、Pre-Training ══ -->
+  <section id="pre-training">
+    <h2>一、Pre-Training：Base Model Evaluation</h2>
+
+    <h3 id="pre-what">这个阶段评测什么</h3>
+    <span class="stage-badge pre">① Pre-Training · Base Model</span>
+    <p>预训练结束后，得到的是 <strong>Base Model</strong>。它还没有经过指令微调，不会"听话"，不擅长对话，但它是所有后续能力的地基。</p>
+    <p>核心目标是：<strong>在只做大规模 next-token prediction 训练时，模型有没有学到语言、知识、推理、代码、数学等基础能力？架构设计是否有效，数据质量是否够高？</strong></p>
+
+    <h3 id="pre-bench">主要 Benchmark</h3>
+    <p>基座模型的评测通常覆盖四个维度：</p>
+
+    <h4>世界知识</h4>
+    <p>测的是"模型记住了多少、记得准不准"。</p>
+    <p>常见 Benchmark：MMLU、MMLU-Pro、C-Eval（中文知识）、CMMLU、TriviaQA、SimpleQA、FACTS Parametric。</p>
+    <p>题目有标准答案，评分方式是 Exact Match（精确匹配），客观、自动化、可重复。</p>
+
+    <h4>语言理解与推理</h4>
+    <p>测的是"模型能不能理解语言逻辑，完成复杂推断"。</p>
+    <p>常见 Benchmark：BBH（BIG-Bench Hard）、DROP、HellaSwag、WinoGrande。</p>
+    <p>BBH 被专门设计成"让模型难以靠记忆做对"的题集，更能测出真实推理能力。</p>
+
+    <h4>代码与数学</h4>
+    <p>测的是结构化推理和程序生成能力。</p>
+    <p>常见 Benchmark：HumanEval（Pass@1）、BigCodeBench、GSM8K、MATH、CMath。</p>
+    <p>这类题有执行环境做验证，答案对不对不靠人判断，是目前<strong>最可靠的自动评估之一</strong>。</p>
+
+    <h4>长上下文</h4>
+    <p>测的不是"上下文窗口有多长"，而是"模型在很长的输入里，能不能找到并用好关键信息"。</p>
+    <p>常见 Benchmark：LongBench-V2（多任务长文档理解）。</p>
+
+    <h3 id="pre-method">评测方法</h3>
+    <p>这个阶段以<strong>自动化客观评分</strong>为主：</p>
+    <ul>
+      <li>多数题目用 Exact Match（EM）：模型输出必须与标准答案完全匹配</li>
+      <li>通常用 few-shot 提示（比如 5-shot），给模型几道例题后再提问，减少格式差异带来的噪音</li>
+      <li>所有模型在同一评估框架下跑，结果才有横向可比性</li>
+    </ul>
+    <blockquote>
+      <p>DeepSeek-V4 论文特别说明：<strong>分数差距不超过 0.3 视为同水平</strong>，避免把统计误差当成真实差距。</p>
+    </blockquote>
+  </section>
+
+  <hr>
+
+  <!-- ══ 二、Post-Training ══ -->
+  <section id="post-training">
+    <h2>二、Post-Training：Standard Benchmark Evaluation</h2>
+
+    <h3 id="post-what">这个阶段评测什么</h3>
+    <span class="stage-badge post">② Post-Training · Chat Model</span>
+    <p>经过 SFT（监督微调）和 RL（强化学习）后，得到的是<strong>对齐模型（Chat Model）</strong>，也就是用户实际使用的版本。</p>
+    <p>这个阶段的评测，目标是：<strong>验证模型在真实指令下的综合能力，包括知识调用、推理深度、工具使用和多步骤任务完成。</strong></p>
+    <p>题目比预训练阶段难得多，覆盖的场景也更接近实际使用。</p>
+
+    <h3 id="post-bench">主要 Benchmark</h3>
+
+    <h4>知识与推理（含前沿难题）</h4>
+    <ul>
+      <li><strong>MMLU-Pro、GPQA Diamond</strong>：研究生级科学题，需要深度推理</li>
+      <li><strong>HLE（Humanity's Last Exam，人类最后考试）</strong>：目前最难的多学科综合评测，题目由顶尖学者出题</li>
+      <li><strong>LiveCodeBench</strong>：持续更新的真实竞赛代码题，避免训练数据污染</li>
+      <li><strong>IMOAnswerBench</strong>：国际数学奥林匹克水平题目</li>
+      <li><strong>Codeforces（竞赛 Elo 排名）</strong>：让模型参加真实编程竞赛，计算 Elo 评分</li>
+    </ul>
+
+    <h4>长上下文（百万 Token 级别）</h4>
+    <ul>
+      <li><strong>MRCR（Multi-Round Context Retrieval）</strong>：在百万 Token 中做多针检索，测模型能不能在超长输入里找到所有相关信息</li>
+      <li><strong>CorpusQA</strong>：更接近真实场景的长文档问答</li>
+    </ul>
+
+    <h4>Agent 能力</h4>
+    <p>Agent 评测是目前发展最快的方向，测的是模型能否在真实工具环境里完成多步骤任务：</p>
+    <div class="table-wrapper">
+      <table>
+        <thead><tr><th>Benchmark</th><th>测试内容</th></tr></thead>
+        <tbody>
+          <tr><td><strong>SWE-Verified</strong></td><td>修复真实 GitHub issue，能否通过测试</td></tr>
+          <tr><td><strong>Terminal Bench 2.0</strong></td><td>终端命令行操作任务</td></tr>
+          <tr><td><strong>BrowseComp</strong></td><td>网页浏览 + 复杂信息检索</td></tr>
+          <tr><td><strong>MCPAtlas / Tool-Decathlon</strong></td><td>跨多种工具、MCP 服务的综合使用</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="editorial-note">DeepSeek-V4 在设计 Agent 评测时，刻意把工具集限制到最少——<strong>只给模型 bash 和 file-edit 两个工具</strong>，目的是测真实推理能力，而不是工具工程能力。</p>
+
+    <h3 id="post-method">评测方法</h3>
+    <p>这个阶段的方法开始多元化，因为任务类型不同，评分逻辑也不同。</p>
+
+    <h4>Pass@k</h4>
+    <p>生成 k 个答案，只要有一个正确就算通过。Pass@1 看稳定性；Pass@8、Pass@16 更像是在看模型的能力上限。适合数学、代码等有明确对错的任务。</p>
+
+    <h4>Codeforces Elo：把模型当选手参赛</h4>
+    <p>这是 DeepSeek-V4 论文里一个有意思的评估设计，比干讲 Elo 原理直观得多：</p>
+    <pre><code>每道题  →  生成 32 个候选解
+        →  随机采样 10 个提交
+        →  按真实 Codeforces 赛制计分（错误次数会被扣分）
+        →  与真实人类选手历史成绩比较
+        →  最终得出模型的估算人类排名</code></pre>
+    <p>结果：DeepSeek-V4-Pro-Max 估算排在人类选手<strong>第 23 位</strong>。</p>
+
+    <h4>LLM-as-Judge（用 AI 当裁判）</h4>
+    <p>有些任务很难用标准答案评分，比如"这段分析有没有深度"、"这段代码是否符合工程规范"。</p>
+    <p>一种解决方案是用另一个 LLM 来评分，提供评分 Rubric（评分细则），让模型按照细则打分。这叫 <strong>LLM-as-Judge</strong>，也叫 Generative Reward Model（生成式奖励模型）。</p>
+    <p>DeepSeek-V4 在后训练阶段放弃了传统的标量打分模型，改用这种方式评估难以自动验证的任务。优点是覆盖面广，缺点是评审模型本身也可能有偏见，需要谨慎使用。</p>
+
+    <h3 id="reasoning-budget">推理预算：一个容易被忽视的变量</h3>
+    <p>评测 Post-Training 模型时，还有一个关键变量经常被忽视：<strong>模型用了多少推理 Token？</strong></p>
+    <p>现代推理模型支持不同的"思考深度"，DeepSeek-V4 把它分成三个模式：</p>
+    <div class="table-wrapper">
+      <table>
+        <thead><tr><th>模式</th><th>特点</th><th>适合场景</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Non-Think</strong></td><td>直接回答，不输出思维链</td><td>日常对话、快速响应</td></tr>
+          <tr><td><strong>Think High</strong></td><td>有限推理预算，输出 <code>&lt;think&gt;</code> 过程</td><td>中等复杂任务</td></tr>
+          <tr><td><strong>Think Max</strong></td><td>最大推理预算，彻底展开推理</td><td>探索模型能力上限</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>同一个 DeepSeek-V4-Pro，在 HLE（人类最后考试）上的成绩：</p>
+    <img class="diagram" src="../assets/diagrams/reasoning-effort.svg" alt="推理预算对评测结果的影响">
+    <p>Non-Think 模式 7.7%，Think Max 模式 37.7%，<strong>差距将近 5 倍</strong>。</p>
+    <blockquote>
+      <p>如果一篇评测报告没有注明推理模式，它的数字就没有可比性。两个模型的 HLE 分数，一个用了 Max 模式，另一个用了 Non-Think，直接对比不具有参考性。</p>
+    </blockquote>
+  </section>
+
+  <hr>
+
+  <!-- ══ 三、Real-World Task ══ -->
+  <section id="real-world">
+    <h2>三、Real-World Task：真实场景评测</h2>
+
+    <h3 id="real-why">为什么还需要真实场景评测</h3>
+    <span class="stage-badge real">③ Real-World Task</span>
+    <blockquote>
+      <p>"标准化 Benchmark 往往难以捕捉真实任务的复杂性，测试结果和实际用户体验之间存在差距。"——DeepSeek-V4 论文</p>
+    </blockquote>
+    <p>标准 Benchmark 解决的是"可比性"问题。但它终究是"题目"，真实工作不是题目。真实任务通常包含：模糊需求、多轮上下文、隐含偏好、格式要求、领域规范——这些很难塞进一道标准化的题目里。</p>
+    <p>所以，严肃的评估体系会在标准 Benchmark 之外，<strong>额外设计真实场景评测，验证模型能不能真正服务用户。</strong></p>
+    <img class="diagram" src="../assets/diagrams/benchmark-vs-realworld.svg" alt="Benchmark 与真实任务评估">
+
+    <h3 id="real-tasks">主要任务类型</h3>
+
+    <h4>写作质量</h4>
+    <p>测模型能不能写出真正好用的内容，不只是"文字通顺"。</p>
+    <p>DeepSeek-V4 做了两类中文写作评测：</p>
+    <ul>
+      <li><strong>功能性写作</strong>：3170 道题，覆盖商务文书、媒体文案、学术写作、公文等 30+ 子类</li>
+      <li><strong>创意写作</strong>：2837 道题，覆盖小说、散文、诗歌等文体</li>
+    </ul>
+    <p>评测结果用<strong>胜率</strong>衡量：DeepSeek-V4-Pro 在功能性写作上对 Gemini-3.1-Pro 的总体胜率为 62.65% vs 34.10%。</p>
+
+    <h4>搜索能力</h4>
+    <p>测模型在接入搜索工具后，能不能真正找到并整合信息。DeepSeek-V4 对比了两种搜索策略：</p>
+    <ul>
+      <li><strong>RAG（检索增强生成）</strong>：一次性检索，喂给模型</li>
+      <li><strong>Agentic Search（智能体搜索）</strong>：模型自己决定搜什么、搜几次、怎么整合</li>
+    </ul>
+    <p>869 道题的测试结果：Agentic Search 胜率 61.7%，RAG 只有 18.3%。特别是在"原因分析"和"规划策略"类问题上，差距最明显——这类任务需要迭代搜索，一次性检索往往不够。</p>
+
+    <h4>企业白领任务</h4>
+    <p>测模型在职业场景里的实际输出质量。DeepSeek-V4 设计了 30 个高难度任务，跨越金融、法律、教育、技术等 13 个行业，评估四个维度：</p>
+    <div class="table-wrapper">
+      <table>
+        <thead><tr><th>评估维度</th><th>含义</th></tr></thead>
+        <tbody>
+          <tr><td><strong>任务完成度</strong></td><td>核心问题有没有被真正解决</td></tr>
+          <tr><td><strong>指令遵循</strong></td><td>有没有遵守格式、约束、特殊要求</td></tr>
+          <tr><td><strong>内容质量</strong></td><td>事实准确性、逻辑连贯性、专业深度</td></tr>
+          <tr><td><strong>格式美观</strong></td><td>排版可读性、视觉呈现</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h4>代码 Agent 工程任务</h4>
+    <p>测模型在真实 R&amp;D 环境里能不能独立完成工程任务。DeepSeek-V4 从 50+ 工程师的真实工作中收集了约 200 道题（PyTorch、CUDA、Rust、C++ 等），每道题配有原始仓库、执行环境和人工评分 Rubric，最终筛选出 30 道作为评测集。</p>
+    <div class="table-wrapper">
+      <table>
+        <thead><tr><th>模型</th><th>Pass Rate</th></tr></thead>
+        <tbody>
+          <tr><td>Claude Haiku 4.5</td><td>13%</td></tr>
+          <tr><td>Claude Sonnet 4.5</td><td>47%</td></tr>
+          <tr><td>DeepSeek-V4-Pro-Max</td><td>67%</td></tr>
+          <tr><td>Claude Opus 4.5（标准）</td><td>70%</td></tr>
+          <tr><td><strong>Claude Opus 4.6（思考版）</strong></td><td><strong>80%</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 id="real-method">评测方法</h3>
+    <p>真实场景任务大多没有标准答案，所以评分方式也不一样。</p>
+
+    <h4>Pairwise 人工盲评</h4>
+    <p>同一个任务，给两个模型各做一遍，让评审者在不知道哪个是哪个模型的情况下判断：A 更好、B 更好、还是差不多？最终统计 Win / Tie / Lose。</p>
+    <p>盲评的关键是<strong>评审者不知道模型身份</strong>，避免品牌偏见影响判断。这种方法适合写作、分析、企业任务这类主观性强的评测。局限是成本高、速度慢，而且评审者之间的偏好不一定一致。</p>
+
+    <h4>LLM-as-Judge 结合 Rubric</h4>
+    <p>对于规模更大的评测，完全靠人工不现实。另一种做法是：先设计详细的评分细则（Rubric），再用 LLM 按照细则评分，代替部分人工打分。这可以大幅扩展评测规模，但评审模型本身的偏见和盲点也会带进来。</p>
+  </section>
+
+  <hr>
+
+  <!-- ══ 四、检查清单 ══ -->
+  <section id="checklist">
+    <h2>四、读懂模型评测报告：一张检查清单</h2>
+    <p>下次看到某个新模型"刷新 SOTA""超越 GPT"这类说法，可以用这张清单过一遍：</p>
+
+    <h3>关于评测阶段</h3>
+    <ul class="checklist">
+      <li><span class="check-icon"></span><span>这是 Base 模型评测，还是 Chat 模型评测？（两者不能混比）</span></li>
+      <li><span class="check-icon"></span><span>有没有真实场景评测，还是只有标准 Benchmark？</span></li>
+    </ul>
+
+    <h3>关于推理预算</h3>
+    <ul class="checklist">
+      <li><span class="check-icon"></span><span>有没有注明推理模式（Non-Think / Think / Max）？</span></li>
+      <li><span class="check-icon"></span><span>如果是推理模型，有没有控制推理 Token 数量？</span></li>
+    </ul>
+
+    <h3>关于 Benchmark 本身</h3>
+    <ul class="checklist">
+      <li><span class="check-icon"></span><span>这些 Benchmark 和你的实际任务相关吗？</span></li>
+      <li><span class="check-icon"></span><span>有没有防止数据污染的措施（比如用竞赛后的新题）？</span></li>
+      <li><span class="check-icon"></span><span>题目是否有足够区分度，还是大家都高分看不出差异？</span></li>
+    </ul>
+
+    <h3>关于评测公平性</h3>
+    <ul class="checklist">
+      <li><span class="check-icon"></span><span>不同模型用的 prompt 格式、采样参数是否一致？</span></li>
+      <li><span class="check-icon"></span><span>如果是 Pairwise 评测，评审者是否是盲评？</span></li>
+    </ul>
+
+    <h3>关于评分的有效性</h3>
+    <ul class="checklist">
+      <li><span class="check-icon"></span><span>分数提升转化成真实用户体验提升了吗？</span></li>
+      <li><span class="check-icon"></span><span>有没有内部用户调研或线上数据验证？</span></li>
+    </ul>
+  </section>
+
+  <hr>
+
+  <!-- ══ 总结 ══ -->
+  <section id="summary">
+    <h2>总结</h2>
+    <div class="summary-block">
+      <p>LLM 评估不是一个分数，而是三层叠加：</p>
+      <p><strong>Pre-Training 评测</strong>模型的知识地基和架构效率</p>
+      <p><strong>Post-Training 标准 Benchmark</strong>模型在各类能力上的横向可比位置</p>
+      <p><strong>Real-World Task 评测</strong>模型在真实场景里到底好不好用</p>
+      <p style="margin-top:14px;color:#7A7068;font-size:14px">三层都看，才算看完一份评测报告。</p>
+    </div>
+  </section>
+
+</div>
+</main>
+
+<script>
+// 滚动高亮 TOC
+const tocLinks = document.querySelectorAll('.toc-link');
+const headings = Array.from(document.querySelectorAll('h2[id], h3[id]'));
+
+function updateToc() {
+  const scrollY = window.scrollY + 80;
+  let active = null;
+  for (const h of headings) {
+    if (h.offsetTop <= scrollY) active = h.id;
+  }
+  tocLinks.forEach(a => {
+    const href = a.getAttribute('href');
+    a.classList.toggle('active', href === '#' + active);
+  });
+}
+
+window.addEventListener('scroll', updateToc, {passive: true});
+updateToc();
+</script>
+</body>
 </html>

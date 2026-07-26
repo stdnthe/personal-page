@@ -1,0 +1,54 @@
+<svg width="1200" height="520" viewBox="0 0 1200 520" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="520" fill="#F7F5EF"/>
+  <text x="600" y="56" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="30" font-weight="700" fill="#222222">推理预算：同一个模型，成绩可以差 5 倍</text>
+  <text x="600" y="90" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="17" fill="#5F6368">DeepSeek-V4-Pro 在 HLE（人类最后考试）上的表现，按推理模式区分</text>
+
+  <!-- Bar chart background -->
+  <rect x="180" y="120" width="840" height="300" rx="12" fill="#FFFFFF" stroke="#E5E7EB" stroke-width="1.5"/>
+
+  <!-- Y axis grid lines -->
+  <line x1="260" y1="140" x2="980" y2="140" stroke="#F3F4F6" stroke-width="1"/>
+  <line x1="260" y1="190" x2="980" y2="190" stroke="#F3F4F6" stroke-width="1"/>
+  <line x1="260" y1="240" x2="980" y2="240" stroke="#F3F4F6" stroke-width="1"/>
+  <line x1="260" y1="290" x2="980" y2="290" stroke="#F3F4F6" stroke-width="1"/>
+  <line x1="260" y1="340" x2="980" y2="340" stroke="#F3F4F6" stroke-width="1"/>
+  <line x1="260" y1="390" x2="980" y2="390" stroke="#E5E7EB" stroke-width="1.5"/>
+
+  <!-- Y axis labels -->
+  <text x="248" y="394" text-anchor="end" font-family="Arial, 'PingFang SC', sans-serif" font-size="14" fill="#9CA3AF">0%</text>
+  <text x="248" y="344" text-anchor="end" font-family="Arial, 'PingFang SC', sans-serif" font-size="14" fill="#9CA3AF">10%</text>
+  <text x="248" y="294" text-anchor="end" font-family="Arial, 'PingFang SC', sans-serif" font-size="14" fill="#9CA3AF">20%</text>
+  <text x="248" y="244" text-anchor="end" font-family="Arial, 'PingFang SC', sans-serif" font-size="14" fill="#9CA3AF">30%</text>
+  <text x="248" y="194" text-anchor="end" font-family="Arial, 'PingFang SC', sans-serif" font-size="14" fill="#9CA3AF">40%</text>
+  <text x="248" y="144" text-anchor="end" font-family="Arial, 'PingFang SC', sans-serif" font-size="14" fill="#9CA3AF">50%</text>
+
+  <!-- Bar 1: Non-Think 7.7% -->
+  <!-- 7.7/50 * 250 = 38.5px height, top = 390 - 38.5 = 351.5 -->
+  <rect x="360" y="351" width="120" height="39" rx="6" fill="#CBD2D9"/>
+  <text x="420" y="343" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="22" font-weight="700" fill="#6B7280">7.7%</text>
+  <text x="420" y="418" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="16" fill="#6B7280">Non-Think</text>
+  <text x="420" y="438" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="13" fill="#9CA3AF">不思考，直接回答</text>
+
+  <!-- Bar 2: High 34.5% -->
+  <!-- 34.5/50 * 250 = 172.5px, top = 390-172.5 = 217.5 -->
+  <rect x="540" y="217" width="120" height="173" rx="6" fill="#E6A23C"/>
+  <text x="600" y="208" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="22" font-weight="700" fill="#7A4D00">34.5%</text>
+  <text x="600" y="418" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="16" fill="#7A4D00">Think High</text>
+  <text x="600" y="438" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="13" fill="#9CA3AF">有限推理预算</text>
+
+  <!-- Bar 3: Max 37.7% -->
+  <!-- 37.7/50 * 250 = 188.5px, top = 390-188.5 = 201.5 -->
+  <rect x="720" y="201" width="120" height="189" rx="6" fill="#2F6F73"/>
+  <text x="780" y="192" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="22" font-weight="700" fill="#1F4F52">37.7%</text>
+  <text x="780" y="418" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="16" fill="#1F4F52">Think Max</text>
+  <text x="780" y="438" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="13" fill="#9CA3AF">最大推理预算</text>
+
+  <!-- Annotation: 5x arrow -->
+  <line x1="420" y1="351" x2="420" y2="320" stroke="#C8553D" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <line x1="420" y1="320" x2="780" y2="320" stroke="#C8553D" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <line x1="780" y1="320" x2="780" y2="201" stroke="#C8553D" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <rect x="545" y="304" width="110" height="30" rx="6" fill="#C8553D"/>
+  <text x="600" y="324" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="15" font-weight="700" fill="#FFFFFF">差距约 5 倍 ↑</text>
+
+  <text x="600" y="490" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="15" fill="#4B5563">评测报告如果不注明推理模式，数字之间就没有可比性</text>
+</svg>

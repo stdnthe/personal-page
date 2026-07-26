@@ -1,0 +1,37 @@
+<svg width="1200" height="700" viewBox="0 0 1200 700" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="700" fill="#F6F7F8"/>
+  <text x="600" y="62" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="34" font-weight="700" fill="#222222">Benchmark 高分，不等于真实体验一定好</text>
+  <text x="600" y="100" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="18" fill="#5F6368">标准题库适合横向比较，真实任务更接近日常使用</text>
+
+  <rect x="95" y="155" width="465" height="430" rx="18" fill="#FFFFFF" stroke="#D6D0C4" stroke-width="2"/>
+  <text x="327.5" y="210" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="27" font-weight="700" fill="#222222">标准 Benchmark</text>
+  <text x="327.5" y="244" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="17" fill="#6B7280">可复现、可横向比较、覆盖清晰能力点</text>
+
+  <g font-family="Arial, 'PingFang SC', sans-serif">
+    <rect x="160" y="315" width="335" height="52" rx="10" fill="#EAF4F4"/>
+    <text x="327.5" y="348" text-anchor="middle" font-size="18" font-weight="700" fill="#1F4F52">数学题 / 知识题 / 代码题</text>
+    <rect x="160" y="390" width="335" height="52" rx="10" fill="#FFF4E0"/>
+    <text x="327.5" y="423" text-anchor="middle" font-size="18" font-weight="700" fill="#7A4D00">统一数据集与评分规则</text>
+    <rect x="160" y="465" width="335" height="52" rx="10" fill="#F6EAF2"/>
+    <text x="327.5" y="498" text-anchor="middle" font-size="18" font-weight="700" fill="#5E4560">适合看单点能力</text>
+  </g>
+
+  <rect x="640" y="155" width="465" height="430" rx="18" fill="#FFFFFF" stroke="#D6D0C4" stroke-width="2"/>
+  <text x="872.5" y="210" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="27" font-weight="700" fill="#222222">真实任务评估</text>
+  <text x="872.5" y="244" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="17" fill="#6B7280">更复杂、更主观、更接近用户价值</text>
+
+  <g font-family="Arial, 'PingFang SC', sans-serif">
+    <rect x="705" y="315" width="335" height="52" rx="10" fill="#FCE9E4"/>
+    <text x="872.5" y="348" text-anchor="middle" font-size="18" font-weight="700" fill="#7C2D1F">企业任务 / 写作 / Agent 工作流</text>
+    <rect x="705" y="390" width="335" height="52" rx="10" fill="#EAF4F4"/>
+    <text x="872.5" y="423" text-anchor="middle" font-size="18" font-weight="700" fill="#1F4F52">人工盲评或用户调研</text>
+    <rect x="705" y="465" width="335" height="52" rx="10" fill="#FFF4E0"/>
+    <text x="872.5" y="498" text-anchor="middle" font-size="18" font-weight="700" fill="#7A4D00">适合看真实可用性</text>
+  </g>
+
+  <g stroke="#C8553D" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M575 370H625"/>
+    <path d="M615 360L631 370L615 380"/>
+  </g>
+  <text x="600" y="630" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="18" fill="#4B5563">好的评估体系要两边都看：Benchmark 给可比性，真实任务给有效性</text>
+</svg>
